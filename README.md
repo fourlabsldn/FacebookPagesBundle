@@ -8,6 +8,14 @@
 
 ## Configuration
 
+## Tests
+
+To run the test suite, you need [composer](http://getcomposer.org).
+
+```bash
+    $ composer install
+    $ phpunit
+```
 ## License
 
 FacebookPagesBundle is licensed under the MIT license.
