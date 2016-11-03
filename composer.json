@@ -36,7 +36,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "FL\\FacebookPagesBundle\\Tests": "Tests"
+      "FL\\FacebookPagesBundle\\Tests\\": "Tests"
     }
   }
 }
