@@ -1,5 +1,9 @@
 # FacebookPagesBundle
 
+[![Build Status](https://travis-ci.org/fourlabsldn/FacebookPagesBundle.svg?branch=master)](https://travis-ci.org/fourlabsldn/FacebookPagesBundle)
+
+Manage your Facebook Pages in Symfony
+
 ## Installation
 
 ```bash
