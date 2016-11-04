@@ -23,13 +23,13 @@ class FLFacebookPagesExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
-        if (! is_subclass_of($config['facebook_user_class'], FacebookUserInterface::class)) {
+        if (!is_subclass_of($config['facebook_user_class'], FacebookUserInterface::class)) {
             throw new InvalidConfigurationException(sprintf(
                 'Class set in fl_facebook_pages.facebook_user_class is not an instance of %s',
                 FacebookUserInterface::class
             ));
         }
-        if (! is_subclass_of($config['page_class'], PageInterface::class)) {
+        if (!is_subclass_of($config['page_class'], PageInterface::class)) {
             throw new InvalidConfigurationException(sprintf(
                 'Class set in fl_facebook_pages.page_class is not an instance of %s',
                 PageInterface::class
