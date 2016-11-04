@@ -13,12 +13,14 @@ interface PageStorageInterface
 
     /**
      * @param PageInterface $page
+     *
      * @return PageStorageInterface
      */
     public function persist(PageInterface $page): PageStorageInterface;
 
     /**
      * @param PageInterface[] $pages
+     *
      * @return PageStorageInterface
      */
     public function persistMultiple(array $pages): PageStorageInterface;

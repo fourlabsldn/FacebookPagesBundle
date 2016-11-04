@@ -62,5 +62,4 @@ class PageStorageTest extends \PHPUnit_Framework_TestCase
             $this->assertInstanceOf(PageInterface::class, $page);
         }
     }
-
 }
