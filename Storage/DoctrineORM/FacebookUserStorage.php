@@ -21,13 +21,14 @@ class FacebookUserStorage implements FacebookUserStorageInterface
 
     /**
      * @param EntityManagerInterface $entityManager
-     * @param string $facebookUserClass
+     * @param string                 $facebookUserClass
      */
     public function __construct(EntityManagerInterface $entityManager, string $facebookUserClass)
     {
         $this->entityManager = $entityManager;
         $this->facebookUserRepository = $this->entityManager->getRepository($facebookUserClass);
     }
+
     /**
      * {@inheritdoc}
      */
@@ -55,11 +56,10 @@ class FacebookUserStorage implements FacebookUserStorageInterface
     {
         $this->entityManager->clear();
         foreach ($facebookUsers as $user) {
-            if (! ($user instanceof FacebookUserInterface)) {
+            if (!($user instanceof FacebookUserInterface)) {
                 throw new \InvalidArgumentException();
             }
             $this->entityManager->persist($user);
-
         }
         $this->entityManager->flush();
 

@@ -21,7 +21,7 @@ class PageStorage implements PageStorageInterface
 
     /**
      * @param EntityManagerInterface $entityManager
-     * @param string $pageStorageClass
+     * @param string                 $pageStorageClass
      */
     public function __construct(EntityManagerInterface $entityManager, string $pageStorageClass)
     {
@@ -56,7 +56,7 @@ class PageStorage implements PageStorageInterface
     {
         $this->entityManager->clear();
         foreach ($pages as $page) {
-            if (! ($page instanceof PageInterface)) {
+            if (!($page instanceof PageInterface)) {
                 throw new \InvalidArgumentException();
             }
             $this->entityManager->persist($page);
