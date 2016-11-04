@@ -29,6 +29,7 @@ class FLFacebookPagesExtensionTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
+     * @covers \FL\FacebookPagesBundle\DependencyInjection\FLFacebookPagesExtension
      */
     public function testLoad()
     {
