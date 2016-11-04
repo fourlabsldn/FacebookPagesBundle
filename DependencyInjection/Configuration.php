@@ -1,6 +1,6 @@
 <?php
 
-namespace FL\GmailBundle\DependencyInjection;
+namespace FL\FacebookPagesBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -21,23 +21,21 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->children()
                 ->scalarNode('facebook_user_class')
+                    ->isRequired()
                     ->cannotBeEmpty()
                 ->end()
                 ->scalarNode('page_class')
+                    ->isRequired()
                     ->cannotBeEmpty()
                 ->end()
-//                ->scalarNode('page_rating_class')
-//                    ->cannotBeEmpty()
-//                ->end()
                 ->scalarNode('facebook_user_storage')
+                    ->isRequired()
                     ->cannotBeEmpty()
                 ->end()
                 ->scalarNode('page_class_storage')
+                    ->isRequired()
                     ->cannotBeEmpty()
                 ->end()
-//                ->scalarNode('page_rating_storage')
-//                    ->cannotBeEmpty()
-//                ->end()
             ->end()
         ;
 
