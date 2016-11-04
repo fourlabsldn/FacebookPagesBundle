@@ -10,18 +10,18 @@ class PageTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @test
-     * @covers Page::getShortLivedToken
-     * @covers Page::setShortLivedToken
-     * @covers Page::getShortLivedTokenExpiration
-     * @covers Page::setShortLivedTokenExpiration
-     * @covers Page::getLongLivedToken
-     * @covers Page::setLongLivedToken
-     * @covers Page::getLongLivedTokenExpiration
-     * @covers Page::setLongLivedTokenExpiration
-     * @covers Page::getPageId
-     * @covers Page::setPageId
-     * @covers Page::getCategory
-     * @covers Page::setCategory
+     * @covers \FL\FacebookPagesBundle\Model\Page::getShortLivedToken
+     * @covers \FL\FacebookPagesBundle\Model\Page::setShortLivedToken
+     * @covers \FL\FacebookPagesBundle\Model\Page::getShortLivedTokenExpiration
+     * @covers \FL\FacebookPagesBundle\Model\Page::setShortLivedTokenExpiration
+     * @covers \FL\FacebookPagesBundle\Model\Page::getLongLivedToken
+     * @covers \FL\FacebookPagesBundle\Model\Page::setLongLivedToken
+     * @covers \FL\FacebookPagesBundle\Model\Page::getLongLivedTokenExpiration
+     * @covers \FL\FacebookPagesBundle\Model\Page::setLongLivedTokenExpiration
+     * @covers \FL\FacebookPagesBundle\Model\Page::getPageId
+     * @covers \FL\FacebookPagesBundle\Model\Page::setPageId
+     * @covers \FL\FacebookPagesBundle\Model\Page::getCategory
+     * @covers \FL\FacebookPagesBundle\Model\Page::setCategory
      */
     public function testGettersAndSetters()
     {
@@ -44,12 +44,12 @@ class PageTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @covers Page::getShortLivedToken
-     * @covers Page::getShortLivedTokenExpiration
-     * @covers Page::getLongLivedToken
-     * @covers Page::getLongLivedTokenExpiration
-     * @covers Page::getPageId
-     * @covers Page::getCategory
+     * @covers \FL\FacebookPagesBundle\Model\Page::getShortLivedToken
+     * @covers \FL\FacebookPagesBundle\Model\Page::getShortLivedTokenExpiration
+     * @covers \FL\FacebookPagesBundle\Model\Page::getLongLivedToken
+     * @covers \FL\FacebookPagesBundle\Model\Page::getLongLivedTokenExpiration
+     * @covers \FL\FacebookPagesBundle\Model\Page::getPageId
+     * @covers \FL\FacebookPagesBundle\Model\Page::getCategory
      */
     public function testNullValuesInNewObject()
     {
@@ -64,7 +64,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @covers Page::isLongLivedTokenExpired
+     * @covers \FL\FacebookPagesBundle\Model\Page::isLongLivedTokenExpired
      */
     public function testLongLivedExpirationIfTokenNull()
     {
@@ -76,7 +76,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @covers Page::isLongLivedTokenExpired
+     * @covers \FL\FacebookPagesBundle\Model\Page::isLongLivedTokenExpired
      */
     public function testLongLivedExpirationIfPastToken()
     {
@@ -89,7 +89,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @covers Page::isLongLivedTokenExpired
+     * @covers \FL\FacebookPagesBundle\Model\Page::isLongLivedTokenExpired
      */
     public function testLongLivedExpirationIfFutureToken()
     {
@@ -102,7 +102,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @covers Page::isShortLivedTokenExpired()
+     * @covers \FL\FacebookPagesBundle\Model\Page::isShortLivedTokenExpired()
      */
     public function testShortLivedExpirationIfTokenNull()
     {
@@ -114,7 +114,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @covers Page::isShortLivedTokenExpired
+     * @covers \FL\FacebookPagesBundle\Model\Page::isShortLivedTokenExpired
      */
     public function testShortLivedExpirationIfPastToken()
     {
@@ -127,7 +127,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @covers Page::isShortLivedTokenExpired
+     * @covers \FL\FacebookPagesBundle\Model\Page::isShortLivedTokenExpired
      */
     public function testShortLivedExpirationIfFutureToken()
     {

@@ -18,6 +18,7 @@
     <!-- Add a filter to make sure we don't count vendor and Tests in the coverage report -->
     <filter>
         <whitelist>
+            <directory suffix=".php">.</directory>
             <exclude>
                 <directory>./vendor</directory>
                 <directory>./Tests</directory>
