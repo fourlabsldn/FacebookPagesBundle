@@ -30,7 +30,7 @@ class FacebookUser implements FacebookUserInterface
     private $userId;
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getShortLivedToken()
     {
@@ -38,7 +38,7 @@ class FacebookUser implements FacebookUserInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function setShortLivedToken(string $token = null): FacebookUserInterface
     {
@@ -48,7 +48,7 @@ class FacebookUser implements FacebookUserInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getShortLivedTokenExpiration()
     {
@@ -56,7 +56,7 @@ class FacebookUser implements FacebookUserInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function setShortLivedTokenExpiration(\DateTimeImmutable $expiration = null): FacebookUserInterface
     {
@@ -66,21 +66,22 @@ class FacebookUser implements FacebookUserInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function isShortLivedTokenExpired(): bool
     {
         if (
             (is_string($this->shortLivedToken)) &&
-            (new \DateTimeImmutable("now") < $this->shortLivedTokenExpiration)
+            (new \DateTimeImmutable('now') < $this->shortLivedTokenExpiration)
         ) {
             return false;
         }
+
         return true;
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getLongLivedToken()
     {
@@ -88,7 +89,7 @@ class FacebookUser implements FacebookUserInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function setLongLivedToken(string $token = null): FacebookUserInterface
     {
@@ -98,7 +99,7 @@ class FacebookUser implements FacebookUserInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getLongLivedTokenExpiration()
     {
@@ -106,7 +107,7 @@ class FacebookUser implements FacebookUserInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function setLongLivedTokenExpiration(\DateTimeImmutable $expiration = null): FacebookUserInterface
     {
@@ -116,21 +117,22 @@ class FacebookUser implements FacebookUserInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function isLongLivedTokenExpired(): bool
     {
         if (
             (is_string($this->longLivedToken)) &&
-            (new \DateTimeImmutable("now") < $this->longLivedTokenExpiration)
+            (new \DateTimeImmutable('now') < $this->longLivedTokenExpiration)
         ) {
             return false;
         }
+
         return true;
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getUserId()
     {
@@ -138,7 +140,7 @@ class FacebookUser implements FacebookUserInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function setUserId(string $userId = null): FacebookUserInterface
     {

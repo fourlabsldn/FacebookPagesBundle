@@ -21,6 +21,7 @@ class TestTool
 
     /**
      * @param object $object
+     *
      * @throws \InvalidArgumentException
      *
      * @return bool
@@ -35,16 +36,18 @@ class TestTool
         foreach ($this->testItems as $testItem) {
             call_user_func([$object, $testItem->getSetter()], $testItem->getValue());
             $setValueMatchesGetter = call_user_func([$object, $testItem->getGetter()]) === $testItem->getValue();
-            if (! $setValueMatchesGetter) {
+            if (!$setValueMatchesGetter) {
                 $this->latestError = sprintf(
                     'A getter and setter pair, is not working. Object of class %s, getter of name %s, setter of name %s',
                     get_class($object),
                     $testItem->getGetter(),
                     $testItem->getSetter()
                 );
+
                 return false;
             }
         }
+
         return true;
     }
 
@@ -79,25 +82,28 @@ class TestTool
     {
         foreach ($this->testItems as $similarItem) {
             // Do not change this to "===". Value object equality is asserted with "==".
-            if ($testItem == $similarItem) {
+            if ($testItem === $similarItem) {
                 $this->testItems->detach($similarItem);
             }
         }
+
         return $this;
     }
 
     /**
      * @param TestItemImmutable $testItem
+     *
      * @return bool
      */
     private function containsSimilarTestItem(TestItemImmutable $testItem): bool
     {
         foreach ($this->testItems as $similarItem) {
             // Do not change this to "===". Value object equality is asserted with "==".
-            if ($testItem == $similarItem) {
+            if ($testItem === $similarItem) {
                 return true;
             }
         }
+
         return false;
     }
 }

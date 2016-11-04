@@ -35,7 +35,7 @@ class Page implements PageInterface
     private $category;
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getShortLivedToken()
     {
@@ -43,7 +43,7 @@ class Page implements PageInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function setShortLivedToken(string $token = null): PageInterface
     {
@@ -53,7 +53,7 @@ class Page implements PageInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getShortLivedTokenExpiration()
     {
@@ -61,7 +61,7 @@ class Page implements PageInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function setShortLivedTokenExpiration(\DateTimeImmutable $expiration = null): PageInterface
     {
@@ -71,21 +71,22 @@ class Page implements PageInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function isShortLivedTokenExpired(): bool
     {
         if (
             (is_string($this->shortLivedToken)) &&
-            (new \DateTimeImmutable("now") < $this->shortLivedTokenExpiration)
+            (new \DateTimeImmutable('now') < $this->shortLivedTokenExpiration)
         ) {
             return false;
         }
+
         return true;
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getLongLivedToken()
     {
@@ -93,7 +94,7 @@ class Page implements PageInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function setLongLivedToken(string $token = null): PageInterface
     {
@@ -103,7 +104,7 @@ class Page implements PageInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getLongLivedTokenExpiration()
     {
@@ -111,7 +112,7 @@ class Page implements PageInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function setLongLivedTokenExpiration(\DateTimeImmutable $expiration = null): PageInterface
     {
@@ -121,21 +122,22 @@ class Page implements PageInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function isLongLivedTokenExpired(): bool
     {
         if (
             (is_string($this->longLivedToken)) &&
-            (new \DateTimeImmutable("now") < $this->longLivedTokenExpiration)
+            (new \DateTimeImmutable('now') < $this->longLivedTokenExpiration)
         ) {
             return false;
         }
+
         return true;
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getPageId()
     {
@@ -143,7 +145,7 @@ class Page implements PageInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function setPageId(string $pageId = null): PageInterface
     {
@@ -153,7 +155,7 @@ class Page implements PageInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getCategory()
     {
@@ -161,7 +163,7 @@ class Page implements PageInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function setCategory(string $category = null)
     {

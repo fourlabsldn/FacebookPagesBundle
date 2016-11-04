@@ -34,9 +34,9 @@ class FacebookUserTest extends \PHPUnit_Framework_TestCase
             ->addTestItem(new TestItemImmutable('getUserId', 'setUserId', '123812479124791287192412312412371924871924'))
         ;
 
-        if (! $tool->doGettersAndSettersWork($facebookUser)) {
+        if (!$tool->doGettersAndSettersWork($facebookUser)) {
             $this->fail($tool->getLatestErrorMessage());
-        };
+        }
     }
 
     /**
@@ -76,7 +76,7 @@ class FacebookUserTest extends \PHPUnit_Framework_TestCase
     public function testLongLivedExpirationIfPastToken()
     {
         $facebookUser = new FacebookUser();
-        $now = new \DateTimeImmutable("now");
+        $now = new \DateTimeImmutable('now');
         $facebookUser->setLongLivedToken('{token}');
         $facebookUser->setLongLivedTokenExpiration($now->sub(new \DateInterval('P1D')));
         $this->assertTrue($facebookUser->isLongLivedTokenExpired());
@@ -89,7 +89,7 @@ class FacebookUserTest extends \PHPUnit_Framework_TestCase
     public function testLongLivedExpirationIfFutureToken()
     {
         $facebookUser = new FacebookUser();
-        $now = new \DateTimeImmutable("now");
+        $now = new \DateTimeImmutable('now');
         $facebookUser->setLongLivedToken('{token}');
         $facebookUser->setLongLivedTokenExpiration($now->add(new \DateInterval('P1D')));
         $this->assertFalse($facebookUser->isLongLivedTokenExpired());
@@ -114,7 +114,7 @@ class FacebookUserTest extends \PHPUnit_Framework_TestCase
     public function testShortLivedExpirationIfPastToken()
     {
         $facebookUser = new FacebookUser();
-        $now = new \DateTimeImmutable("now");
+        $now = new \DateTimeImmutable('now');
         $facebookUser->setShortLivedToken('{token}');
         $facebookUser->setShortLivedTokenExpiration($now->sub(new \DateInterval('P1D')));
         $this->assertTrue($facebookUser->isShortLivedTokenExpired());
@@ -127,7 +127,7 @@ class FacebookUserTest extends \PHPUnit_Framework_TestCase
     public function testShortLivedExpirationIfFutureToken()
     {
         $facebookUser = new FacebookUser();
-        $now = new \DateTimeImmutable("now");
+        $now = new \DateTimeImmutable('now');
         $facebookUser->setShortLivedToken('{token}');
         $facebookUser->setShortLivedTokenExpiration($now->add(new \DateInterval('P1D')));
         $this->assertFalse($facebookUser->isShortLivedTokenExpired());

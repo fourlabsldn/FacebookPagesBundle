@@ -2,7 +2,8 @@
 
 namespace FL\FacebookPagesBundle\Tests\Util\GettersSetters;
 
-class TestItemImmutable{
+class TestItemImmutable
+{
     /**
      * @var string
      */
