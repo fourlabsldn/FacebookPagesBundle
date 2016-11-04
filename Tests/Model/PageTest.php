@@ -36,10 +36,10 @@ class PageTest extends \PHPUnit_Framework_TestCase
             ->addTestItem(new TestItemImmutable('getPageId', 'setPageId', '123812479124791287192412312412371924871924'))
             ->addTestItem(new TestItemImmutable('getCategory', 'setCategory', 'SomeParentCategory/Category'))
         ;
-        
-        if (! $tool->doGettersAndSettersWork($page)) {
+
+        if (!$tool->doGettersAndSettersWork($page)) {
             $this->fail($tool->getLatestErrorMessage());
-        };
+        }
     }
 
     /**
@@ -81,7 +81,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
     public function testLongLivedExpirationIfPastToken()
     {
         $page = new Page();
-        $now = new \DateTimeImmutable("now");
+        $now = new \DateTimeImmutable('now');
         $page->setLongLivedToken('{token}');
         $page->setLongLivedTokenExpiration($now->sub(new \DateInterval('P1D')));
         $this->assertTrue($page->isLongLivedTokenExpired());
@@ -94,7 +94,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
     public function testLongLivedExpirationIfFutureToken()
     {
         $page = new Page();
-        $now = new \DateTimeImmutable("now");
+        $now = new \DateTimeImmutable('now');
         $page->setLongLivedToken('{token}');
         $page->setLongLivedTokenExpiration($now->add(new \DateInterval('P1D')));
         $this->assertFalse($page->isLongLivedTokenExpired());
@@ -119,7 +119,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
     public function testShortLivedExpirationIfPastToken()
     {
         $page = new Page();
-        $now = new \DateTimeImmutable("now");
+        $now = new \DateTimeImmutable('now');
         $page->setShortLivedToken('{token}');
         $page->setShortLivedTokenExpiration($now->sub(new \DateInterval('P1D')));
         $this->assertTrue($page->isShortLivedTokenExpired());
@@ -132,7 +132,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
     public function testShortLivedExpirationIfFutureToken()
     {
         $page = new Page();
-        $now = new \DateTimeImmutable("now");
+        $now = new \DateTimeImmutable('now');
         $page->setShortLivedToken('{token}');
         $page->setShortLivedTokenExpiration($now->add(new \DateInterval('P1D')));
         $this->assertFalse($page->isShortLivedTokenExpired());
