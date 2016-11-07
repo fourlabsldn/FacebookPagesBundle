@@ -101,22 +101,22 @@ class PageRatingTest extends \PHPUnit_Framework_TestCase
         try {
             $pageRating->setRating(-10);
         } catch (\InvalidArgumentException $exception) {
-            $totalExceptions++;
+            ++$totalExceptions;
         }
         try {
             $pageRating->setRating(0);
         } catch (\InvalidArgumentException $exception) {
-            $totalExceptions++;
+            ++$totalExceptions;
         }
         try {
             $pageRating->setRating(6);
         } catch (\InvalidArgumentException $exception) {
-            $totalExceptions++;
+            ++$totalExceptions;
         }
         try {
             $pageRating->setRating(20);
         } catch (\InvalidArgumentException $exception) {
-            $totalExceptions++;
+            ++$totalExceptions;
         }
 
         if ($totalExceptions !== 4) {
