@@ -6,9 +6,6 @@ use FL\FacebookPagesBundle\DependencyInjection\FLFacebookPagesExtension;
 use FL\FacebookPagesBundle\Model\FacebookUser;
 use FL\FacebookPagesBundle\Model\Page;
 use FL\FacebookPagesBundle\Model\PageRating;
-use FL\FacebookPagesBundle\Storage\DoctrineORM\FacebookUserStorage;
-use FL\FacebookPagesBundle\Storage\DoctrineORM\PageRatingStorage;
-use FL\FacebookPagesBundle\Storage\DoctrineORM\PageStorage;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 class FLFacebookPagesExtensionTest extends \PHPUnit_Framework_TestCase
@@ -47,7 +44,7 @@ class FLFacebookPagesExtensionTest extends \PHPUnit_Framework_TestCase
     public function testInvalidFacebookUserClassConfiguration()
     {
         $this->extension->load(
-            array_merge($this->createValidConfiguration(), [['facebook_user_class'=> \DateTimeImmutable::class]]),
+            array_merge($this->createValidConfiguration(), [['facebook_user_class' => \DateTimeImmutable::class]]),
             $this->container
         );
     }
@@ -61,7 +58,7 @@ class FLFacebookPagesExtensionTest extends \PHPUnit_Framework_TestCase
     public function testInvalidPageClassConfiguration()
     {
         $this->extension->load(
-            array_merge($this->createValidConfiguration(), [['page_class'=> \DateTimeImmutable::class]]),
+            array_merge($this->createValidConfiguration(), [['page_class' => \DateTimeImmutable::class]]),
             $this->container
         );
     }
@@ -75,7 +72,7 @@ class FLFacebookPagesExtensionTest extends \PHPUnit_Framework_TestCase
     public function testInvalidPageRatingClassConfiguration()
     {
         $this->extension->load(
-            array_merge($this->createValidConfiguration(), [['page_rating_class'=> \DateTimeImmutable::class]]),
+            array_merge($this->createValidConfiguration(), [['page_rating_class' => \DateTimeImmutable::class]]),
             $this->container
         );
     }
@@ -93,7 +90,7 @@ class FLFacebookPagesExtensionTest extends \PHPUnit_Framework_TestCase
                 'facebook_user_storage' => 'facebook_user_storage_service_alias',
                 'page_storage' => 'page_storage_service_alias',
                 'page_rating_storage' => 'page_ratingstorage_service_alias',
-            ]
+            ],
         ];
     }
 }

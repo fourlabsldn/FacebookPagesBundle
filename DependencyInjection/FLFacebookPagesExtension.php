@@ -5,9 +5,6 @@ namespace FL\FacebookPagesBundle\DependencyInjection;
 use FL\FacebookPagesBundle\Model\FacebookUserInterface;
 use FL\FacebookPagesBundle\Model\PageInterface;
 use FL\FacebookPagesBundle\Model\PageRatingInterface;
-use FL\FacebookPagesBundle\Storage\FacebookUserStorageInterface;
-use FL\FacebookPagesBundle\Storage\PageRatingStorageInterface;
-use FL\FacebookPagesBundle\Storage\PageStorageInterface;
 use Symfony\Component\DependencyInjection\Loader;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
@@ -21,6 +18,7 @@ class FLFacebookPagesExtension extends Extension
 {
     /**
      * {@inheritdoc}
+     *
      * @throws InvalidConfigurationException
      */
     public function load(array $configs, ContainerBuilder $container)
@@ -28,21 +26,21 @@ class FLFacebookPagesExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
-        /**
+        /*
          * Validate Model Classes Parameters
          */
         $this->validateClassNameIsInstanceOfAnother($config['facebook_user_class'], FacebookUserInterface::class, 'fl_facebook_pages.facebook_user_class');
         $this->validateClassNameIsInstanceOfAnother($config['page_class'], PageInterface::class, 'fl_facebook_pages.page_class');
         $this->validateClassNameIsInstanceOfAnother($config['page_rating_class'], PageRatingInterface::class, 'fl_facebook_pages.page_rating_class');
 
-        /**
+        /*
          * Set Model Classes Parameters
          */
         $container->setParameter('fl_facebook_pages.facebook_user_class', $config['facebook_user_class']);
         $container->setParameter('fl_facebook_pages.page_class', $config['page_class']);
         $container->setParameter('fl_facebook_pages.page_rating_class', $config['page_rating_class']);
 
-        /**
+        /*
          * Set Storage Parameters
          * These cannot be validated until we have a container.
          */
@@ -57,11 +55,11 @@ class FLFacebookPagesExtension extends Extension
         $loader->load('services.yml');
     }
 
-
     /**
      * @param string $className
      * @param string $anotherClassName
      * @param string $parameter
+     *
      * @throws InvalidConfigurationException
      */
     private function validateClassNameIsInstanceOfAnother(string $className, string $anotherClassName, string $parameter)
