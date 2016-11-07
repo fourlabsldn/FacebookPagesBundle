@@ -19,14 +19,14 @@ class ManagerAndRepositoryTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @var array
-     * Persist method on @see ManagerAndRepositoryTest::$entityManager will add an entity to $persistedEntities
-     * Clear method on @see ManagerAndRepositoryTest::$entityManager will reset $persistedEntities
+     *            Persist method on @see ManagerAndRepositoryTest::$entityManager will add an entity to $persistedEntities
+     *            Clear method on @see ManagerAndRepositoryTest::$entityManager will reset $persistedEntities
      */
     protected $persistedEntities = [];
 
     /**
      * @var array
-     * Flush method on @see ManagerAndRepositoryTest::$entityManager will merge $persistedEntities into $persistedAndFlushedEntities
+     *            Flush method on @see ManagerAndRepositoryTest::$entityManager will merge $persistedEntities into $persistedAndFlushedEntities
      */
     protected $persistedAndFlushedEntities = [];
 
@@ -37,7 +37,7 @@ class ManagerAndRepositoryTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Set up @see ManagerAndRepositoryTest::$entityManager
-     * Set up @see ManagerAndRepositoryTest::$entityRepository
+     * Set up @see ManagerAndRepositoryTest::$entityRepository.
      */
     public function setUp()
     {
@@ -65,21 +65,18 @@ class ManagerAndRepositoryTest extends \PHPUnit_Framework_TestCase
             ->willReturnCallback(function () {
                 $this->persistedEntities = [];
             });
-        ;
         $this->entityManager
             ->expects($this->any())
             ->method('persist')
             ->willReturnCallback(function ($entity) {
                 $this->persistedEntities[] = $entity;
             });
-        ;
         $this->entityManager
             ->expects($this->any())
             ->method('flush')
             ->willReturnCallback(function () {
                 $this->persistedAndFlushedEntities = array_merge($this->persistedAndFlushedEntities, $this->persistedEntities);
             });
-        ;
 
         $this->entityManager
             ->expects($this->any())

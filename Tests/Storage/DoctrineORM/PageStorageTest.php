@@ -9,7 +9,6 @@ use FL\FacebookPagesBundle\Tests\Util\Storage\DoctrineORM\ManagerAndRepositoryTe
 
 class PageStorageTest extends ManagerAndRepositoryTest
 {
-
     public function setUp()
     {
         $this->findAllReturnValue = [new Page(), new Page()];

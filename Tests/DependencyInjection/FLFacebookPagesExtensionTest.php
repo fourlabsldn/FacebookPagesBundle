@@ -61,6 +61,7 @@ class FLFacebookPagesExtensionTest extends \PHPUnit_Framework_TestCase
             ], $this->container);
         } catch (InvalidConfigurationException $exception) {
             $this->assertTrue(true);
+
             return;
         }
 
@@ -73,8 +74,8 @@ class FLFacebookPagesExtensionTest extends \PHPUnit_Framework_TestCase
      */
     public function testConfigurationExceptionBadPageClass()
     {
-       try {
-           $this->extension->load([
+        try {
+            $this->extension->load([
                'fl_facebook_pages' => [
                    'facebook_user_class' => FacebookUser::class,
                    'page_class' => FacebookUser::class,
@@ -82,11 +83,12 @@ class FLFacebookPagesExtensionTest extends \PHPUnit_Framework_TestCase
                    'page_class_storage' => PageStorage::class,
                ],
            ], $this->container);
-       } catch (InvalidConfigurationException $exception) {
-           $this->assertTrue(true);
-           return;
-       }
+        } catch (InvalidConfigurationException $exception) {
+            $this->assertTrue(true);
 
-       $this->fail(sprintf('Expected %s when loading bad configuration.', InvalidConfigurationException::class));
+            return;
+        }
+
+        $this->fail(sprintf('Expected %s when loading bad configuration.', InvalidConfigurationException::class));
     }
 }

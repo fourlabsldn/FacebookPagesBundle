@@ -42,12 +42,12 @@ class FacebookUserStorageTest extends ManagerAndRepositoryTest
             FacebookUserStorage::class
         );
 
-        $facebookUserA = new FacebookUser;
+        $facebookUserA = new FacebookUser();
         $facebookUserStorage->persist($facebookUserA);
         $this->assertContains($facebookUserA, $this->persistedEntities);
         $this->assertContains($facebookUserA, $this->persistedAndFlushedEntities);
 
-        $facebookUserB = new FacebookUser;
+        $facebookUserB = new FacebookUser();
         $facebookUserStorage->persist($facebookUserB);
         $this->assertNotContains($facebookUserA, $this->persistedEntities);
         $this->assertContains($facebookUserB, $this->persistedEntities);
@@ -66,8 +66,8 @@ class FacebookUserStorageTest extends ManagerAndRepositoryTest
             FacebookUserStorage::class
         );
 
-        $facebookUserA = new FacebookUser;
-        $facebookUserB = new FacebookUser;
+        $facebookUserA = new FacebookUser();
+        $facebookUserB = new FacebookUser();
 
         $facebookUserStorage->persistMultiple([$facebookUserA, $facebookUserB]);
         $this->assertContains($facebookUserA, $this->persistedEntities);
