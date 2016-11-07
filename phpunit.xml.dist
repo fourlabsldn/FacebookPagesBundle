@@ -12,7 +12,7 @@
     <testsuites>
         <testsuite name="Facebook Pages Bundle Test Suite">
             <directory>./Tests/</directory>
-            <exclude>./tests/Util</exclude>
+            <exclude>./Tests/Util</exclude>
         </testsuite>
     </testsuites>
     <!-- Add a filter to make sure we don't count vendor and Tests in the coverage report -->
