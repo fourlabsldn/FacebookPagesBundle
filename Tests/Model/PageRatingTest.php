@@ -55,9 +55,6 @@ class PageRatingTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      * @covers \FL\FacebookPagesBundle\Model\PageRating::hasRating
-     * @covers \FL\FacebookPagesBundle\Model\PageRating::getRating
-     * @covers \FL\FacebookPagesBundle\Model\PageRating::getReview
-     * @covers \FL\FacebookPagesBundle\Model\PageRating::getReviewerId
      */
     public function testHasRatingIsFalseIfRatingIsNull()
     {
@@ -69,10 +66,8 @@ class PageRatingTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @covers \FL\FacebookPagesBundle\Model\PageRating::hasRating
-     * @covers \FL\FacebookPagesBundle\Model\PageRating::getRating
-     * @covers \FL\FacebookPagesBundle\Model\PageRating::getReview
-     * @covers \FL\FacebookPagesBundle\Model\PageRating::getReviewerId
+     * @covers \FL\FacebookPagesBundle\Model\PageRating::hasReview
+
      */
     public function testHasReviewIsFalseInNewObject()
     {
@@ -80,5 +75,52 @@ class PageRatingTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($pageRating->hasReview());
         $pageRating->setReview(null);
         $this->assertFalse($pageRating->hasReview());
+    }
+
+    /**
+     * @test
+     */
+    public function testValidSetRating()
+    {
+        $pageRating = new PageRating();
+        $pageRating->setRating(1);
+        $pageRating->setRating(2);
+        $pageRating->setRating(3);
+        $pageRating->setRating(4);
+        $pageRating->setRating(5);
+    }
+
+    /**
+     * @test
+     */
+    public function testInvalidSetRating()
+    {
+        $pageRating = new PageRating();
+        $totalExceptions = 0;
+
+        try {
+            $pageRating->setRating(-10);
+        } catch (\InvalidArgumentException $exception) {
+            $totalExceptions++;
+        }
+        try {
+            $pageRating->setRating(0);
+        } catch (\InvalidArgumentException $exception) {
+            $totalExceptions++;
+        }
+        try {
+            $pageRating->setRating(6);
+        } catch (\InvalidArgumentException $exception) {
+            $totalExceptions++;
+        }
+        try {
+            $pageRating->setRating(20);
+        } catch (\InvalidArgumentException $exception) {
+            $totalExceptions++;
+        }
+
+        if ($totalExceptions !== 4) {
+            $this->fail(sprintf('-10, 0, 6, and 20 must throw an exception when using %s::setRating', PageRating::class));
+        }
     }
 }

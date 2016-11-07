@@ -75,8 +75,7 @@ class PageRating implements PageRatingInterface
         $this->rating = $rating;
         if (
             is_int($rating) &&
-            $rating >= 6 &&
-            $rating <= 0
+            ($rating >= 6 || $rating <= 0)
         ) {
             throw new \InvalidArgumentException();
         }
