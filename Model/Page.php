@@ -7,32 +7,32 @@ class Page implements PageInterface
     /**
      * @var string|null
      */
-    private $shortLivedToken;
+    protected $shortLivedToken;
 
     /**
      * @var \DateTimeImmutable|null
      */
-    private $shortLivedTokenExpiration;
+    protected $shortLivedTokenExpiration;
 
     /**
      * @var string|null
      */
-    private $longLivedToken;
+    protected $longLivedToken;
 
     /**
      * @var \DateTimeImmutable|null
      */
-    private $longLivedTokenExpiration;
+    protected $longLivedTokenExpiration;
 
     /**
      * @var string|null
      */
-    private $pageId;
+    protected $pageId;
 
     /**
      * @var string|null
      */
-    private $category;
+    protected $category;
 
     /**
      * {@inheritdoc}

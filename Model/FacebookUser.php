@@ -7,27 +7,27 @@ class FacebookUser implements FacebookUserInterface
     /**
      * @var string|null
      */
-    private $shortLivedToken;
+    protected $shortLivedToken;
 
     /**
      * @var \DateTimeImmutable|null
      */
-    private $shortLivedTokenExpiration;
+    protected $shortLivedTokenExpiration;
 
     /**
      * @var string|null
      */
-    private $longLivedToken;
+    protected $longLivedToken;
 
     /**
      * @var \DateTimeImmutable|null
      */
-    private $longLivedTokenExpiration;
+    protected $longLivedTokenExpiration;
 
     /**
      * @var string|null
      */
-    private $userId;
+    protected $userId;
 
     /**
      * {@inheritdoc}
