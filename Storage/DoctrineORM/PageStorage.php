@@ -17,7 +17,7 @@ class PageStorage implements PageStorageInterface
     /**
      * @var EntityRepository
      */
-    private $pageStorageRepository;
+    private $pageRepository;
 
     /**
      * @param EntityManagerInterface $entityManager
@@ -26,7 +26,7 @@ class PageStorage implements PageStorageInterface
     public function __construct(EntityManagerInterface $entityManager, string $pageClass)
     {
         $this->entityManager = $entityManager;
-        $this->pageStorageRepository = $this->entityManager->getRepository($pageClass);
+        $this->pageRepository = $this->entityManager->getRepository($pageClass);
     }
 
     /**
@@ -34,7 +34,7 @@ class PageStorage implements PageStorageInterface
      */
     public function getAll(): array
     {
-        return $this->pageStorageRepository->findAll();
+        return $this->pageRepository->findAll();
     }
 
     /**
