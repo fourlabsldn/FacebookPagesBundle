@@ -79,6 +79,7 @@ class PageRatingTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
+     * @covers \FL\FacebookPagesBundle\Model\PageRating::setRating
      */
     public function testValidSetRating()
     {
@@ -92,6 +93,7 @@ class PageRatingTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
+     * @covers \FL\FacebookPagesBundle\Model\PageRating::setRating
      */
     public function testInvalidSetRating()
     {

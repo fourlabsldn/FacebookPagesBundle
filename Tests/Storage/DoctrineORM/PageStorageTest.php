@@ -17,6 +17,7 @@ class PageStorageTest extends ManagerAndRepositoryTest
 
     /**
      * @test
+     * @covers \FL\FacebookPagesBundle\Storage\DoctrineORM\PageStorage::__construct
      * @covers \FL\FacebookPagesBundle\Storage\DoctrineORM\PageStorage::getAll
      */
     public function testGetAll()
@@ -34,6 +35,7 @@ class PageStorageTest extends ManagerAndRepositoryTest
 
     /**
      * @test
+     * @covers \FL\FacebookPagesBundle\Storage\DoctrineORM\PageStorage::__construct
      * @covers \FL\FacebookPagesBundle\Storage\DoctrineORM\PageStorage::persist
      */
     public function testPersist()
@@ -58,6 +60,7 @@ class PageStorageTest extends ManagerAndRepositoryTest
 
     /**
      * @test
+     * @covers \FL\FacebookPagesBundle\Storage\DoctrineORM\PageStorage::__construct
      * @covers \FL\FacebookPagesBundle\Storage\DoctrineORM\PageStorage::persistMultiple
      */
     public function testPersistMultiple()
@@ -75,5 +78,32 @@ class PageStorageTest extends ManagerAndRepositoryTest
         $this->assertContains($pageB, $this->persistedEntities);
         $this->assertContains($pageA, $this->persistedAndFlushedEntities);
         $this->assertContains($pageB, $this->persistedAndFlushedEntities);
+    }
+
+    /**
+     * @test
+     * @covers \FL\FacebookPagesBundle\Storage\DoctrineORM\PageStorage::persistMultiple
+     */
+    public function testPersistMultipleException()
+    {
+        $pageStorage = new PageStorage(
+            $this->entityManager,
+            PageStorage::class
+        );
+
+        $page = new Page();
+        $date = new \DateTimeImmutable();
+
+        try {
+            $pageStorage->persistMultiple([$page, $date]);
+        } catch (\InvalidArgumentException $exception) {
+            return;
+        }
+
+        $this->fail(sprintf(
+            'Expected %s for invalid %s::persistMultiple',
+            \InvalidArgumentException::class,
+            Page::class
+        ));
     }
 }

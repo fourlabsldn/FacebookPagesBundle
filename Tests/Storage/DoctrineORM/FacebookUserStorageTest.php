@@ -17,6 +17,7 @@ class FacebookUserStorageTest extends ManagerAndRepositoryTest
 
     /**
      * @test
+     * @covers \FL\FacebookPagesBundle\Storage\DoctrineORM\FacebookUserStorage::__construct
      * @covers \FL\FacebookPagesBundle\Storage\DoctrineORM\FacebookUserStorage::getAll
      */
     public function testGetAll()
@@ -33,6 +34,7 @@ class FacebookUserStorageTest extends ManagerAndRepositoryTest
 
     /**
      * @test
+     * @covers \FL\FacebookPagesBundle\Storage\DoctrineORM\FacebookUserStorage::__construct
      * @covers \FL\FacebookPagesBundle\Storage\DoctrineORM\FacebookUserStorage::persist
      */
     public function testPersist()
@@ -57,6 +59,7 @@ class FacebookUserStorageTest extends ManagerAndRepositoryTest
 
     /**
      * @test
+     * @covers \FL\FacebookPagesBundle\Storage\DoctrineORM\FacebookUserStorage::__construct
      * @covers \FL\FacebookPagesBundle\Storage\DoctrineORM\FacebookUserStorage::persistMultiple
      */
     public function testPersistMultiple()
@@ -74,5 +77,32 @@ class FacebookUserStorageTest extends ManagerAndRepositoryTest
         $this->assertContains($facebookUserB, $this->persistedEntities);
         $this->assertContains($facebookUserA, $this->persistedAndFlushedEntities);
         $this->assertContains($facebookUserB, $this->persistedAndFlushedEntities);
+    }
+
+    /**
+     * @test
+     * @covers \FL\FacebookPagesBundle\Storage\DoctrineORM\PageStorage::persistMultiple
+     */
+    public function testPersistMultipleException()
+    {
+        $facebookUserStorage = new FacebookUserStorage(
+            $this->entityManager,
+            FacebookUserStorage::class
+        );
+
+        $facebookUser = new FacebookUser();
+        $date = new \DateTimeImmutable();
+
+        try {
+            $facebookUserStorage->persistMultiple([$facebookUser, $date]);
+        } catch (\InvalidArgumentException $exception) {
+            return;
+        }
+
+        $this->fail(sprintf(
+            'Expected %s for invalid %s::persistMultiple',
+            \InvalidArgumentException::class,
+            FacebookUser::class
+        ));
     }
 }
