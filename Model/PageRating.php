@@ -88,7 +88,7 @@ class PageRating implements PageRatingInterface
      */
     public function hasReview(): bool
     {
-        if (is_string($this->rating)) {
+        if (is_string($this->review)) {
             return true;
         }
 

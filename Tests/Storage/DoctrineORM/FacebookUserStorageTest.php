@@ -81,7 +81,7 @@ class FacebookUserStorageTest extends ManagerAndRepositoryTest
 
     /**
      * @test
-     * @covers \FL\FacebookPagesBundle\Storage\DoctrineORM\PageStorage::persistMultiple
+     * @covers \FL\FacebookPagesBundle\Storage\DoctrineORM\FacebookUserStorage::persistMultiple
      */
     public function testPersistMultipleException()
     {

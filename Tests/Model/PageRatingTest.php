@@ -56,6 +56,28 @@ class PageRatingTest extends \PHPUnit_Framework_TestCase
      * @test
      * @covers \FL\FacebookPagesBundle\Model\PageRating::hasRating
      */
+    public function testHasRatingIsTrue()
+    {
+        $pageRating = new PageRating();
+        $pageRating->setRating(2);
+        $this->assertTrue($pageRating->hasRating());
+    }
+
+    /**
+     * @test
+     * @covers \FL\FacebookPagesBundle\Model\PageRating::hasReview
+     */
+    public function testHasReviewIsTrue()
+    {
+        $pageRating = new PageRating();
+        $pageRating->setReview('Some Review!');
+        $this->assertTrue($pageRating->hasReview());
+    }
+
+    /**
+     * @test
+     * @covers \FL\FacebookPagesBundle\Model\PageRating::hasRating
+     */
     public function testHasRatingIsFalseIfRatingIsNull()
     {
         $pageRating = new PageRating();
@@ -67,7 +89,6 @@ class PageRatingTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      * @covers \FL\FacebookPagesBundle\Model\PageRating::hasReview
-
      */
     public function testHasReviewIsFalseInNewObject()
     {
