@@ -10,7 +10,7 @@ class FacebookUserTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @test
-     * @covers \FL\FacebookPagesBundle\Model\FacebookUser::getShortLivedToken()
+     * @covers \FL\FacebookPagesBundle\Model\FacebookUser::getShortLivedToken
      * @covers \FL\FacebookPagesBundle\Model\FacebookUser::setShortLivedToken
      * @covers \FL\FacebookPagesBundle\Model\FacebookUser::getShortLivedTokenExpiration
      * @covers \FL\FacebookPagesBundle\Model\FacebookUser::setShortLivedTokenExpiration
@@ -45,7 +45,7 @@ class FacebookUserTest extends \PHPUnit_Framework_TestCase
      * @covers \FL\FacebookPagesBundle\Model\FacebookUser::getShortLivedTokenExpiration
      * @covers \FL\FacebookPagesBundle\Model\FacebookUser::getLongLivedToken
      * @covers \FL\FacebookPagesBundle\Model\FacebookUser::getLongLivedTokenExpiration
-     * @covers \FL\FacebookPagesBundle\Model\FacebookUser::getUserId()
+     * @covers \FL\FacebookPagesBundle\Model\FacebookUser::getUserId
      */
     public function testNullValuesInNewObject()
     {
