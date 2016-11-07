@@ -60,8 +60,6 @@ class FLFacebookPagesExtensionTest extends \PHPUnit_Framework_TestCase
                 ],
             ], $this->container);
         } catch (InvalidConfigurationException $exception) {
-            $this->assertTrue(true);
-
             return;
         }
 
@@ -84,8 +82,6 @@ class FLFacebookPagesExtensionTest extends \PHPUnit_Framework_TestCase
                ],
            ], $this->container);
         } catch (InvalidConfigurationException $exception) {
-            $this->assertTrue(true);
-
             return;
         }
 

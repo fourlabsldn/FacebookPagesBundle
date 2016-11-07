@@ -48,7 +48,6 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
                     ],
             ]
         );
-        $this->assertTrue(true);
     }
 
     /**
@@ -70,8 +69,6 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
                 ]
             );
         } catch (InvalidConfigurationException $exception) {
-            $this->assertTrue(true);
-
             return;
         }
         $this->fail();
