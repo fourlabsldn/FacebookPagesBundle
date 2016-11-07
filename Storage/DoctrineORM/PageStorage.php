@@ -21,12 +21,12 @@ class PageStorage implements PageStorageInterface
 
     /**
      * @param EntityManagerInterface $entityManager
-     * @param string                 $pageStorageClass
+     * @param string                 $pageClass
      */
-    public function __construct(EntityManagerInterface $entityManager, string $pageStorageClass)
+    public function __construct(EntityManagerInterface $entityManager, string $pageClass)
     {
         $this->entityManager = $entityManager;
-        $this->pageStorageRepository = $this->entityManager->getRepository($pageStorageClass);
+        $this->pageStorageRepository = $this->entityManager->getRepository($pageClass);
     }
 
     /**
