@@ -4,6 +4,10 @@ namespace FL\FacebookPagesBundle\DependencyInjection;
 
 use FL\FacebookPagesBundle\Model\FacebookUserInterface;
 use FL\FacebookPagesBundle\Model\PageInterface;
+use FL\FacebookPagesBundle\Model\PageRatingInterface;
+use FL\FacebookPagesBundle\Storage\FacebookUserStorageInterface;
+use FL\FacebookPagesBundle\Storage\PageRatingStorageInterface;
+use FL\FacebookPagesBundle\Storage\PageStorageInterface;
 use Symfony\Component\DependencyInjection\Loader;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
@@ -17,38 +21,62 @@ class FLFacebookPagesExtension extends Extension
 {
     /**
      * {@inheritdoc}
+     * @throws InvalidConfigurationException
      */
     public function load(array $configs, ContainerBuilder $container)
     {
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
-        if (!is_subclass_of($config['facebook_user_class'], FacebookUserInterface::class)) {
-            throw new InvalidConfigurationException(sprintf(
-                'Class set in fl_facebook_pages.facebook_user_class is not an instance of %s',
-                FacebookUserInterface::class
-            ));
-        }
-        if (!is_subclass_of($config['page_class'], PageInterface::class)) {
-            throw new InvalidConfigurationException(sprintf(
-                'Class set in fl_facebook_pages.page_class is not an instance of %s',
-                PageInterface::class
-            ));
-        }
+        /**
+         * Validate Model Classes Parameters
+         */
+        $this->validateClassNameIsInstanceOfAnother($config['facebook_user_class'], FacebookUserInterface::class, 'fl_facebook_pages.facebook_user_class');
+        $this->validateClassNameIsInstanceOfAnother($config['page_class'], PageInterface::class, 'fl_facebook_pages.page_class');
+        $this->validateClassNameIsInstanceOfAnother($config['page_rating_class'], PageRatingInterface::class, 'fl_facebook_pages.page_rating_class');
 
+        /**
+         * Set Model Classes Parameters
+         */
         $container->setParameter('fl_facebook_pages.facebook_user_class', $config['facebook_user_class']);
         $container->setParameter('fl_facebook_pages.page_class', $config['page_class']);
+        $container->setParameter('fl_facebook_pages.page_rating_class', $config['page_rating_class']);
 
-        if ($config['facebook_user_storage']) {
-            $container->setParameter('fl_facebook_pages.facebook_user_storage', $config['facebook_user_storage']);
-            $container->setAlias('fl_facebook_pages.facebook_user_storage', $config['facebook_user_storage']);
-        }
-        if ($config['page_class']) {
-            $container->setParameter('fl_facebook_pages.page_class_storage', $config['page_class_storage']);
-            $container->setAlias('fl_facebook_pages.page_class_storage', $config['page_class_storage']);
-        }
+        /**
+         * Set Storage Parameters
+         * These cannot be validated until we have a container.
+         */
+        $container->setParameter('fl_facebook_pages.facebook_user_storage', $config['facebook_user_storage']);
+        $container->setAlias('fl_facebook_pages.facebook_user_storage', $config['facebook_user_storage']);
+        $container->setParameter('fl_facebook_pages.page_storage', $config['page_storage']);
+        $container->setAlias('fl_facebook_pages.page_storage', $config['page_storage']);
+        $container->setParameter('fl_facebook_pages.page_rating_storage', $config['page_rating_storage']);
+        $container->setAlias('fl_facebook_pages.page_rating_storage', $config['page_rating_storage']);
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
+    }
+
+
+    /**
+     * @param string $className
+     * @param string $anotherClassName
+     * @param string $parameter
+     * @throws InvalidConfigurationException
+     */
+    private function validateClassNameIsInstanceOfAnother(string $className, string $anotherClassName, string $parameter)
+    {
+        if (
+            is_subclass_of($className, $anotherClassName) ||
+            $className === $anotherClassName
+        ) {
+            return;
+        }
+        throw new InvalidConfigurationException(sprintf(
+            'Class %s in %s is not an instance of %s',
+            $className,
+            $parameter,
+            $anotherClassName
+        ));
     }
 }

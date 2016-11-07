@@ -5,9 +5,10 @@ namespace FL\FacebookPagesBundle\Tests\DependencyInjection;
 use FL\FacebookPagesBundle\DependencyInjection\Configuration;
 use FL\FacebookPagesBundle\Model\FacebookUser;
 use FL\FacebookPagesBundle\Model\Page;
+use FL\FacebookPagesBundle\Model\PageRating;
 use FL\FacebookPagesBundle\Storage\DoctrineORM\FacebookUserStorage;
+use FL\FacebookPagesBundle\Storage\DoctrineORM\PageRatingStorage;
 use FL\FacebookPagesBundle\Storage\DoctrineORM\PageStorage;
-use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 use Symfony\Component\Config\Definition\Processor;
 
 class ConfigurationTest extends \PHPUnit_Framework_TestCase
@@ -15,12 +16,12 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
     /**
      * @var Configuration
      */
-    private $configuration;
+    protected $configuration;
 
     /**
      * @var Processor
      */
-    private $processor;
+    protected $processor;
 
     /**
      * {@inheritdoc}
@@ -34,6 +35,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      * @covers \FL\FacebookPagesBundle\DependencyInjection\Configuration::getConfigTreeBuilder
+     * @covers \FL\FacebookPagesBundle\DependencyInjection\Configuration::getConfigTreeBuilder
      */
     public function testValidConfigurationWorks()
     {
@@ -43,8 +45,10 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
                 'fl_facebook_pages' => [
                         'facebook_user_class' => FacebookUser::class,
                         'page_class' => Page::class,
+                        'page_rating_class' => PageRating::class,
                         'facebook_user_storage' => FacebookUserStorage::class,
-                        'page_class_storage' => PageStorage::class,
+                        'page_storage' => PageStorage::class,
+                        'page_rating_storage' => PageRatingStorage::class,
                     ],
             ]
         );
@@ -53,24 +57,22 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      * @covers \FL\FacebookPagesBundle\DependencyInjection\Configuration::getConfigTreeBuilder
+     * @expectedException \Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
      */
     public function testEmptyConfigurationsThrowException()
     {
-        try {
-            $this->processor->processConfiguration(
-                $this->configuration,
-                [
-                    'fl_facebook_pages' => [
-                            'facebook_user_class' => '',
-                            'page_class' => '',
-                            'facebook_user_storage' => '',
-                            'page_class_storage' => '',
-                        ],
-                ]
-            );
-        } catch (InvalidConfigurationException $exception) {
-            return;
-        }
-        $this->fail();
+        $this->processor->processConfiguration(
+            $this->configuration,
+            [
+                'fl_facebook_pages' => [
+                        'facebook_user_class' => '',
+                        'page_class' => '',
+                        'page_rating_class' => '',
+                        'facebook_user_storage' => '',
+                        'page_storage' => '',
+                        'page_rating_storage' => '',
+                    ],
+            ]
+        );
     }
 }

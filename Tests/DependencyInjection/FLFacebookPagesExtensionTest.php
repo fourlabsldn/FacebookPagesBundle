@@ -5,9 +5,10 @@ namespace FL\FacebookPagesBundle\Tests\DependencyInjection;
 use FL\FacebookPagesBundle\DependencyInjection\FLFacebookPagesExtension;
 use FL\FacebookPagesBundle\Model\FacebookUser;
 use FL\FacebookPagesBundle\Model\Page;
+use FL\FacebookPagesBundle\Model\PageRating;
 use FL\FacebookPagesBundle\Storage\DoctrineORM\FacebookUserStorage;
+use FL\FacebookPagesBundle\Storage\DoctrineORM\PageRatingStorage;
 use FL\FacebookPagesBundle\Storage\DoctrineORM\PageStorage;
-use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 class FLFacebookPagesExtensionTest extends \PHPUnit_Framework_TestCase
@@ -15,12 +16,12 @@ class FLFacebookPagesExtensionTest extends \PHPUnit_Framework_TestCase
     /**
      * @var ContainerBuilder
      */
-    private $container;
+    protected $container;
 
     /**
      * @var FLFacebookPagesExtension
      */
-    private $extension;
+    protected $extension;
 
     public function setUp()
     {
@@ -32,59 +33,67 @@ class FLFacebookPagesExtensionTest extends \PHPUnit_Framework_TestCase
      * @test
      * @covers \FL\FacebookPagesBundle\DependencyInjection\FLFacebookPagesExtension
      */
-    public function testLoad()
+    public function testValidConfiguration()
     {
-        $this->extension->load([
+        $this->extension->load($this->createValidConfiguration(), $this->container);
+    }
+
+    /**
+     * @test
+     * @covers \FL\FacebookPagesBundle\DependencyInjection\FLFacebookPagesExtension::load
+     * @covers \FL\FacebookPagesBundle\DependencyInjection\FLFacebookPagesExtension::validateClassNameIsInstanceOfAnother
+     * @expectedException \Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
+     */
+    public function testInvalidFacebookUserClassConfiguration()
+    {
+        $this->extension->load(
+            array_merge($this->createValidConfiguration(), [['facebook_user_class'=> \DateTimeImmutable::class]]),
+            $this->container
+        );
+    }
+
+    /**
+     * @test
+     * @covers \FL\FacebookPagesBundle\DependencyInjection\FLFacebookPagesExtension::load
+     * @covers \FL\FacebookPagesBundle\DependencyInjection\FLFacebookPagesExtension::validateClassNameIsInstanceOfAnother
+     * @expectedException \Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
+     */
+    public function testInvalidPageClassConfiguration()
+    {
+        $this->extension->load(
+            array_merge($this->createValidConfiguration(), [['page_class'=> \DateTimeImmutable::class]]),
+            $this->container
+        );
+    }
+
+    /**
+     * @test
+     * @covers \FL\FacebookPagesBundle\DependencyInjection\FLFacebookPagesExtension::load
+     * @covers \FL\FacebookPagesBundle\DependencyInjection\FLFacebookPagesExtension::validateClassNameIsInstanceOfAnother
+     * @expectedException \Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
+     */
+    public function testInvalidPageRatingClassConfiguration()
+    {
+        $this->extension->load(
+            array_merge($this->createValidConfiguration(), [['page_rating_class'=> \DateTimeImmutable::class]]),
+            $this->container
+        );
+    }
+
+    /**
+     * @return array
+     */
+    protected function createValidConfiguration()
+    {
+        return [
             'fl_facebook_pages' => [
                 'facebook_user_class' => FacebookUser::class,
                 'page_class' => Page::class,
-                'facebook_user_storage' => FacebookUserStorage::class,
-                'page_class_storage' => PageStorage::class,
-            ],
-        ], $this->container);
-    }
-
-    /**
-     * @test
-     * @covers \FL\FacebookPagesBundle\DependencyInjection\FLFacebookPagesExtension::load
-     */
-    public function testConfigurationExceptionBadFacebookUserClass()
-    {
-        try {
-            $this->extension->load([
-                'fl_facebook_pages' => [
-                    'facebook_user_class' => Page::class,
-                    'page_class' => Page::class,
-                    'facebook_user_storage' => FacebookUserStorage::class,
-                    'page_class_storage' => PageStorage::class,
-                ],
-            ], $this->container);
-        } catch (InvalidConfigurationException $exception) {
-            return;
-        }
-
-        $this->fail(sprintf('Expected %s when loading bad configuration.', InvalidConfigurationException::class));
-    }
-
-    /**
-     * @test
-     * @covers \FL\FacebookPagesBundle\DependencyInjection\FLFacebookPagesExtension::load
-     */
-    public function testConfigurationExceptionBadPageClass()
-    {
-        try {
-            $this->extension->load([
-               'fl_facebook_pages' => [
-                   'facebook_user_class' => FacebookUser::class,
-                   'page_class' => FacebookUser::class,
-                   'facebook_user_storage' => FacebookUserStorage::class,
-                   'page_class_storage' => PageStorage::class,
-               ],
-           ], $this->container);
-        } catch (InvalidConfigurationException $exception) {
-            return;
-        }
-
-        $this->fail(sprintf('Expected %s when loading bad configuration.', InvalidConfigurationException::class));
+                'page_rating_class' => PageRating::class,
+                'facebook_user_storage' => 'facebook_user_storage_service_alias',
+                'page_storage' => 'page_storage_service_alias',
+                'page_rating_storage' => 'page_ratingstorage_service_alias',
+            ]
+        ];
     }
 }
