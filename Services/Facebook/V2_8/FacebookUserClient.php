@@ -4,6 +4,7 @@ namespace FL\FacebookPagesBundle\Services\Facebook\V2_8;
 
 use Facebook\Facebook;
 use Facebook\FacebookResponse;
+use Facebook\Helpers\FacebookRedirectLoginHelper;
 use FL\FacebookPagesBundle\Guzzle\Guzzle6HttpClient;
 use FL\FacebookPagesBundle\Model\FacebookUserInterface;
 
@@ -50,5 +51,13 @@ class FacebookUserClient
         }
 
         return $this->client->get($endpoint, $facebookUser->getLongLivedToken(), null, null);
+    }
+
+    /**
+     * @return FacebookRedirectLoginHelper
+     */
+    public function getRedirectLoginHelper()
+    {
+        return $this->client->getRedirectLoginHelper();
     }
 }

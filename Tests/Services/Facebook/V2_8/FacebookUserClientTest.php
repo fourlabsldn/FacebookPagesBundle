@@ -2,6 +2,7 @@
 
 namespace FL\FacebookPagesBundle\Tests\Services\Facebook\V2_8;
 
+use Facebook\Helpers\FacebookRedirectLoginHelper;
 use FL\FacebookPagesBundle\Model\FacebookUser;
 use FL\FacebookPagesBundle\Services\Facebook\V2_8\FacebookUserClient;
 use FL\FacebookPagesBundle\Guzzle\Guzzle6HttpClient;
@@ -64,5 +65,15 @@ class FacebookUserClientTest extends \PHPUnit_Framework_TestCase
         $facebookUser = new FacebookUser();
         $facebookUser->setLongLivedToken(null);
         $client->get('/me', $facebookUser);
+    }
+
+    /**
+     * @test
+     * @covers \FL\FacebookPagesBundle\Services\Facebook\V2_8\FacebookUserClient::getRedirectLoginHelper
+     *     */
+    public function testGetRedirectLoginHelper()
+    {
+        $client = new FacebookUserClient('fakeAppId', 'fakeAppToken');
+        $this->assertInstanceOf(FacebookRedirectLoginHelper::class, $client->getRedirectLoginHelper());
     }
 }
