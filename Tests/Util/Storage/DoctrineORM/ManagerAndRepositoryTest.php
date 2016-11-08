@@ -19,13 +19,15 @@ class ManagerAndRepositoryTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Persist method on @see ManagerAndRepositoryTest::$entityManager will add an entity to $persistedEntities
-     * Clear method on @see ManagerAndRepositoryTest::$entityManager will reset $persistedEntities
+     * Clear method on @see ManagerAndRepositoryTest::$entityManager will reset $persistedEntities.
+     *
      * @var array
      */
     protected $persistedEntities = [];
 
     /**
-     * Flush method on @see ManagerAndRepositoryTest::$entityManager will merge $persistedEntities into $persistedAndFlushedEntities
+     * Flush method on @see ManagerAndRepositoryTest::$entityManager will merge $persistedEntities into $persistedAndFlushedEntities.
+     *
      * @var array
      */
     protected $persistedAndFlushedEntities = [];
