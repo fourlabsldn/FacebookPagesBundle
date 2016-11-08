@@ -1,5 +1,5 @@
 services:
-  'FL\FacebookPagesBundle\Action':
+  'FL\FacebookPagesBundle\Action\AuthorizeFacebook':
     class: FL\FacebookPagesBundle\Action\AuthorizeFacebook
     arguments:
       - "@fl_facebook_pages.facebook.v2_8.user_client"
