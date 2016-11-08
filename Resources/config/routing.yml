@@ -1,0 +1,3 @@
+imports:
+    - { resource: 'routing/action/authorization.yml' }
+    - { resource: 'routing/action/webhook/rating.yml }
