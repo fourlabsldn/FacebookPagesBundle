@@ -84,12 +84,16 @@ class FLFacebookPagesExtensionTest extends \PHPUnit_Framework_TestCase
     {
         return [
             'fl_facebook_pages' => [
+                'app_id' => 'fakeAppId',
+                'app_secret'=> 'fakePageSecret',
+                'callback_url'=> 'http://example.com',
                 'facebook_user_class' => FacebookUser::class,
                 'page_class' => Page::class,
                 'page_rating_class' => PageRating::class,
-                'facebook_user_storage' => 'facebook_user_storage_service_alias',
-                'page_storage' => 'page_storage_service_alias',
-                'page_rating_storage' => 'page_ratingstorage_service_alias',
+                'facebook_user_storage' => '@fake_facebook_user_storage_service_alias',
+                'page_storage' => '@fake_page_storage_service_alias',
+                'page_rating_storage' => '@fake_page_rating_storage_service_alias',
+                'guzzle_service' => '@fake_guzzle_service',
             ],
         ];
     }
