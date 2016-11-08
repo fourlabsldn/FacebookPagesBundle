@@ -3,6 +3,7 @@
 namespace FL\FacebookPagesBundle\Action;
 
 use FL\FacebookPagesBundle\Services\Facebook\V2_8\FacebookUserClient;
+use FL\FacebookPagesBundle\Tests\Util\Url\ManipulateUrl;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -22,17 +23,12 @@ class AuthorizeFacebookTest extends \PHPUnit_Framework_TestCase
         $response = $authorizeAction(new Request());
 
         /*
-         * $response->getTargetUrl() will return a url with a variable state query
-         * E.g. ...'state=819273ab81238bcas7123'
+         * Keep in mind $client->generateAuthorizationUrl will return a url that has a query,
+         * with a changing state parameter. E.g. ...'state=819273ab81238ba7123' or ...'state=21f371ce23bac6123'
          */
-        $removeStateQueryFromURL = function (string $url) {
-            return preg_replace('/state=.+?(&|$)/', 'state=1234&', $url);
-        };
-
         $this->assertEquals(
-            $removeStateQueryFromURL($response->getTargetUrl()),
+            ManipulateUrl::removeParametersFromQueryInUrl($response->getTargetUrl(), ['state']),
             'https://www.facebook.com/v2.8/dialog/oauth?client_id=fakeAppId'.
-            '&state=1234'.
             '&response_type=code&sdk=php-sdk-5.4.0&redirect_uri='.
             'https%3A%2F%2Fwww.example.com%2Fcallbackurl&scope=id%2Cfirst_name%2Clast_name');
     }

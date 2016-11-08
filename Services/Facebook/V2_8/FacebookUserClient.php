@@ -4,7 +4,6 @@ namespace FL\FacebookPagesBundle\Services\Facebook\V2_8;
 
 use Facebook\Facebook;
 use Facebook\FacebookResponse;
-use Facebook\Helpers\FacebookRedirectLoginHelper;
 use FL\FacebookPagesBundle\Guzzle\Guzzle6HttpClient;
 use FL\FacebookPagesBundle\Model\FacebookUserInterface;
 
@@ -54,10 +53,15 @@ class FacebookUserClient
     }
 
     /**
-     * @return FacebookRedirectLoginHelper
+     * @param string $callbackUrl
+     * @param array $permissions
+     *
+     * @link https://developers.facebook.com/docs/facebook-login/permissions
+     *
+     * @return string
      */
-    public function getRedirectLoginHelper()
+    public function generateAuthorizationUrl(string $callbackUrl, array $permissions)
     {
-        return $this->client->getRedirectLoginHelper();
+        return $this->client->getRedirectLoginHelper()->getLoginUrl($callbackUrl, $permissions);
     }
 }
