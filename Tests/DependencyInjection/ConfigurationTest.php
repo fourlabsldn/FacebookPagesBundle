@@ -6,9 +6,6 @@ use FL\FacebookPagesBundle\DependencyInjection\Configuration;
 use FL\FacebookPagesBundle\Model\FacebookUser;
 use FL\FacebookPagesBundle\Model\Page;
 use FL\FacebookPagesBundle\Model\PageRating;
-use FL\FacebookPagesBundle\Storage\DoctrineORM\FacebookUserStorage;
-use FL\FacebookPagesBundle\Storage\DoctrineORM\PageRatingStorage;
-use FL\FacebookPagesBundle\Storage\DoctrineORM\PageStorage;
 use Symfony\Component\Config\Definition\Processor;
 
 class ConfigurationTest extends \PHPUnit_Framework_TestCase
@@ -44,8 +41,8 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
             [
                 'fl_facebook_pages' => [
                     'app_id' => 'fakeAppId',
-                    'app_secret'=> 'fakePageSecret',
-                    'callback_url'=> 'http://example.com',
+                    'app_secret' => 'fakePageSecret',
+                    'callback_url' => 'http://example.com',
                     'facebook_user_class' => FacebookUser::class,
                     'page_class' => Page::class,
                     'page_rating_class' => PageRating::class,

@@ -85,8 +85,8 @@ class FLFacebookPagesExtensionTest extends \PHPUnit_Framework_TestCase
         return [
             'fl_facebook_pages' => [
                 'app_id' => 'fakeAppId',
-                'app_secret'=> 'fakePageSecret',
-                'callback_url'=> 'http://example.com',
+                'app_secret' => 'fakePageSecret',
+                'callback_url' => 'http://example.com',
                 'facebook_user_class' => FacebookUser::class,
                 'page_class' => Page::class,
                 'page_rating_class' => PageRating::class,
