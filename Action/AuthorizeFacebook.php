@@ -34,7 +34,7 @@ class AuthorizeFacebook
     ) {
         $this->facebookUserClient = $facebookUserClient;
         $this->callbackUrl = $callBackUrl;
-        $this->permissions = ['id', 'first_name', 'last_name'];
+        $this->permissions = ['public_profile', 'email', 'manage_pages', 'publish_pages'];
     }
 
     /**
