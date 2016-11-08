@@ -31,7 +31,7 @@ class AuthorizeFacebookTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(
             $removeStateQueryFromURL($response->getTargetUrl()),
-            'https://www.facebook.com/v2.8/dialog/oauth?client_id=fakeAppId' .
+            'https://www.facebook.com/v2.8/dialog/oauth?client_id=fakeAppId'.
             '&state=1234'.
             '&response_type=code&sdk=php-sdk-5.4.0&redirect_uri='.
             'https%3A%2F%2Fwww.example.com%2Fcallbackurl&scope=id%2Cfirst_name%2Clast_name');

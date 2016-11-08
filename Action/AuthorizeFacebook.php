@@ -26,8 +26,9 @@ class AuthorizeFacebook
 
     /**
      * @param FacebookUserClient $facebookUserClient
-     * @param string $callBackUrl
-     * @param array $permissions
+     * @param string             $callBackUrl
+     * @param array              $permissions
+     *
      * @link https://developers.facebook.com/docs/facebook-login/permissions
      */
     public function __construct(FacebookUserClient $facebookUserClient, string $callBackUrl, array $permissions = ['id'])
@@ -39,6 +40,7 @@ class AuthorizeFacebook
 
     /**
      * @param Request $request
+     *
      * @return Response
      */
     public function __invoke(Request $request): Response
