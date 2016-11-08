@@ -1,0 +1,7 @@
+services:
+  fl_facebook_pages.facebook.v2_8.user_client:
+    class: FL\FacebookPagesBundle\Services\Facebook\V2_8\FacebookUserClient
+    arguments:
+      - "%fl_facebook_pages.app_id%"
+      - "%fl_facebook_pages.app_secret%"
+      - "@fl_facebook_pages.guzzle.client"

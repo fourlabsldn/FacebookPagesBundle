@@ -1,0 +1,12 @@
+services:
+  'FL\FacebookPagesBundle\Action\':
+    class: FL\FacebookPagesBundle\Action\AuthorizeFacebook
+    arguments:
+      - "@fl_facebook_pages.facebook.v2_8.user_client"
+      - ['id', 'first_name', 'last_name']
+      - "%fl_facebook_pages.callback_url%"
+  'FL\FacebookPagesBundle\Action\SaveAuthorization':
+    class: FL\FacebookPagesBundle\Action\SaveAuthorization
+    arguments:
+      - "@fl_facebook_pages.facebook.v2_8.user_client"
+      - "@fl_facebook_pages.facebook_user_class"
