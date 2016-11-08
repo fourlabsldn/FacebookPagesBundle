@@ -3,3 +3,4 @@ imports:
     - { resource: 'services/action/webhook/rating.yml' }
     - { resource: 'services/facebook/v2-8/clients.yml' }
     - { resource: 'services/guzzle/guzzle.yml' }
+    - { resource: 'services/storage/doctrine.yml' }

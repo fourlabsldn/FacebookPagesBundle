@@ -1,7 +1,7 @@
-fl_facebook_pages.authorize_facebook:
+fl_facebook_pages_routes.authorize_facebook:
     path: /fl_facebook_pages/authorize-facebook
     defaults: { _controller: 'FL\FacebookPagesBundle\Action\AuthorizeFacebook:__invoke' }
 
-fl_facebook_pages.save_authorization:
+fl_facebook_pages_routes.save_authorization:
     path: /fl_facebook_pages/save-authorization
     defaults: { _controller: 'FL\FacebookPagesBundle\Action\SaveAuthorization:__invoke' }

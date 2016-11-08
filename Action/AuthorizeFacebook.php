@@ -27,16 +27,14 @@ class AuthorizeFacebook
     /**
      * @param FacebookUserClient $facebookUserClient
      * @param string             $callBackUrl
-     * @param array              $permissions
      */
     public function __construct(
         FacebookUserClient $facebookUserClient,
-        string $callBackUrl,
-        array $permissions
+        string $callBackUrl
     ) {
         $this->facebookUserClient = $facebookUserClient;
         $this->callbackUrl = $callBackUrl;
-        $this->permissions = $permissions;
+        $this->permissions = ['id', 'first_name', 'last_name'];
     }
 
     /**
