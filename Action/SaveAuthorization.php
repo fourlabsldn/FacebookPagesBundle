@@ -20,7 +20,7 @@ class SaveAuthorization
     private $facebookUserStorage;
 
     /**
-     * @param FacebookUserClient $facebookUserClient
+     * @param FacebookUserClient           $facebookUserClient
      * @param FacebookUserStorageInterface $facebookUserStorage
      *
      * @link https://developers.facebook.com/docs/facebook-login/permissions
