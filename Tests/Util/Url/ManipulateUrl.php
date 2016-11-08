@@ -5,8 +5,9 @@ namespace FL\FacebookPagesBundle\Tests\Util\Url;
 class ManipulateUrl
 {
     /**
-     * @param string $url
+     * @param string   $url
      * @param string[] $parameters
+     *
      * @return string
      */
     public static function removeParametersFromQueryInUrl(string $url, array $parameters)
@@ -20,5 +21,4 @@ class ManipulateUrl
 
         return http_build_url($parsedUrl);
     }
-
 }

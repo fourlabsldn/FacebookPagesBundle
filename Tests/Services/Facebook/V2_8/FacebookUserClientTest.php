@@ -2,7 +2,6 @@
 
 namespace FL\FacebookPagesBundle\Tests\Services\Facebook\V2_8;
 
-use Facebook\Helpers\FacebookRedirectLoginHelper;
 use FL\FacebookPagesBundle\Model\FacebookUser;
 use FL\FacebookPagesBundle\Services\Facebook\V2_8\FacebookUserClient;
 use FL\FacebookPagesBundle\Guzzle\Guzzle6HttpClient;
@@ -76,7 +75,6 @@ class FacebookUserClientTest extends \PHPUnit_Framework_TestCase
     {
         $client = new FacebookUserClient('fakeAppId', 'fakeAppToken');
         $url = $client->generateAuthorizationUrl('https://www.example.com/callbackurl', ['id', 'first_name', 'last_name']);
-
 
         /*
          * Keep in mind $client->generateAuthorizationUrl will return a url that has a query,

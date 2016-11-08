@@ -54,7 +54,7 @@ class FacebookUserClient
 
     /**
      * @param string $callbackUrl
-     * @param array $permissions
+     * @param array  $permissions
      *
      * @link https://developers.facebook.com/docs/facebook-login/permissions
      *
