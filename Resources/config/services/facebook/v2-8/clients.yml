@@ -4,4 +4,5 @@ services:
     arguments:
       - "%fl_facebook_pages.app_id%"
       - "%fl_facebook_pages.app_secret%"
+      - "%fl_facebook_pages.facebook_user_class%"
       - "@fl_facebook_pages.guzzle.client"

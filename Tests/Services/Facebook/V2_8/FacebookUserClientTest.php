@@ -24,7 +24,7 @@ class FacebookUserClientTest extends \PHPUnit_Framework_TestCase
      */
     public function testConstruction()
     {
-        new FacebookUserClient('fakeAppId', 'fakeAppToken');
+        new FacebookUserClient('fakeAppId', 'fakeAppToken', FacebookUser::class);
     }
 
     /**
@@ -41,7 +41,7 @@ class FacebookUserClientTest extends \PHPUnit_Framework_TestCase
         $ourGuzzleClient = new Guzzle6HttpClient(new Client([
             'handler' => $stack,
         ]));
-        $facebookUserClient = new FacebookUserClient('fakeAppId', 'fakeAppToken', $ourGuzzleClient);
+        $facebookUserClient = new FacebookUserClient('fakeAppId', 'fakeAppToken', FacebookUser::class, $ourGuzzleClient);
         $facebookUser = new FacebookUser();
         $facebookUser->setLongLivedToken('someToken12371623123812763');
         $facebookUserClient->get('/me', $facebookUser);
@@ -61,7 +61,7 @@ class FacebookUserClientTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetException()
     {
-        $client = new FacebookUserClient('fakeAppId', 'fakeAppToken');
+        $client = new FacebookUserClient('fakeAppId', 'fakeAppToken', FacebookUser::class);
         $facebookUser = new FacebookUser();
         $facebookUser->setLongLivedToken(null);
         $client->get('/me', $facebookUser);
@@ -73,7 +73,7 @@ class FacebookUserClientTest extends \PHPUnit_Framework_TestCase
      */
     public function testGenerateAuthorizationUrl()
     {
-        $client = new FacebookUserClient('fakeAppId', 'fakeAppToken');
+        $client = new FacebookUserClient('fakeAppId', 'fakeAppToken', FacebookUser::class);
         $url = $client->generateAuthorizationUrl('https://www.example.com/callbackurl');
 
         /*

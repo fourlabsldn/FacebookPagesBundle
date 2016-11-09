@@ -52,7 +52,7 @@ class Guzzle6HttpClient implements FacebookHttpClientInterface
         foreach ($responseHeaders as $key => $values) {
             $responseHeaders[$key] = implode(', ', $values);
         }
-        $responseBody = $response->getBody()->getContents();
+        $responseBody = strval($response->getBody());
 
         return new GraphRawResponse(
             $responseHeaders,

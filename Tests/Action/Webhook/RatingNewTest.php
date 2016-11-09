@@ -23,6 +23,6 @@ class RatingNewTest extends \PHPUnit_Framework_TestCase
         $action = new RatingNew($mockRatingStorage);
         /** @var Response $response */
         $response = $action(new Request());
-        $this->assertEquals($response->getStatusCode(), 200);
+        $this->assertEquals($response->getStatusCode(), Response::HTTP_ACCEPTED);
     }
 }

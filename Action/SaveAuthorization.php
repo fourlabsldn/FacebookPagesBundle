@@ -40,7 +40,10 @@ class SaveAuthorization
      */
     public function __invoke(Request $request): Response
     {
-        // todo persist user
-        return new Response('', 200);
+        $this->facebookUserStorage->persist(
+            $this->facebookUserClient->generateUserFromRequest($request)
+        );
+
+        return new Response('Authenticated!', 200);
     }
 }

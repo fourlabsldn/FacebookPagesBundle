@@ -2,30 +2,55 @@
 
 namespace FL\FacebookPagesBundle\Services\Facebook\V2_8;
 
+use Facebook\Authentication\AccessToken;
 use Facebook\Facebook;
 use Facebook\FacebookResponse;
 use FL\FacebookPagesBundle\Guzzle\Guzzle6HttpClient;
 use FL\FacebookPagesBundle\Model\FacebookUserInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 class FacebookUserClient
 {
     /**
-     * @var Facebook
+     * @var string
      */
-    private $client;
+    private $appId;
+
+    /**
+     * @var string
+     */
+    private $appSecret;
+
+    /**
+     * @var string
+     */
+    private $userClass;
+
+    /**
+     * @var Guzzle6HttpClient
+     */
+    private $guzzleClient;
 
     /**
      * @param string            $appId
      * @param string            $appSecret
      * @param Guzzle6HttpClient $guzzle6HttpClient
      */
-    public function __construct(string $appId, string $appSecret, Guzzle6HttpClient $guzzle6HttpClient = null)
-    {
+    public function __construct(
+        string $appId,
+        string $appSecret,
+        string $userClass,
+        Guzzle6HttpClient $guzzle6HttpClient = null
+    ) {
         if ($guzzle6HttpClient === null) {
             $guzzle6HttpClient = new Guzzle6HttpClient(new \GuzzleHttp\Client());
         }
 
-        $this->client = new Facebook([
+        $this->appId = $appId;
+        $this->appSecret = $appSecret;
+        $this->userClass = $userClass;
+
+        $this->guzzleClient = new Facebook([
             'app_id' => $appId,
             'app_secret' => $appSecret,
             'default_graph_version' => 'v2.8',
@@ -49,7 +74,7 @@ class FacebookUserClient
             throw new \InvalidArgumentException();
         }
 
-        return $this->client->get($endpoint, $facebookUser->getLongLivedToken(), null, null);
+        return $this->guzzleClient->get($endpoint, $facebookUser->getLongLivedToken(), null, null);
     }
 
     /**
@@ -61,9 +86,58 @@ class FacebookUserClient
      */
     public function generateAuthorizationUrl(string $callbackUrl)
     {
-        return $this->client->getRedirectLoginHelper()->getLoginUrl(
+        return $this->guzzleClient->getRedirectLoginHelper()->getLoginUrl(
             $callbackUrl,
             ['public_profile', 'email', 'manage_pages', 'publish_pages', 'pages_messaging']
         );
+    }
+
+    /**
+     * @param Request $authorizeFacebookRequest
+     *
+     * @return FacebookUserInterface
+     */
+    public function generateUserFromRequest(Request $authorizeFacebookRequest)
+    {
+        $token = $this->generateLongLivedTokenFromUrl($authorizeFacebookRequest->getUri());
+        $response = $this->guzzleClient->get('/me', $token->getValue());
+        $graphUser = $response->getGraphUser();
+        /** @var FacebookUserInterface $user */
+        $user = (new $this->userClass);
+        $user
+            ->setLongLivedTokenExpiration(\DateTimeImmutable::createFromMutable($token->getExpiresAt()))
+            ->setLongLivedToken($token->getValue())
+            ->setUserId($graphUser->getId())
+        ;
+
+        return $user;
+    }
+
+    /**
+     * @param string $url
+     *
+     * @return AccessToken
+     *
+     * @throws \InvalidArgumentException
+     */
+    private function generateLongLivedTokenFromUrl(string $url): AccessToken
+    {
+        $helper = $this->guzzleClient->getRedirectLoginHelper();
+        $oAuth2Client = $this->guzzleClient->getOAuth2Client();
+
+        $accessToken = $helper->getAccessToken($url);
+
+        if (! isset($accessToken)) {
+            throw new \InvalidArgumentException();
+        }
+        $tokenMetadata = $oAuth2Client->debugToken($accessToken);
+        $tokenMetadata->validateAppId($this->appId);
+        $tokenMetadata->validateExpiration();
+
+        if (! $accessToken->isLongLived()) {
+            $accessToken = $oAuth2Client->getLongLivedAccessToken($accessToken);
+        }
+
+        return $accessToken;
     }
 }

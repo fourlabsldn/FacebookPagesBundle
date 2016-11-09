@@ -2,6 +2,7 @@
 
 namespace FL\FacebookPagesBundle\Action;
 
+use FL\FacebookPagesBundle\Model\FacebookUser;
 use FL\FacebookPagesBundle\Services\Facebook\V2_8\FacebookUserClient;
 use FL\FacebookPagesBundle\Tests\Util\Url\ManipulateUrl;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -16,7 +17,7 @@ class AuthorizeFacebookTest extends \PHPUnit_Framework_TestCase
      */
     public function testInvoke()
     {
-        $facebookUserClient = new FacebookUserClient('fakeAppId', 'fakeAppSecret');
+        $facebookUserClient = new FacebookUserClient('fakeAppId', 'fakeAppSecret', FacebookUser::class);
         $authorizeAction = new AuthorizeFacebook($facebookUserClient, 'https://www.example.com/callbackurl');
 
         /** @var RedirectResponse $response */
