@@ -30,8 +30,7 @@ class RatingNew
     public function __invoke(Request $request): Response
     {
         // todo get Request from rating
-        $ratingFromRequest = new PageRating();
-        $this->pageRatingsStorage->persist($ratingFromRequest);
+//        $this->pageRatingsStorage->persist($ratingFromRequest);
 
         return new Response('', 200);
     }
