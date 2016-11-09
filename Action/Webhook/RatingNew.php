@@ -29,9 +29,17 @@ class RatingNew
      */
     public function __invoke(Request $request): Response
     {
-        // todo get rating from Request and persist
+        // todo persist rating
+        // todo use verify token
         $jsonObject = json_decode($request->getContent(), true);
-
-        return new JsonResponse($jsonObject['entry.time'], 200);
+        if ($jsonObject === null) {
+            $jsonObject = [];
+        }
+        if (array_key_exists('hub.challenge', $jsonObject)) {
+            return new JsonResponse($jsonObject['hub.challenge'], 200);
+        }
+        else {
+            return new JsonResponse([], 200);
+        }
     }
 }
