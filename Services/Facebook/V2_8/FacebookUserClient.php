@@ -198,7 +198,7 @@ class FacebookUserClient
             $permissions = $pageGraphNode->getField('perms');
             if (
                 is_array($permissions->uncastItems()) &&
-                in_array('ADMINISTER', $permissions->uncastItems())
+                in_array('BASIC_ADMIN', $permissions->uncastItems())
             ) {
                 /** @var PageInterface $page */
                 $page = new $this->pageClass();
