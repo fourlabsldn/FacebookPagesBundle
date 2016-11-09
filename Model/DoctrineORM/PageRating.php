@@ -34,4 +34,10 @@ class PageRating extends BasePageRating implements PageRatingInterface
      * @ORM\Column(type="string", nullable=true, length=2048)
      */
     protected $reviewerId;
+
+    /**
+     * @var string|null
+     * @ORM\Column(type="string", nullable=true, length=2048)
+     */
+    protected $reviewerName;
 }

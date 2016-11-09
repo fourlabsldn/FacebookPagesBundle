@@ -64,4 +64,16 @@ interface PageRatingInterface
      * @return PageRatingInterface
      */
     public function setReviewerId(string $reviewerId = null): PageRatingInterface;
+
+    /**
+     * @return string|null
+     */
+    public function getReviewerName();
+
+    /**
+     * @param string|null $reviewerName
+     *
+     * @return PageRatingInterface
+     */
+    public function setReviewerName(string $reviewerName = null): PageRatingInterface;
 }

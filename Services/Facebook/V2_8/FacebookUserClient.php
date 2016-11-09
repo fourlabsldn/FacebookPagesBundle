@@ -5,10 +5,12 @@ namespace FL\FacebookPagesBundle\Services\Facebook\V2_8;
 use Facebook\Authentication\AccessToken;
 use Facebook\Facebook;
 use Facebook\FacebookResponse;
+use Facebook\GraphNodes\GraphEdge;
 use Facebook\GraphNodes\GraphNode;
 use FL\FacebookPagesBundle\Guzzle\Guzzle6HttpClient;
 use FL\FacebookPagesBundle\Model\FacebookUserInterface;
 use FL\FacebookPagesBundle\Model\PageInterface;
+use FL\FacebookPagesBundle\Model\PageRatingInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 class FacebookUserClient
@@ -83,18 +85,35 @@ class FacebookUserClient
     }
 
     /**
-     * @param $endpoint
+     * @param string $endpoint
      * @param FacebookUserInterface $facebookUser
      *
      * @return FacebookResponse
      */
-    public function get($endpoint, FacebookUserInterface $facebookUser)
+    public function get(string $endpoint, FacebookUserInterface $facebookUser)
     {
         if ($facebookUser->getLongLivedToken() === null) {
             throw new \InvalidArgumentException();
         }
 
         return $this->guzzleClient->get($endpoint, $facebookUser->getLongLivedToken(), null, null);
+    }
+
+    /**
+     * This could become a separate client in the future
+     *
+     * @param string $endpoint
+     * @param PageInterface $facebookPage
+     *
+     * @return FacebookResponse
+     */
+    public function getWithPage(string $endpoint, PageInterface $facebookPage)
+    {
+        if ($facebookPage->getLongLivedToken() === null) {
+            throw new \InvalidArgumentException();
+        }
+
+        return $this->guzzleClient->get($endpoint, $facebookPage->getLongLivedToken(), null, null);
     }
 
     /**
@@ -184,6 +203,8 @@ class FacebookUserClient
                 /** @var PageInterface $page */
                 $page = new $this->pageClass();
                 $page
+                    ->setLongLivedToken($pageGraphNode->getField('access_token'))
+                    ->setLongLivedTokenExpiration(null)
                     ->setPageId($pageGraphNode->getField('id'))
                     ->setPageName($pageGraphNode->getField('name'))
                     ->setCategory($pageGraphNode->getField('category'))
@@ -194,5 +215,37 @@ class FacebookUserClient
         }
 
         return $fullyAdminedPages;
+    }
+
+    /**
+     * @param PageInterface $page
+     *
+     * @return PageRatingInterface[]
+     */
+    public function resolvePageRatings(PageInterface $page): array
+    {
+        $allRatings = [];
+        /** @var GraphEdge $ratingsEdge */
+        $ratingsEdge = $this->getWithPage(sprintf('/%s/ratings', $page->getPageId()), $page)->getGraphEdge();
+        do {
+            /** @var GraphNode $ratingGraphNode */
+            foreach ($ratingsEdge->all() as $ratingGraphNode) {
+                /** @var GraphNode $reviewerGraphNode */
+                $reviewerGraphNode = $ratingGraphNode->getField('reviewer');
+
+                /** @var PageRatingInterface $rating */
+                $rating = new $this->pageRatingClass();
+                $rating
+                    ->setReview($ratingGraphNode->getField('review_text'))
+                    ->setRating($ratingGraphNode->getField('rating'))
+                    ->setReviewerId($reviewerGraphNode->getField('id'))
+                    ->setReviewerName($reviewerGraphNode->getField('name'))
+                    ->setCreatedAt(\DateTimeImmutable::createFromMutable($ratingGraphNode->getField('created_time')))
+                ;
+                $allRatings[] = $rating;
+            }
+        } while ($ratingsEdge = $this->guzzleClient->next($ratingsEdge));
+
+        return $allRatings;
     }
 }

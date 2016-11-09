@@ -28,6 +28,11 @@ class PageRating implements PageRatingInterface
     protected $reviewerId;
 
     /**
+     * @var string|null
+     */
+    protected $reviewerName;
+
+    /**
      * {@inheritdoc}
      */
     public function getCreatedAt()
@@ -127,6 +132,24 @@ class PageRating implements PageRatingInterface
     public function setReviewerId(string $reviewerId = null): PageRatingInterface
     {
         $this->reviewerId = $reviewerId;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getReviewerName()
+    {
+        return $this->reviewerName;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setReviewerName(string $reviewerName = null): PageRatingInterface
+    {
+        $this->reviewerName = $reviewerName;
 
         return $this;
     }
