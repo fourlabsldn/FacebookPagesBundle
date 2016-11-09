@@ -1,3 +1,3 @@
-fl_facebook_pages.rating_new:
+fl_facebook_pages_routes.rating_new:
     path: /fl_facebook_pages/webhooks/rating_new
     defaults: { _controller: 'FL\FacebookPagesBundle\Action\Webhook\RatingNew:__invoke' }
