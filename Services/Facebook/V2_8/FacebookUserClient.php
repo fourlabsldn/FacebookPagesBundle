@@ -54,14 +54,16 @@ class FacebookUserClient
 
     /**
      * @param string $callbackUrl
-     * @param array  $permissions
      *
      * @link https://developers.facebook.com/docs/facebook-login/permissions
      *
      * @return string
      */
-    public function generateAuthorizationUrl(string $callbackUrl, array $permissions)
+    public function generateAuthorizationUrl(string $callbackUrl)
     {
-        return $this->client->getRedirectLoginHelper()->getLoginUrl($callbackUrl, $permissions);
+        return $this->client->getRedirectLoginHelper()->getLoginUrl(
+            $callbackUrl,
+            ['public_profile', 'email', 'manage_pages', 'publish_pages', 'pages_messaging']
+        );
     }
 }

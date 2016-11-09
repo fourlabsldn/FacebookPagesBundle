@@ -15,11 +15,6 @@ class AuthorizeFacebook
     private $facebookUserClient;
 
     /**
-     * @var string[]
-     */
-    private $permissions;
-
-    /**
      * @var string
      */
     private $callbackUrl;
@@ -34,7 +29,6 @@ class AuthorizeFacebook
     ) {
         $this->facebookUserClient = $facebookUserClient;
         $this->callbackUrl = $callBackUrl;
-        $this->permissions = ['public_profile', 'email', 'manage_pages', 'publish_pages'];
     }
 
     /**
@@ -44,6 +38,6 @@ class AuthorizeFacebook
      */
     public function __invoke(Request $request): Response
     {
-        return new RedirectResponse($this->facebookUserClient->generateAuthorizationUrl($this->callbackUrl, $this->permissions));
+        return new RedirectResponse($this->facebookUserClient->generateAuthorizationUrl($this->callbackUrl));
     }
 }
