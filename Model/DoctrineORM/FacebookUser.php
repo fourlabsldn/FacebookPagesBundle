@@ -19,7 +19,7 @@ class FacebookUser extends BaseFacebookUser implements FacebookUserInterface
 
     /**
      * @var \DateTimeImmutable|null
-     * @ORM\Column(type="datetime_immutable", nullable=true)
+     * @ORM\Column(type="datetimetz", nullable=true)
      */
     protected $shortLivedTokenExpiration;
 
@@ -31,7 +31,7 @@ class FacebookUser extends BaseFacebookUser implements FacebookUserInterface
 
     /**
      * @var \DateTimeImmutable|null
-     * @ORM\Column(type="datetime_immutable", nullable=true)
+     * @ORM\Column(type="datetimetz", nullable=true)
      */
     protected $longLivedTokenExpiration;
 

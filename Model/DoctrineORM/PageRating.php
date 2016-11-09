@@ -13,7 +13,7 @@ class PageRating extends BasePageRating implements PageRatingInterface
 {
     /**
      * @var \DateTimeImmutable|null
-     * @ORM\Column(type="datetime_immutable", nullable=true)
+     * @ORM\Column(type="datetimetz", nullable=true)
      */
     protected $createdAt;
 
@@ -25,7 +25,7 @@ class PageRating extends BasePageRating implements PageRatingInterface
 
     /**
      * @var string|null
-     * @ORM\Column(type="test", nullable=true)
+     * @ORM\Column(type="text", nullable=true)
      */
     protected $review;
 
