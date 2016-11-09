@@ -85,7 +85,7 @@ class FacebookUserClient
     }
 
     /**
-     * @param string $endpoint
+     * @param string                $endpoint
      * @param FacebookUserInterface $facebookUser
      *
      * @return FacebookResponse
@@ -100,9 +100,9 @@ class FacebookUserClient
     }
 
     /**
-     * This could become a separate client in the future
+     * This could become a separate client in the future.
      *
-     * @param string $endpoint
+     * @param string        $endpoint
      * @param PageInterface $facebookPage
      *
      * @return FacebookResponse
