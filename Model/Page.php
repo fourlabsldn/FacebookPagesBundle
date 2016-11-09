@@ -40,6 +40,11 @@ class Page implements PageInterface
     protected $category;
 
     /**
+     * @var FacebookUserInterface|null
+     */
+    protected $facebookUser;
+
+    /**
      * {@inheritdoc}
      */
     public function getShortLivedToken()
@@ -188,9 +193,27 @@ class Page implements PageInterface
     /**
      * {@inheritdoc}
      */
-    public function setCategory(string $category = null)
+    public function setCategory(string $category = null): PageInterface
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getFacebookUser()
+    {
+        return $this->facebookUser;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setFacebookUser(FacebookUserInterface $facebookUser = null): PageInterface
+    {
+        $this->facebookUser = $facebookUser;
 
         return $this;
     }

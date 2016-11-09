@@ -100,5 +100,17 @@ interface PageInterface
      *
      * @return PageInterface
      */
-    public function setCategory(string $category = null);
+    public function setCategory(string $category = null): PageInterface;
+
+    /**
+     * @return FacebookUserInterface|null
+     */
+    public function getFacebookUser();
+
+    /**
+     * @param FacebookUserInterface|null $facebookUser
+     *
+     * @return PageInterface
+     */
+    public function setFacebookUser(FacebookUserInterface $facebookUser = null): PageInterface;
 }

@@ -185,6 +185,7 @@ class FacebookUserClient
                     ->setPageId($pageGraphNode->getField('id'))
                     ->setPageName($pageGraphNode->getField('name'))
                     ->setCategory($pageGraphNode->getField('category'))
+                    ->setFacebookUser($facebookUser)
                 ;
                 $fullyAdminedPages[] = $page;
             }
