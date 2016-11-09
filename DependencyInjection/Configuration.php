@@ -60,7 +60,17 @@ class Configuration implements ConfigurationInterface
                     ->isRequired()
                     ->cannotBeEmpty()
                 ->end()
+                ->scalarNode('redirect_url_after_authorization')
+                    ->isRequired()
+                    ->cannotBeEmpty()
+                ->end()
+                ->arrayNode('only_these_page_ids')
+                    ->defaultValue([])
+                    ->prototype('scalar')
+                    ->end()
+                ->end()
             ->end()
+
         ;
 
         return $treeBuilder;

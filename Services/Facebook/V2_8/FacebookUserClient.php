@@ -45,12 +45,13 @@ class FacebookUserClient
 
     /**
      * FacebookUserClient constructor.
-     * @param string                    $appId
-     * @param string                    $appSecret
-     * @param string                    $userClass
-     * @param string                    $pageClass
-     * @param string                    $pageRatingClass
-     * @param Guzzle6HttpClient|null    $guzzle6HttpClient
+     *
+     * @param string                 $appId
+     * @param string                 $appSecret
+     * @param string                 $userClass
+     * @param string                 $pageClass
+     * @param string                 $pageRatingClass
+     * @param Guzzle6HttpClient|null $guzzle6HttpClient
      */
     public function __construct(
         string $appId,
@@ -169,7 +170,6 @@ class FacebookUserClient
     {
         $response = $this->get('/me/accounts', $facebookUser);
         $fullyAdminedPages = [];
-
 
         /** @var GraphNode $pageGraphNode */
         foreach ($response->getGraphEdge()->all() as $pageGraphNode) {

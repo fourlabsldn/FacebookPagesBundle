@@ -50,6 +50,8 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
                     'page_storage' => '@fake_page_storage_service_alias',
                     'page_rating_storage' => '@fake_page_rating_storage_service_alias',
                     'guzzle_service' => '@fake_guzzle_service',
+                    'redirect_url_after_authorization' => 'http://example.com/hello',
+                    'only_these_page_ids' => [],
                 ],
             ]
         );
@@ -72,6 +74,8 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
                         'facebook_user_storage' => '',
                         'page_storage' => '',
                         'page_rating_storage' => '',
+                        'redirect_url_after_authorization' => '',
+                        'only_these_page_ids' => [],
                     ],
             ]
         );

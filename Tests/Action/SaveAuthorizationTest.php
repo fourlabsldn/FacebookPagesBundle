@@ -7,6 +7,7 @@ use FL\FacebookPagesBundle\Model\Page;
 use FL\FacebookPagesBundle\Model\PageRating;
 use FL\FacebookPagesBundle\Services\Facebook\V2_8\FacebookUserClient;
 use FL\FacebookPagesBundle\Storage\FacebookUserStorageInterface;
+use FL\FacebookPagesBundle\Storage\PageStorageInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -23,8 +24,9 @@ class SaveAuthorizationTest extends \PHPUnit_Framework_TestCase
     public function testInvoke()
     {
         $facebookUserClient = new FacebookUserClient('fakeAppId', 'fakeAppSecret', FacebookUser::class, Page::class, PageRating::class);
-        $storage = $this->getMockBuilder(FacebookUserStorageInterface::class)->getMock();
-        $saveAction = new SaveAuthorization($facebookUserClient, $storage);
+        $userStorage = $this->getMockBuilder(FacebookUserStorageInterface::class)->getMock();
+        $pageStorage = $this->getMockBuilder(PageStorageInterface::class)->getMock();
+        $saveAction = new SaveAuthorization($facebookUserClient, $userStorage, $pageStorage);
         $this->assertInstanceOf(Response::class, $saveAction(new Request()));
     }
 }

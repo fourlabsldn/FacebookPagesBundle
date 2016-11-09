@@ -10,3 +10,5 @@ services:
     arguments:
       - "@fl_facebook_pages.facebook.v2_8.user_client"
       - "@?fl_facebook_pages.facebook_user_storage"
+      - "@?fl_facebook_pages.page_storage"
+      - "%fl_facebook_pages.only_these_page_ids%"

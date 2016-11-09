@@ -32,6 +32,11 @@ class FLFacebookPagesExtension extends Extension
         $container->setParameter('fl_facebook_pages.app_id', $config['app_id']);
         $container->setParameter('fl_facebook_pages.app_secret', $config['app_secret']);
         $container->setParameter('fl_facebook_pages.callback_url', $config['callback_url']);
+        $container->setParameter('fl_facebook_pages.redirect_url_after_authorization', $config['redirect_url_after_authorization']);
+        if ($config['only_these_page_ids'] === []) {
+            $config['only_these_page_ids'] = null;
+        }
+        $container->setParameter('fl_facebook_pages.only_these_page_ids', $config['only_these_page_ids']);
 
         /*
          * Validate Model Classes Parameters
