@@ -36,6 +36,6 @@ class RatingNew
             $jsonObject = [];
         }
         // verification only
-        return new JsonResponse($request->get('hub.challenge'), 200);
+        return new JsonResponse($request->get('hub_challenge'), 200);
     }
 }
