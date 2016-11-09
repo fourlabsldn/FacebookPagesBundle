@@ -8,4 +8,5 @@ fl_facebook_pages_routes.save_authorization:
 
 fl_facebook_pages_routes.rating_new:
     path: /fl_facebook_pages/webhooks/rating_new
-    defaults: { _controller: 'FL\FacebookPagesBundle\Action\Webhook\RatingNew:__invoke' }
+    methods: [POST]
+    defaults: {_format: 'application/json', _controller: 'FL\FacebookPagesBundle\Action\Webhook\RatingNew:__invoke' }
