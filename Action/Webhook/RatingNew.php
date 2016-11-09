@@ -32,10 +32,6 @@ class RatingNew
         // todo get rating from Request and persist
         $jsonObject = json_decode($request->getContent(), true);
 
-        if (! array_key_exists('entry.time', $jsonObject)) {
-            return new JsonResponse('{}', 400);
-        }
-
-        return new JsonResponse([$jsonObject['entry.time']], 200);
+        return new JsonResponse($jsonObject['entry.time'], 200);
     }
 }
