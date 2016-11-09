@@ -36,6 +36,6 @@ class RatingNew
             $jsonObject = [];
         }
         // verification only
-        return new JsonResponse($request->get('hub_challenge'), 200);
+        return new Response($request->get('hub_challenge'), Response::HTTP_ACCEPTED, ['Content-Type'=> 'application/json']);
     }
 }
