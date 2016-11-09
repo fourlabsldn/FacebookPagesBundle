@@ -5,4 +5,6 @@ services:
       - "%fl_facebook_pages.app_id%"
       - "%fl_facebook_pages.app_secret%"
       - "%fl_facebook_pages.facebook_user_class%"
+      - "%fl_facebook_pages.page_class%"
+      - "%fl_facebook_pages.page_rating_class%"
       - "@fl_facebook_pages.guzzle.client"

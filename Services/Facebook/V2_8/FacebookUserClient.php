@@ -5,8 +5,10 @@ namespace FL\FacebookPagesBundle\Services\Facebook\V2_8;
 use Facebook\Authentication\AccessToken;
 use Facebook\Facebook;
 use Facebook\FacebookResponse;
+use Facebook\GraphNodes\GraphNode;
 use FL\FacebookPagesBundle\Guzzle\Guzzle6HttpClient;
 use FL\FacebookPagesBundle\Model\FacebookUserInterface;
+use FL\FacebookPagesBundle\Model\PageInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 class FacebookUserClient
@@ -27,19 +29,35 @@ class FacebookUserClient
     private $userClass;
 
     /**
+     * @var string
+     */
+    private $pageClass;
+
+    /**
+     * @var string
+     */
+    private $pageRatingClass;
+
+    /**
      * @var Guzzle6HttpClient
      */
     private $guzzleClient;
 
     /**
-     * @param string            $appId
-     * @param string            $appSecret
-     * @param Guzzle6HttpClient $guzzle6HttpClient
+     * FacebookUserClient constructor.
+     * @param string                    $appId
+     * @param string                    $appSecret
+     * @param string                    $userClass
+     * @param string                    $pageClass
+     * @param string                    $pageRatingClass
+     * @param Guzzle6HttpClient|null    $guzzle6HttpClient
      */
     public function __construct(
         string $appId,
         string $appSecret,
         string $userClass,
+        string $pageClass,
+        string $pageRatingClass,
         Guzzle6HttpClient $guzzle6HttpClient = null
     ) {
         if ($guzzle6HttpClient === null) {
@@ -49,7 +67,8 @@ class FacebookUserClient
         $this->appId = $appId;
         $this->appSecret = $appSecret;
         $this->userClass = $userClass;
-
+        $this->pageClass = $pageClass;
+        $this->pageRatingClass = $pageRatingClass;
         $this->guzzleClient = new Facebook([
             'app_id' => $appId,
             'app_secret' => $appSecret,
@@ -97,7 +116,7 @@ class FacebookUserClient
      *
      * @return FacebookUserInterface
      */
-    public function generateUserFromRequest(Request $authorizeFacebookRequest)
+    public function generateUserFromAuthorizationRequest(Request $authorizeFacebookRequest): FacebookUserInterface
     {
         $token = $this->generateLongLivedTokenFromUrl($authorizeFacebookRequest->getUri());
         $response = $this->guzzleClient->get('/me', $token->getValue());
@@ -139,5 +158,38 @@ class FacebookUserClient
         }
 
         return $accessToken;
+    }
+
+    /**
+     * @param FacebookUserInterface $facebookUser
+     *
+     * @return PageInterface[]
+     */
+    public function resolveUserPages(FacebookUserInterface $facebookUser)
+    {
+        $response = $this->get('/me/accounts', $facebookUser);
+        $fullyAdminedPages = [];
+
+
+        /** @var GraphNode $pageGraphNode */
+        foreach ($response->getGraphEdge()->all() as $pageGraphNode) {
+            /** @var GraphNode $permissions */
+            $permissions = $pageGraphNode->getField('perms');
+            if (
+                is_array($permissions->uncastItems()) &&
+                in_array('ADMINISTER', $permissions->uncastItems())
+            ) {
+                /** @var PageInterface $page */
+                $page = new $this->pageClass();
+                $page
+                    ->setPageId($pageGraphNode->getField('id'))
+                    ->setPageName($pageGraphNode->getField('name'))
+                    ->setCategory($pageGraphNode->getField('category'))
+                ;
+                $fullyAdminedPages[] = $page;
+            }
+        }
+
+        return $fullyAdminedPages;
     }
 }

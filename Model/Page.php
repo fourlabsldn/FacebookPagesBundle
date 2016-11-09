@@ -32,6 +32,11 @@ class Page implements PageInterface
     /**
      * @var string|null
      */
+    protected $pageName;
+
+    /**
+     * @var string|null
+     */
     protected $category;
 
     /**
@@ -150,6 +155,24 @@ class Page implements PageInterface
     public function setPageId(string $pageId = null): PageInterface
     {
         $this->pageId = $pageId;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPageName()
+    {
+        return $this->pageName;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setPageName(string $pageName = null): PageInterface
+    {
+        $this->pageName = $pageName;
 
         return $this;
     }

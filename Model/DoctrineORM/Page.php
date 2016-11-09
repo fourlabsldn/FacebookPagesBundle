@@ -45,5 +45,11 @@ class Page extends BasePage implements PageInterface
      * @var string|null
      * @ORM\Column(type="string", nullable=true, length=2048)
      */
+    protected $pageName;
+
+    /**
+     * @var string|null
+     * @ORM\Column(type="string", nullable=true, length=2048)
+     */
     protected $category;
 }

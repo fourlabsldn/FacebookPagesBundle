@@ -81,6 +81,18 @@ interface PageInterface
     /**
      * @return string|null
      */
+    public function getPageName();
+
+    /**
+     * @param string|null $pageName
+     *
+     * @return PageInterface
+     */
+    public function setPageName(string $pageName = null): PageInterface;
+
+    /**
+     * @return string|null
+     */
     public function getCategory();
 
     /**
