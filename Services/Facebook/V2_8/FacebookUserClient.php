@@ -103,7 +103,7 @@ class FacebookUserClient
         $response = $this->guzzleClient->get('/me', $token->getValue());
         $graphUser = $response->getGraphUser();
         /** @var FacebookUserInterface $user */
-        $user = (new $this->userClass);
+        $user = (new $this->userClass());
         $user
             ->setLongLivedTokenExpiration(\DateTimeImmutable::createFromMutable($token->getExpiresAt()))
             ->setLongLivedToken($token->getValue())
@@ -127,14 +127,14 @@ class FacebookUserClient
 
         $accessToken = $helper->getAccessToken($url);
 
-        if (! isset($accessToken)) {
+        if (!isset($accessToken)) {
             throw new \InvalidArgumentException();
         }
         $tokenMetadata = $oAuth2Client->debugToken($accessToken);
         $tokenMetadata->validateAppId($this->appId);
         $tokenMetadata->validateExpiration();
 
-        if (! $accessToken->isLongLived()) {
+        if (!$accessToken->isLongLived()) {
             $accessToken = $oAuth2Client->getLongLivedAccessToken($accessToken);
         }
 

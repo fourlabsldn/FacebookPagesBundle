@@ -3,7 +3,6 @@
 namespace FL\FacebookPagesBundle\Action\Webhook;
 
 use FL\FacebookPagesBundle\Storage\PageRatingStorageInterface;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -36,6 +35,6 @@ class RatingNew
             $jsonObject = [];
         }
         // verification only
-        return new Response($request->get('hub_challenge'), Response::HTTP_ACCEPTED, ['Content-Type'=> 'application/json']);
+        return new Response($request->get('hub_challenge'), Response::HTTP_ACCEPTED, ['Content-Type' => 'application/json']);
     }
 }
