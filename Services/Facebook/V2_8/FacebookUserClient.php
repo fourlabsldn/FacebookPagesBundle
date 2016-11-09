@@ -122,10 +122,12 @@ class FacebookUserClient
         $token = $this->generateLongLivedTokenFromUrl($authorizeFacebookRequest->getUri());
         $response = $this->guzzleClient->get('/me', $token->getValue());
         $graphUser = $response->getGraphUser();
+
         /** @var FacebookUserInterface $user */
         $user = (new $this->userClass());
+        $expiration = $token->getExpiresAt() ? \DateTimeImmutable::createFromMutable($token->getExpiresAt()) : null;
         $user
-            ->setLongLivedTokenExpiration(\DateTimeImmutable::createFromMutable($token->getExpiresAt()))
+            ->setLongLivedTokenExpiration($expiration)
             ->setLongLivedToken($token->getValue())
             ->setUserId($graphUser->getId())
         ;

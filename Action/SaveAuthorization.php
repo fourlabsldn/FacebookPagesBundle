@@ -58,7 +58,6 @@ class SaveAuthorization
     public function __invoke(Request $request): Response
     {
         $user = $this->facebookUserClient->generateUserFromAuthorizationRequest($request);
-        $this->facebookUserStorage->persist($user);
 
         $userPages = $this->facebookUserClient->resolveUserPages($user);
         if ($this->onlyThesePageIds === null || count($this->onlyThesePageIds) === 0) {

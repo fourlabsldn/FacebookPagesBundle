@@ -55,7 +55,10 @@ class Page extends BasePage implements PageInterface
 
     /**
      * Must be implemented in extended class - one to one relationship - unidirectional
-     * @var FacebookUser|null
+     * And activate cascade persist. Below is an example:.
+     *
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\FacebookPageManager", cascade={"persist"})
+     * @ORM\JoinColumn(referencedColumnName="id", nullable=true)
      */
     protected $facebookUser;
 }
