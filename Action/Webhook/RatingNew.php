@@ -35,11 +35,7 @@ class RatingNew
         if ($jsonObject === null) {
             $jsonObject = [];
         }
-        if (array_key_exists('hub.challenge', $jsonObject)) {
-            return new JsonResponse($jsonObject['hub.challenge'], 200);
-        }
-        else {
-            return new JsonResponse([], 200);
-        }
+        // verification only
+        return new JsonResponse($request->get('hub.challenge'), 200);
     }
 }
