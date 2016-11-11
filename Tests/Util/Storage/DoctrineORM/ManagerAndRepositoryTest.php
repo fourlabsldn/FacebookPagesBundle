@@ -49,6 +49,7 @@ class ManagerAndRepositoryTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock()
         ;
+
         $this->entityRepository
             ->expects($this->any())
             ->method('findAll')
@@ -61,18 +62,21 @@ class ManagerAndRepositoryTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock()
         ;
+
         $this->entityManager
             ->expects($this->any())
             ->method('clear')
             ->willReturnCallback(function () {
                 $this->persistedEntities = [];
             });
+
         $this->entityManager
             ->expects($this->any())
             ->method('persist')
             ->willReturnCallback(function ($entity) {
                 $this->persistedEntities[] = $entity;
             });
+
         $this->entityManager
             ->expects($this->any())
             ->method('flush')

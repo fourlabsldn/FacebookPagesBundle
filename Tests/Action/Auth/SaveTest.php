@@ -2,16 +2,17 @@
 
 namespace FL\FacebookPagesBundle\Action;
 
+use FL\FacebookPagesBundle\Action\Auth\Save;
 use FL\FacebookPagesBundle\Model\FacebookUser;
 use FL\FacebookPagesBundle\Model\Page;
 use FL\FacebookPagesBundle\Model\PageRating;
 use FL\FacebookPagesBundle\Services\Facebook\V2_8\FacebookUserClient;
-use FL\FacebookPagesBundle\Storage\FacebookUserStorageInterface;
+use FL\FacebookPagesBundle\Storage\PageManagerStorageInterface;
 use FL\FacebookPagesBundle\Storage\PageStorageInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 
-class SaveAuthorizationTest extends \PHPUnit_Framework_TestCase
+class SaveTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @test
@@ -24,9 +25,9 @@ class SaveAuthorizationTest extends \PHPUnit_Framework_TestCase
     public function testInvoke()
     {
         $facebookUserClient = new FacebookUserClient('fakeAppId', 'fakeAppSecret', FacebookUser::class, Page::class, PageRating::class);
-        $userStorage = $this->getMockBuilder(FacebookUserStorageInterface::class)->getMock();
+        $userStorage = $this->getMockBuilder(PageManagerStorageInterface::class)->getMock();
         $pageStorage = $this->getMockBuilder(PageStorageInterface::class)->getMock();
-        $saveAction = new SaveAuthorization($facebookUserClient, $userStorage, $pageStorage, 'https://www.example.com');
+        $saveAction = new Save($facebookUserClient, $userStorage, $pageStorage, 'https://www.example.com');
         $this->assertInstanceOf(RedirectResponse::class, $saveAction(new Request()));
     }
 }

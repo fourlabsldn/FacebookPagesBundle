@@ -2,12 +2,12 @@
 
 namespace FL\FacebookPagesBundle\Tests\Action\Webhook;
 
-use FL\FacebookPagesBundle\Action\Webhook\RatingNew;
+use FL\FacebookPagesBundle\Action\Webhook\Rating;
 use FL\FacebookPagesBundle\Storage\PageRatingStorageInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class RatingNewTest extends \PHPUnit_Framework_TestCase
+class RatingTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @test
@@ -20,7 +20,7 @@ class RatingNewTest extends \PHPUnit_Framework_TestCase
             ->getMockBuilder(PageRatingStorageInterface::class)
             ->getMock()
         ;
-        $action = new RatingNew($mockRatingStorage);
+        $action = new Rating($mockRatingStorage);
         /** @var Response $response */
         $response = $action(new Request());
         $this->assertEquals($response->getStatusCode(), Response::HTTP_ACCEPTED);

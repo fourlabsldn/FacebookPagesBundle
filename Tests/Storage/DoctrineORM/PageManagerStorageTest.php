@@ -5,9 +5,10 @@ namespace FL\FacebookPagesBundle\Tests\Storage\DoctrineORM;
 use FL\FacebookPagesBundle\Model\FacebookUser;
 use FL\FacebookPagesBundle\Model\FacebookUserInterface;
 use FL\FacebookPagesBundle\Storage\DoctrineORM\FacebookUserStorage;
+use FL\FacebookPagesBundle\Storage\DoctrineORM\PageManagerStorage;
 use FL\FacebookPagesBundle\Tests\Util\Storage\DoctrineORM\ManagerAndRepositoryTest;
 
-class FacebookUserStorageTest extends ManagerAndRepositoryTest
+class PageManagerStorageTest extends ManagerAndRepositoryTest
 {
     public function setUp()
     {
@@ -22,7 +23,7 @@ class FacebookUserStorageTest extends ManagerAndRepositoryTest
      */
     public function testGetAll()
     {
-        $facebookUserStorage = new FacebookUserStorage(
+        $facebookUserStorage = new PageManagerStorage(
             $this->entityManager,
             FacebookUser::class
         );
@@ -39,9 +40,9 @@ class FacebookUserStorageTest extends ManagerAndRepositoryTest
      */
     public function testPersist()
     {
-        $facebookUserStorage = new FacebookUserStorage(
+        $facebookUserStorage = new PageManagerStorage(
             $this->entityManager,
-            FacebookUserStorage::class
+            PageManagerStorage::class
         );
 
         $facebookUserA = new FacebookUser();
@@ -64,9 +65,9 @@ class FacebookUserStorageTest extends ManagerAndRepositoryTest
      */
     public function testPersistMultiple()
     {
-        $facebookUserStorage = new FacebookUserStorage(
+        $facebookUserStorage = new PageManagerStorage(
             $this->entityManager,
-            FacebookUserStorage::class
+            PageManagerStorage::class
         );
 
         $facebookUserA = new FacebookUser();
@@ -85,9 +86,9 @@ class FacebookUserStorageTest extends ManagerAndRepositoryTest
      */
     public function testPersistMultipleException()
     {
-        $facebookUserStorage = new FacebookUserStorage(
+        $facebookUserStorage = new PageManagerStorage(
             $this->entityManager,
-            FacebookUserStorage::class
+            PageManagerStorage::class
         );
 
         $facebookUser = new FacebookUser();
