@@ -1,0 +1,22 @@
+services:
+  'FL\FacebookPagesBundle\Action\Auth\Start':
+    class: FL\FacebookPagesBundle\Action\Auth\Start
+    arguments:
+      - "@fl_facebook_pages.facebook.v2_8.user_client"
+      - "@router"
+
+  'FL\FacebookPagesBundle\Action\Auth\Save':
+    class: FL\FacebookPagesBundle\Action\Auth\Save
+    arguments:
+      - "@fl_facebook_pages.facebook.v2_8.user_client"
+      - "@fl_facebook_pages.page_manager_storage"
+      - "@fl_facebook_pages.page_storage"
+      - "%fl_facebook_pages.redirect_url_after_authorization%"
+      - "%fl_facebook_pages.only_these_page_ids%"
+
+  'FL\FacebookPagesBundle\Action\Auth\Clear':
+    class: FL\FacebookPagesBundle\Action\Auth\Clear
+    arguments:
+      - "@fl_facebook_pages.page_manager_storage"
+      - "@fl_facebook_pages.page_storage"
+      - "%fl_facebook_pages.redirect_url_after_authorization%"

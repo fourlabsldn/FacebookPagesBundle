@@ -1,13 +1,14 @@
 <?php
 
-namespace FL\FacebookPagesBundle\Action;
+namespace FL\FacebookPagesBundle\Action\Auth;
 
 use FL\FacebookPagesBundle\Services\Facebook\V2_8\FacebookUserClient;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\RouterInterface;
 
-class AuthorizeFacebook
+class Start
 {
     /**
      * @var FacebookUserClient
@@ -15,20 +16,20 @@ class AuthorizeFacebook
     private $facebookUserClient;
 
     /**
-     * @var string
+     * @var RouterInterface
      */
-    private $callbackUrl;
+    private $router;
 
     /**
      * @param FacebookUserClient $facebookUserClient
-     * @param string             $callBackUrl
+     * @param RouterInterface $router
      */
     public function __construct(
         FacebookUserClient $facebookUserClient,
-        string $callBackUrl
+        RouterInterface $router
     ) {
         $this->facebookUserClient = $facebookUserClient;
-        $this->callbackUrl = $callBackUrl;
+        $this->router = $router;
     }
 
     /**
@@ -38,6 +39,10 @@ class AuthorizeFacebook
      */
     public function __invoke(Request $request): Response
     {
-        return new RedirectResponse($this->facebookUserClient->generateAuthorizationUrl($this->callbackUrl));
+        return new RedirectResponse(
+            $this->facebookUserClient->generateAuthorizationUrl(
+                $this->router->generate('fl_facebook_pages_routes.save_auth', [], RouterInterface::ABSOLUTE_URL)
+            )
+        );
     }
 }

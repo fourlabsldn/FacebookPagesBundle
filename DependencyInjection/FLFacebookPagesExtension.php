@@ -31,7 +31,6 @@ class FLFacebookPagesExtension extends Extension
          */
         $container->setParameter('fl_facebook_pages.app_id', $config['app_id']);
         $container->setParameter('fl_facebook_pages.app_secret', $config['app_secret']);
-        $container->setParameter('fl_facebook_pages.callback_url', $config['callback_url']);
         $container->setParameter('fl_facebook_pages.redirect_url_after_authorization', $config['redirect_url_after_authorization']);
         if ($config['only_these_page_ids'] === []) {
             $config['only_these_page_ids'] = null;
@@ -53,21 +52,17 @@ class FLFacebookPagesExtension extends Extension
         $container->setParameter('fl_facebook_pages.page_rating_class', $config['page_rating_class']);
 
         /*
-         * Set Storage Parameters
+         * Set storage service aliases
          * These cannot be validated until we have a container.
          */
-        $container->setParameter('fl_facebook_pages.facebook_user_storage', $config['facebook_user_storage']);
-        $container->setAlias('fl_facebook_pages.facebook_user_storage', $config['facebook_user_storage']);
-        $container->setParameter('fl_facebook_pages.page_storage', $config['page_storage']);
+        $container->setAlias('fl_facebook_pages.page_manager_storage', $config['page_manager_storage']);
         $container->setAlias('fl_facebook_pages.page_storage', $config['page_storage']);
-        $container->setParameter('fl_facebook_pages.page_rating_storage', $config['page_rating_storage']);
         $container->setAlias('fl_facebook_pages.page_rating_storage', $config['page_rating_storage']);
 
         /*
-         * Set Guzzle Client
+         * Set guzzle client alias
          * This cannot be validated until we have a container.
          */
-        $container->setParameter('fl_facebook_pages.guzzle_service', $config['guzzle_service']);
         $container->setAlias('fl_facebook_pages.guzzle_service', $config['guzzle_service']);
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));

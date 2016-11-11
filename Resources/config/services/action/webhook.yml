@@ -1,0 +1,5 @@
+services:
+  'FL\FacebookPagesBundle\Action\Webhook\Rating':
+    class: FL\FacebookPagesBundle\Action\Webhook\Rating
+    arguments:
+      - "@?fl_facebook_pages.page_rating_storage"

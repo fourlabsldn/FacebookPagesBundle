@@ -24,4 +24,11 @@ interface PageStorageInterface
      * @return PageStorageInterface
      */
     public function persistMultiple(array $pages): PageStorageInterface;
+
+    /**
+     * Deletes all pages.
+     *
+     * @return PageStorageInterface
+     */
+    public function clearAll(): PageStorageInterface;
 }

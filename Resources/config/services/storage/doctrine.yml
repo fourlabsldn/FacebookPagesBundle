@@ -1,16 +1,18 @@
 services:
-  fl_facebook_pages.storage.doctrine.facebook_user_storage:
-    class: FL\FacebookPagesBundle\Storage\DoctrineORM\FacebookUserStorage
+  fl_facebook_pages.storage.doctrine.page_manager_storage:
+    class: FL\FacebookPagesBundle\Storage\DoctrineORM\PageManagerStorage
     arguments:
       - "@doctrine.orm.entity_manager"
       - "%fl_facebook_pages.facebook_user_class%"
     lazy: true
+
   fl_facebook_pages.storage.doctrine.page_storage:
     class: FL\FacebookPagesBundle\Storage\DoctrineORM\PageStorage
     arguments:
       - "@doctrine.orm.entity_manager"
       - "%fl_facebook_pages.page_class%"
     lazy: true
+
   fl_facebook_pages.storage.doctrine.page_rating_storage:
     class: FL\FacebookPagesBundle\Storage\DoctrineORM\PageRatingStorage
     arguments:

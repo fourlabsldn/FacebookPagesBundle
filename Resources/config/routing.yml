@@ -1,15 +1,21 @@
-fl_facebook_pages_routes.authorize_facebook:
-    path: /fl_facebook_pages/authorize-facebook
-    defaults: { _controller: 'FL\FacebookPagesBundle\Action\AuthorizeFacebook:__invoke' }
+fl_facebook_pages_routes.start_auth:
+  path: /fl_facebook_pages/start-auth
+  defaults: { _controller: 'FL\FacebookPagesBundle\Action\Auth\Start:__invoke' }
 
-fl_facebook_pages_routes.save_authorization:
-    path: /fl_facebook_pages/save-authorization
-    defaults: { _controller: 'FL\FacebookPagesBundle\Action\SaveAuthorization:__invoke' }
+fl_facebook_pages_routes.save_auth:
+  path: /fl_facebook_pages/save-auth
+  defaults: { _controller: 'FL\FacebookPagesBundle\Action\Auth\Save:__invoke' }
+
+fl_facebook_pages_routes.clear_auth:
+  path: /fl_facebook_pages/clear-auth
+  defaults: { _controller: 'FL\FacebookPagesBundle\Action\Auth\Clear:__invoke' }
 
 fl_facebook_pages_routes.rating_new:
-    path: /fl_facebook_pages/webhooks/rating_new
-    # https://developers.facebook.com/docs/graph-api/webhooks
-    # "This URL will need to be accessible by Facebook servers, and be able to receive both the POST data
-    # that is sent when an update happens, but also accept GET requests in order to verify subscriptions."
-    methods: [GET, POST]
-    defaults: {_format: 'application/json', _controller: 'FL\FacebookPagesBundle\Action\Webhook\RatingNew:__invoke' }
+  path: /fl_facebook_pages/webhook/rating
+  # https://developers.facebook.com/docs/graph-api/webhooks
+  # "This URL will need to be accessible by Facebook servers, and be able to receive both the POST data
+  # that is sent when an update happens, but also accept GET requests in order to verify subscriptions."
+  defaults:
+    _format: 'application/json'
+    _controller: 'FL\FacebookPagesBundle\Action\Webhook\RatingNew:__invoke'
+  methods: [GET, POST]

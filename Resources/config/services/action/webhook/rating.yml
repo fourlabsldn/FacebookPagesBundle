@@ -1,5 +1,0 @@
-services:
-  'FL\FacebookPagesBundle\Action\Webhook\RatingNew':
-    class: FL\FacebookPagesBundle\Action\Webhook\RatingNew
-    arguments:
-      - "@?fl_facebook_pages.page_rating_storage"

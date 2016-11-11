@@ -5,9 +5,9 @@ namespace FL\FacebookPagesBundle\Storage\DoctrineORM;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use FL\FacebookPagesBundle\Model\FacebookUserInterface;
-use FL\FacebookPagesBundle\Storage\FacebookUserStorageInterface;
+use FL\FacebookPagesBundle\Storage\PageManagerStorageInterface;
 
-class FacebookUserStorage implements FacebookUserStorageInterface
+class PageManagerStorage implements PageManagerStorageInterface
 {
     /**
      * @var EntityManagerInterface
@@ -40,7 +40,7 @@ class FacebookUserStorage implements FacebookUserStorageInterface
     /**
      * {@inheritdoc}
      */
-    public function persist(FacebookUserInterface $facebookUser): FacebookUserStorageInterface
+    public function persist(FacebookUserInterface $facebookUser): PageManagerStorageInterface
     {
         $this->entityManager->clear();
         $this->entityManager->persist($facebookUser);
@@ -52,7 +52,7 @@ class FacebookUserStorage implements FacebookUserStorageInterface
     /**
      * {@inheritdoc}
      */
-    public function persistMultiple(array $facebookUsers): FacebookUserStorageInterface
+    public function persistMultiple(array $facebookUsers): PageManagerStorageInterface
     {
         $this->entityManager->clear();
         foreach ($facebookUsers as $user) {
@@ -62,6 +62,20 @@ class FacebookUserStorage implements FacebookUserStorageInterface
             $this->entityManager->persist($user);
         }
         $this->entityManager->flush();
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function clearAll(): PageManagerStorageInterface
+    {
+        $this->facebookUserRepository->createQueryBuilder('m')
+            ->delete()
+            ->getQuery()
+            ->execute()
+        ;
 
         return $this;
     }

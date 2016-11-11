@@ -65,4 +65,18 @@ class PageStorage implements PageStorageInterface
 
         return $this;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function clearAll(): PageStorageInterface
+    {
+        $this->pageRepository->createQueryBuilder('p')
+            ->delete()
+            ->getQuery()
+            ->execute()
+        ;
+
+        return $this;
+    }
 }

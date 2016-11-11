@@ -6,7 +6,7 @@ use FL\FacebookPagesBundle\Storage\PageRatingStorageInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class RatingNew
+class Rating
 {
     /**
      * @var PageRatingStorageInterface
