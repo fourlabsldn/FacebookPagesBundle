@@ -44,7 +44,7 @@ class FLFacebookPagesExtensionTest extends \PHPUnit_Framework_TestCase
     public function testInvalidFacebookUserClassConfiguration()
     {
         $this->extension->load(
-            array_merge($this->createValidConfiguration(), [['facebook_user_class' => \DateTimeImmutable::class]]),
+            array_merge($this->createValidConfiguration(), [['page_manager_class' => \DateTimeImmutable::class]]),
             $this->container
         );
     }
@@ -86,7 +86,7 @@ class FLFacebookPagesExtensionTest extends \PHPUnit_Framework_TestCase
             'fl_facebook_pages' => [
                 'app_id' => 'fakeAppId',
                 'app_secret' => 'fakePageSecret',
-                'facebook_user_class' => PageManager::class,
+                'page_manager_class' => PageManager::class,
                 'page_class' => Page::class,
                 'page_rating_class' => PageRating::class,
                 'page_manager_storage' => '@fake_facebook_user_storage_service_alias',

@@ -3,7 +3,7 @@ services:
     class: FL\FacebookPagesBundle\Storage\DoctrineORM\PageManagerStorage
     arguments:
       - "@doctrine.orm.entity_manager"
-      - "%fl_facebook_pages.facebook_user_class%"
+      - "%fl_facebook_pages.page_manager_class%"
     lazy: true
 
   fl_facebook_pages.storage.doctrine.page_storage:

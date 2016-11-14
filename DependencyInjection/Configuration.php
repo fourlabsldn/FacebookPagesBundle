@@ -28,7 +28,7 @@ class Configuration implements ConfigurationInterface
                     ->isRequired()
                     ->cannotBeEmpty()
                 ->end()
-                ->scalarNode('facebook_user_class')
+                ->scalarNode('page_manager_class')
                     ->isRequired()
                     ->cannotBeEmpty()
                 ->end()

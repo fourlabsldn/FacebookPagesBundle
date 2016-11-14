@@ -40,14 +40,14 @@ class FLFacebookPagesExtension extends Extension
         /*
          * Validate Model Classes Parameters
          */
-        $this->validateClassNameIsInstanceOfAnother($config['facebook_user_class'], PageManagerInterface::class, 'fl_facebook_pages.facebook_user_class');
+        $this->validateClassNameIsInstanceOfAnother($config['page_manager_class'], PageManagerInterface::class, 'fl_facebook_pages.page_manager_class');
         $this->validateClassNameIsInstanceOfAnother($config['page_class'], PageInterface::class, 'fl_facebook_pages.page_class');
         $this->validateClassNameIsInstanceOfAnother($config['page_rating_class'], PageRatingInterface::class, 'fl_facebook_pages.page_rating_class');
 
         /*
          * Set Model Classes Parameters
          */
-        $container->setParameter('fl_facebook_pages.facebook_user_class', $config['facebook_user_class']);
+        $container->setParameter('fl_facebook_pages.page_manager_class', $config['page_manager_class']);
         $container->setParameter('fl_facebook_pages.page_class', $config['page_class']);
         $container->setParameter('fl_facebook_pages.page_rating_class', $config['page_rating_class']);
 

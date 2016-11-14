@@ -42,7 +42,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
                 'fl_facebook_pages' => [
                     'app_id' => 'fakeAppId',
                     'app_secret' => 'fakePageSecret',
-                    'facebook_user_class' => PageManager::class,
+                    'page_manager_class' => PageManager::class,
                     'page_class' => Page::class,
                     'page_rating_class' => PageRating::class,
                     'page_manager_storage' => '@fake_facebook_user_storage_service_alias',
@@ -69,7 +69,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
                 'fl_facebook_pages' => [
                     'app_id' => '',
                     'app_secret' => '',
-                    'facebook_user_class' => '',
+                    'page_manager_class' => '',
                     'page_class' => '',
                     'page_rating_class' => '',
                     'page_manager_storage' => '',

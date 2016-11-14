@@ -32,7 +32,7 @@ fl_facebook_pages:
     app_id: "%facebook_app_id%"
     app_secret: "%facebook_app_secret%"
     callback_url: "https://example.com/fl_facebook_pages/save-authorization"
-    facebook_user_class: AppBundle\Entity\FacebookPageManager
+    page_manager_class: AppBundle\Entity\FacebookPageManager
     page_class: AppBundle\Entity\FacebookPage
     page_rating_class: AppBundle\Entity\FacebookPageRating
     facebook_user_storage: fl_facebook_pages.storage.doctrine.facebook_user_storage
