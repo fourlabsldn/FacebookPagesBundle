@@ -1,5 +1,5 @@
 services:
-  fl_facebook_pages.facebook.v2_8.user_client:
+  fl_facebook_pages.facebook.v2_8.page_manager_client:
     class: FL\FacebookPagesBundle\Services\Facebook\V2_8\PageManagerClient
     arguments:
       - "%fl_facebook_pages.app_id%"
