@@ -14,12 +14,12 @@ class Save
     /**
      * @var PageManagerClient
      */
-    private $facebookUserClient;
+    private $pageManagerClient;
 
     /**
      * @var PageManagerStorageInterface
      */
-    private $facebookUserStorage;
+    private $pageManagerStorage;
 
     /**
      * @var PageStorageInterface
@@ -37,8 +37,8 @@ class Save
     private $onlyThesePageIds;
 
     /**
-     * @param PageManagerClient           $facebookUserClient
-     * @param PageManagerStorageInterface  $facebookUserStorage
+     * @param PageManagerClient            $pageManagerClient
+     * @param PageManagerStorageInterface  $pageManagerStorage
      * @param PageStorageInterface         $pageStorage
      * @param string                       $redirectAfterAuthorization
      * @param string[]                     $onlyThesePageIds
@@ -46,14 +46,14 @@ class Save
      * @link https://developers.facebook.com/docs/facebook-login/permissions
      */
     public function __construct(
-        PageManagerClient $facebookUserClient,
-        PageManagerStorageInterface $facebookUserStorage,
+        PageManagerClient $pageManagerClient,
+        PageManagerStorageInterface $pageManagerStorage,
         PageStorageInterface $pageStorage,
         string $redirectAfterAuthorization,
         array $onlyThesePageIds = null
     ) {
-        $this->facebookUserClient = $facebookUserClient;
-        $this->facebookUserStorage = $facebookUserStorage;
+        $this->pageManagerClient = $pageManagerClient;
+        $this->pageManagerStorage = $pageManagerStorage;
         $this->pageStorage = $pageStorage;
         $this->redirectAfterAuthorization = $redirectAfterAuthorization;
         $this->onlyThesePageIds = $onlyThesePageIds;
@@ -66,9 +66,9 @@ class Save
      */
     public function __invoke(Request $request): Response
     {
-        $user = $this->facebookUserClient->generateUserFromAuthorizationRequest($request);
+        $user = $this->pageManagerClient->generateUserFromAuthorizationRequest($request);
 
-        $userPages = $this->facebookUserClient->resolveUserPages($user);
+        $userPages = $this->pageManagerClient->resolveUserPages($user);
         if ($this->onlyThesePageIds === null || count($this->onlyThesePageIds) === 0) {
             $this->pageStorage->persistMultiple($userPages);
 

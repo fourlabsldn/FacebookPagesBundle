@@ -21,7 +21,7 @@ class StartTest extends \PHPUnit_Framework_TestCase
      */
     public function testInvoke()
     {
-        $facebookUserClient = new PageManagerClient('fakeAppId', 'fakeAppSecret', PageManager::class, Page::class, PageRating::class);
+        $pageManagerClient = new PageManagerClient('fakeAppId', 'fakeAppSecret', PageManager::class, Page::class, PageRating::class);
         $router = $this
             ->getMockBuilder(RouterInterface::class)
             ->setMethods(['generate', 'getContext', 'match', 'getRouteCollection', 'setContext'])
@@ -33,7 +33,7 @@ class StartTest extends \PHPUnit_Framework_TestCase
             ->method('generate')
             ->will($this->returnValue('https://www.example.com/callbackurl'))
         ;
-        $authorizeAction = new Start($facebookUserClient, $router);
+        $authorizeAction = new Start($pageManagerClient, $router);
 
         /** @var RedirectResponse $response */
         $response = $authorizeAction(new Request());

@@ -17,16 +17,16 @@ class PageManagerStorage implements PageManagerStorageInterface
     /**
      * @var EntityRepository
      */
-    private $facebookUserRepository;
+    private $pageManagerRepository;
 
     /**
      * @param EntityManagerInterface $entityManager
-     * @param string                 $facebookUserClass
+     * @param string                 $pageManagerClass
      */
-    public function __construct(EntityManagerInterface $entityManager, string $facebookUserClass)
+    public function __construct(EntityManagerInterface $entityManager, string $pageManagerClass)
     {
         $this->entityManager = $entityManager;
-        $this->facebookUserRepository = $this->entityManager->getRepository($facebookUserClass);
+        $this->facebookUserRepository = $this->entityManager->getRepository($pageManagerClass);
     }
 
     /**
@@ -40,10 +40,10 @@ class PageManagerStorage implements PageManagerStorageInterface
     /**
      * {@inheritdoc}
      */
-    public function persist(PageManagerInterface $facebookUser): PageManagerStorageInterface
+    public function persist(PageManagerInterface $pageManager): PageManagerStorageInterface
     {
         $this->entityManager->clear();
-        $this->entityManager->persist($facebookUser);
+        $this->entityManager->persist($pageManager);
         $this->entityManager->flush();
 
         return $this;
@@ -52,10 +52,10 @@ class PageManagerStorage implements PageManagerStorageInterface
     /**
      * {@inheritdoc}
      */
-    public function persistMultiple(array $facebookUsers): PageManagerStorageInterface
+    public function persistMultiple(array $pageManagers): PageManagerStorageInterface
     {
         $this->entityManager->clear();
-        foreach ($facebookUsers as $user) {
+        foreach ($pageManagers as $user) {
             if (!($user instanceof PageManagerInterface)) {
                 throw new \InvalidArgumentException();
             }

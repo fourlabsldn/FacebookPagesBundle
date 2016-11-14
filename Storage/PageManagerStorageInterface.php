@@ -12,18 +12,18 @@ interface PageManagerStorageInterface
     public function getAll(): array;
 
     /**
-     * @param PageManagerInterface $facebookUser
+     * @param PageManagerInterface $pageManager
      *
      * @return PageManagerStorageInterface
      */
-    public function persist(PageManagerInterface $facebookUser): PageManagerStorageInterface;
+    public function persist(PageManagerInterface $pageManager): PageManagerStorageInterface;
 
     /**
-     * @param PageManagerInterface[] $facebookUsers
+     * @param PageManagerInterface[] $pageManagers
      *
      * @return PageManagerStorageInterface
      */
-    public function persistMultiple(array $facebookUsers): PageManagerStorageInterface;
+    public function persistMultiple(array $pageManagers): PageManagerStorageInterface;
 
     /**
      * Deletes all page managers.

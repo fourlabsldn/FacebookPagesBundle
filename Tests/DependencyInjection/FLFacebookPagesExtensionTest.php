@@ -41,7 +41,7 @@ class FLFacebookPagesExtensionTest extends \PHPUnit_Framework_TestCase
      * @covers \FL\FacebookPagesBundle\DependencyInjection\FLFacebookPagesExtension::validateClassNameIsInstanceOfAnother
      * @expectedException \Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
      */
-    public function testInvalidFacebookUserClassConfiguration()
+    public function testInvalidPageManagerClassConfiguration()
     {
         $this->extension->load(
             array_merge($this->createValidConfiguration(), [['page_manager_class' => \DateTimeImmutable::class]]),
