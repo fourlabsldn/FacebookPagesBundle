@@ -40,10 +40,10 @@ class PageReviewStorage implements PageReviewStorageInterface
     /**
      * {@inheritdoc}
      */
-    public function persist(PageReviewInterface $pageRating): PageReviewStorageInterface
+    public function persist(PageReviewInterface $pageReview): PageReviewStorageInterface
     {
         $this->entityManager->clear();
-        $this->entityManager->persist($pageRating);
+        $this->entityManager->persist($pageReview);
         $this->entityManager->flush();
 
         return $this;
@@ -52,10 +52,10 @@ class PageReviewStorage implements PageReviewStorageInterface
     /**
      * {@inheritdoc}
      */
-    public function persistMultiple(array $pageRatings): PageReviewStorageInterface
+    public function persistMultiple(array $pageReviews): PageReviewStorageInterface
     {
         $this->entityManager->clear();
-        foreach ($pageRatings as $review) {
+        foreach ($pageReviews as $review) {
             if (!($review instanceof PageReviewInterface)) {
                 throw new \InvalidArgumentException();
             }

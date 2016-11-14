@@ -10,12 +10,12 @@ fl_facebook_pages_routes.clear_auth:
   path: /fl_facebook_pages/clear-auth
   defaults: { _controller: 'FL\FacebookPagesBundle\Action\Auth\Clear:__invoke' }
 
-fl_facebook_pages_routes.rating_new:
+fl_facebook_pages_routes.review_new:
   path: /fl_facebook_pages/webhook/rating
   # https://developers.facebook.com/docs/graph-api/webhooks
   # "This URL will need to be accessible by Facebook servers, and be able to receive both the POST data
   # that is sent when an update happens, but also accept GET requests in order to verify subscriptions."
   defaults:
     _format: 'application/json'
-    _controller: 'FL\FacebookPagesBundle\Action\Webhook\RatingNew:__invoke'
+    _controller: 'FL\FacebookPagesBundle\Action\Webhook\Review:__invoke'
   methods: [GET, POST]

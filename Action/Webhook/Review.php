@@ -6,19 +6,19 @@ use FL\FacebookPagesBundle\Storage\PageReviewStorageInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class Rating
+class Review
 {
     /**
      * @var PageReviewStorageInterface
      */
-    private $pageRatingsStorage;
+    private $pageReviewsStorage;
 
     /**
-     * @param PageReviewStorageInterface $pageRatingsStorage
+     * @param PageReviewStorageInterface $pageReviewsStorage
      */
-    public function __construct(PageReviewStorageInterface $pageRatingsStorage)
+    public function __construct(PageReviewStorageInterface $pageReviewsStorage)
     {
-        $this->pageRatingsStorage = $pageRatingsStorage;
+        $this->pageReviewsStorage = $pageReviewsStorage;
     }
 
     /**
@@ -28,7 +28,7 @@ class Rating
      */
     public function __invoke(Request $request): Response
     {
-        // todo persist rating
+        // todo persist review
         // todo use verify token
         $jsonObject = json_decode($request->getContent(), true);
         if ($jsonObject === null) {

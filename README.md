@@ -34,7 +34,7 @@ fl_facebook_pages:
     callback_url: "https://example.com/fl_facebook_pages/save-authorization"
     page_manager_class: AppBundle\Entity\FacebookPageManager
     page_class: AppBundle\Entity\FacebookPage
-    page_review_class: AppBundle\Entity\FacebookPageRating
+    page_review_class: AppBundle\Entity\FacebookPageReview
     facebook_user_storage: fl_facebook_pages.storage.doctrine.facebook_user_storage
     page_storage: fl_facebook_pages.storage.doctrine.page_storage
     page_review_storage: fl_facebook_pages.storage.doctrine.page_review_storage

@@ -69,7 +69,7 @@ class FLFacebookPagesExtensionTest extends \PHPUnit_Framework_TestCase
      * @covers \FL\FacebookPagesBundle\DependencyInjection\FLFacebookPagesExtension::validateClassNameIsInstanceOfAnother
      * @expectedException \Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
      */
-    public function testInvalidPageRatingClassConfiguration()
+    public function testInvalidPageReviewClassConfiguration()
     {
         $this->extension->load(
             array_merge($this->createValidConfiguration(), [['page_review_class' => \DateTimeImmutable::class]]),
