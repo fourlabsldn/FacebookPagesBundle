@@ -7,7 +7,7 @@ use FL\FacebookPagesBundle\Storage\PageReviewStorageInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class ReviewTest extends \PHPUnit_Framework_TestCase
+class RatingTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @test
