@@ -5,7 +5,7 @@ namespace FL\FacebookPagesBundle\Action;
 use FL\FacebookPagesBundle\Action\Auth\Start;
 use FL\FacebookPagesBundle\Model\PageManager;
 use FL\FacebookPagesBundle\Model\Page;
-use FL\FacebookPagesBundle\Model\PageRating;
+use FL\FacebookPagesBundle\Model\PageReview;
 use FL\FacebookPagesBundle\Services\Facebook\V2_8\PageManagerClient;
 use FL\FacebookPagesBundle\Tests\Util\Url\ManipulateUrl;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -21,7 +21,7 @@ class StartTest extends \PHPUnit_Framework_TestCase
      */
     public function testInvoke()
     {
-        $pageManagerClient = new PageManagerClient('fakeAppId', 'fakeAppSecret', PageManager::class, Page::class, PageRating::class);
+        $pageManagerClient = new PageManagerClient('fakeAppId', 'fakeAppSecret', PageManager::class, Page::class, PageReview::class);
         $router = $this
             ->getMockBuilder(RouterInterface::class)
             ->setMethods(['generate', 'getContext', 'match', 'getRouteCollection', 'setContext'])
@@ -29,9 +29,9 @@ class StartTest extends \PHPUnit_Framework_TestCase
             ->getMock()
         ;
         $router
-            ->expects($this->any())
+            ->expects(static::any())
             ->method('generate')
-            ->will($this->returnValue('https://www.example.com/callbackurl'))
+            ->will(static::returnValue('https://www.example.com/callbackurl'))
         ;
         $authorizeAction = new Start($pageManagerClient, $router);
 
@@ -42,7 +42,7 @@ class StartTest extends \PHPUnit_Framework_TestCase
          * Keep in mind $client->generateAuthorizationUrl will return a url that has a query,
          * with a changing state parameter. E.g. ...'state=819273ab81238ba7123' or ...'state=21f371ce23bac6123'
          */
-        $this->assertEquals(
+        static::assertEquals(
             ManipulateUrl::removeParametersFromQueryInUrl($response->getTargetUrl(), ['state']),
             'https://www.facebook.com/v2.8/dialog/oauth?client_id=fakeAppId'.
             '&response_type=code&sdk=php-sdk-5.4.0&redirect_uri='.

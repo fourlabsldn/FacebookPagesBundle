@@ -2,11 +2,11 @@
 
 namespace FL\FacebookPagesBundle\Tests\Model;
 
-use FL\FacebookPagesBundle\Model\PageRating;
+use FL\FacebookPagesBundle\Model\PageReview;
 use FL\FacebookPagesBundle\Tests\Util\GettersSetters\TestItemImmutable;
 use FL\FacebookPagesBundle\Tests\Util\GettersSetters\TestTool;
 
-class PageRatingTest extends \PHPUnit_Framework_TestCase
+class PageReviewTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @test
@@ -21,7 +21,7 @@ class PageRatingTest extends \PHPUnit_Framework_TestCase
      */
     public function testGettersAndSetters()
     {
-        $pageManager = new PageRating();
+        $pageManager = new PageReview();
         $tool = new TestTool();
 
         $tool
@@ -32,7 +32,7 @@ class PageRatingTest extends \PHPUnit_Framework_TestCase
         ;
 
         if (!$tool->doGettersAndSettersWork($pageManager)) {
-            $this->fail($tool->getLatestErrorMessage());
+            static::fail($tool->getLatestErrorMessage());
         }
     }
 
@@ -45,11 +45,11 @@ class PageRatingTest extends \PHPUnit_Framework_TestCase
      */
     public function testNullValuesInNewObject()
     {
-        $pageRating = new PageRating();
-        $this->assertNull($pageRating->getCreatedAt());
-        $this->assertNull($pageRating->getRating());
-        $this->assertNull($pageRating->getReview());
-        $this->assertNull($pageRating->getReviewerId());
+        $pageRating = new PageReview();
+        static::assertNull($pageRating->getCreatedAt());
+        static::assertNull($pageRating->getRating());
+        static::assertNull($pageRating->getText());
+        static::assertNull($pageRating->getReviewerId());
     }
 
     /**
@@ -58,9 +58,9 @@ class PageRatingTest extends \PHPUnit_Framework_TestCase
      */
     public function testHasRatingIsTrue()
     {
-        $pageRating = new PageRating();
+        $pageRating = new PageReview();
         $pageRating->setRating(2);
-        $this->assertTrue($pageRating->hasRating());
+        static::assertTrue($pageRating->hasRating());
     }
 
     /**
@@ -69,9 +69,9 @@ class PageRatingTest extends \PHPUnit_Framework_TestCase
      */
     public function testHasReviewIsTrue()
     {
-        $pageRating = new PageRating();
-        $pageRating->setReview('Some Review!');
-        $this->assertTrue($pageRating->hasReview());
+        $pageRating = new PageReview();
+        $pageRating->setText('Some Review!');
+        static::assertTrue($pageRating->hasText());
     }
 
     /**
@@ -80,10 +80,8 @@ class PageRatingTest extends \PHPUnit_Framework_TestCase
      */
     public function testHasRatingIsFalseIfRatingIsNull()
     {
-        $pageRating = new PageRating();
-        $this->assertFalse($pageRating->hasRating());
-        $pageRating->setRating(null);
-        $this->assertFalse($pageRating->hasRating());
+        $pageRating = new PageReview();
+        static::assertFalse($pageRating->hasRating());
     }
 
     /**
@@ -92,10 +90,8 @@ class PageRatingTest extends \PHPUnit_Framework_TestCase
      */
     public function testHasReviewIsFalseInNewObject()
     {
-        $pageRating = new PageRating();
-        $this->assertFalse($pageRating->hasReview());
-        $pageRating->setReview(null);
-        $this->assertFalse($pageRating->hasReview());
+        $pageRating = new PageReview();
+        static::assertFalse($pageRating->hasText());
     }
 
     /**
@@ -104,7 +100,7 @@ class PageRatingTest extends \PHPUnit_Framework_TestCase
      */
     public function testValidSetRating()
     {
-        $pageRating = new PageRating();
+        $pageRating = new PageReview();
         $pageRating->setRating(1);
         $pageRating->setRating(2);
         $pageRating->setRating(3);
@@ -118,7 +114,7 @@ class PageRatingTest extends \PHPUnit_Framework_TestCase
      */
     public function testInvalidSetRating()
     {
-        $pageRating = new PageRating();
+        $pageRating = new PageReview();
         $totalExceptions = 0;
 
         try {
@@ -143,7 +139,7 @@ class PageRatingTest extends \PHPUnit_Framework_TestCase
         }
 
         if ($totalExceptions !== 4) {
-            $this->fail(sprintf('-10, 0, 6, and 20 must throw an exception when using %s::setRating', PageRating::class));
+            static::fail(sprintf('-10, 0, 6, and 20 must throw an exception when using %s::setRating', PageReview::class));
         }
     }
 }

@@ -43,9 +43,9 @@ class Guzzle6HttpClientTest extends \PHPUnit_Framework_TestCase
 
         /** @var Request $request */
         $request = $container[0]['request'];
-        $this->assertEquals($request->getUri()->getScheme(), 'http');
-        $this->assertEquals($request->getUri()->getHost(), 'www.notactuallyrequested.com');
-        $this->assertEquals($request->getUri()->getPath(), '');
+        static::assertEquals($request->getUri()->getScheme(), 'http');
+        static::assertEquals($request->getUri()->getHost(), 'www.notactuallyrequested.com');
+        static::assertEquals($request->getUri()->getPath(), '');
     }
 
     /**

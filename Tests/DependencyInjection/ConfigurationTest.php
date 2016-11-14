@@ -3,6 +3,7 @@
 namespace FL\FacebookPagesBundle\Tests\DependencyInjection;
 
 use FL\FacebookPagesBundle\DependencyInjection\Configuration;
+use FL\FacebookPagesBundle\Model\DoctrineORM\PageReview;
 use FL\FacebookPagesBundle\Model\PageManager;
 use FL\FacebookPagesBundle\Model\Page;
 use FL\FacebookPagesBundle\Model\PageRating;
@@ -44,10 +45,10 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
                     'app_secret' => 'fakePageSecret',
                     'page_manager_class' => PageManager::class,
                     'page_class' => Page::class,
-                    'page_rating_class' => PageRating::class,
+                    'page_review_class' => PageReview::class,
                     'page_manager_storage' => '@fake_facebook_user_storage_service_alias',
                     'page_storage' => '@fake_page_storage_service_alias',
-                    'page_rating_storage' => '@fake_page_rating_storage_service_alias',
+                    'page_review_storage' => '@fake_page_review_storage_service_alias',
                     'guzzle_service' => '@fake_guzzle_service',
                     'redirect_url_after_authorization' => 'http://example.com/hello',
                     'only_these_page_ids' => [],
@@ -71,10 +72,10 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
                     'app_secret' => '',
                     'page_manager_class' => '',
                     'page_class' => '',
-                    'page_rating_class' => '',
+                    'page_review_class' => '',
                     'page_manager_storage' => '',
                     'page_storage' => '',
-                    'page_rating_storage' => '',
+                    'page_review_storage' => '',
                     'guzzle_service' => '',
                     'redirect_url_after_authorization' => '',
                     'only_these_page_ids' => [],

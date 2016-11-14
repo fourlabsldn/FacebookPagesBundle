@@ -2,16 +2,16 @@
 
 namespace FL\FacebookPagesBundle\Tests\Storage\DoctrineORM;
 
-use FL\FacebookPagesBundle\Model\PageRating;
-use FL\FacebookPagesBundle\Model\PageRatingInterface;
-use FL\FacebookPagesBundle\Storage\DoctrineORM\PageRatingStorage;
+use FL\FacebookPagesBundle\Model\PageReview;
+use FL\FacebookPagesBundle\Model\PageReviewInterface;
+use FL\FacebookPagesBundle\Storage\DoctrineORM\PageReviewStorage;
 use FL\FacebookPagesBundle\Tests\Util\Storage\DoctrineORM\ManagerAndRepositoryTest;
 
-class PageRatingStorageTest extends ManagerAndRepositoryTest
+class PageReviewStorageTest extends ManagerAndRepositoryTest
 {
     public function setUp()
     {
-        $this->findAllReturnValue = [new PageRating(), new PageRating()];
+        $this->findAllReturnValue = [new PageReview(), new PageReview()];
         parent::setUp();
     }
 
@@ -23,13 +23,13 @@ class PageRatingStorageTest extends ManagerAndRepositoryTest
     public function testGetAll()
     {
         $this->entityManager->clear();
-        $pageRatingStorage = new PageRatingStorage(
+        $pageRatingStorage = new PageReviewStorage(
             $this->entityManager,
-            PageRatingStorage::class
+            PageReview::class
         );
-        $this->assertInternalType('array', $pageRatingStorage->getAll());
+        static::assertInternalType('array', $pageRatingStorage->getAll());
         foreach ($pageRatingStorage->getAll() as $rating) {
-            $this->assertInstanceOf(PageRatingInterface::class, $rating);
+            static::assertInstanceOf(PageReviewInterface::class, $rating);
         }
     }
 
@@ -40,22 +40,22 @@ class PageRatingStorageTest extends ManagerAndRepositoryTest
      */
     public function testPersist()
     {
-        $pageRatingStorage = new PageRatingStorage(
+        $pageRatingStorage = new PageReviewStorage(
             $this->entityManager,
-            PageRatingStorage::class
+            PageReview::class
         );
 
-        $pageRatingA = new PageRating();
+        $pageRatingA = new PageReview();
         $pageRatingStorage->persist($pageRatingA);
-        $this->assertContains($pageRatingA, $this->persistedEntities);
-        $this->assertContains($pageRatingA, $this->persistedAndFlushedEntities);
+        static::assertContains($pageRatingA, $this->persistedEntities);
+        static::assertContains($pageRatingA, $this->persistedAndFlushedEntities);
 
-        $pageRatingB = new PageRating();
+        $pageRatingB = new PageReview();
         $pageRatingStorage->persist($pageRatingB);
-        $this->assertNotContains($pageRatingA, $this->persistedEntities);
-        $this->assertContains($pageRatingB, $this->persistedEntities);
-        $this->assertContains($pageRatingA, $this->persistedAndFlushedEntities);
-        $this->assertContains($pageRatingB, $this->persistedAndFlushedEntities);
+        static::assertNotContains($pageRatingA, $this->persistedEntities);
+        static::assertContains($pageRatingB, $this->persistedEntities);
+        static::assertContains($pageRatingA, $this->persistedAndFlushedEntities);
+        static::assertContains($pageRatingB, $this->persistedAndFlushedEntities);
     }
 
     /**
@@ -65,19 +65,19 @@ class PageRatingStorageTest extends ManagerAndRepositoryTest
      */
     public function testPersistMultiple()
     {
-        $pageRatingStorage = new PageRatingStorage(
+        $pageRatingStorage = new PageReviewStorage(
             $this->entityManager,
-            PageRatingStorage::class
+            PageReview::class
         );
 
-        $pageRatingA = new PageRating();
-        $pageRatingB = new PageRating();
+        $pageRatingA = new PageReview();
+        $pageRatingB = new PageReview();
 
         $pageRatingStorage->persistMultiple([$pageRatingA, $pageRatingB]);
-        $this->assertContains($pageRatingA, $this->persistedEntities);
-        $this->assertContains($pageRatingB, $this->persistedEntities);
-        $this->assertContains($pageRatingA, $this->persistedAndFlushedEntities);
-        $this->assertContains($pageRatingB, $this->persistedAndFlushedEntities);
+        static::assertContains($pageRatingA, $this->persistedEntities);
+        static::assertContains($pageRatingB, $this->persistedEntities);
+        static::assertContains($pageRatingA, $this->persistedAndFlushedEntities);
+        static::assertContains($pageRatingB, $this->persistedAndFlushedEntities);
     }
 
     /**
@@ -86,12 +86,12 @@ class PageRatingStorageTest extends ManagerAndRepositoryTest
      */
     public function testPersistMultipleException()
     {
-        $pageRatingStorage = new PageRatingStorage(
+        $pageRatingStorage = new PageReviewStorage(
             $this->entityManager,
-            PageRatingStorage::class
+            PageReview::class
         );
 
-        $pageRating = new PageRating();
+        $pageRating = new PageReview();
         $date = new \DateTimeImmutable();
 
         try {
@@ -100,10 +100,10 @@ class PageRatingStorageTest extends ManagerAndRepositoryTest
             return;
         }
 
-        $this->fail(sprintf(
+        static::fail(sprintf(
             'Expected %s for invalid %s::persistMultiple',
             \InvalidArgumentException::class,
-            PageRating::class
+            PageReview::class
         ));
     }
 }

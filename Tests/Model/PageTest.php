@@ -38,7 +38,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
         ;
 
         if (!$tool->doGettersAndSettersWork($page)) {
-            $this->fail($tool->getLatestErrorMessage());
+            static::fail($tool->getLatestErrorMessage());
         }
     }
 
@@ -54,12 +54,12 @@ class PageTest extends \PHPUnit_Framework_TestCase
     public function testNullValuesInNewObject()
     {
         $page = new Page();
-        $this->assertNull($page->getLongLivedToken());
-        $this->assertNull($page->getLongLivedTokenExpiration());
-        $this->assertNull($page->getShortLivedToken());
-        $this->assertNull($page->getShortLivedTokenExpiration());
-        $this->assertNull($page->getPageId());
-        $this->assertNull($page->getCategory());
+        static::assertNull($page->getLongLivedToken());
+        static::assertNull($page->getLongLivedTokenExpiration());
+        static::assertNull($page->getShortLivedToken());
+        static::assertNull($page->getShortLivedTokenExpiration());
+        static::assertNull($page->getPageId());
+        static::assertNull($page->getCategory());
     }
 
     /**
@@ -69,9 +69,9 @@ class PageTest extends \PHPUnit_Framework_TestCase
     public function testLongLivedExpirationIfTokenNull()
     {
         $page = new Page();
-        $this->assertTrue($page->isLongLivedTokenExpired());
+        static::assertTrue($page->isLongLivedTokenExpired());
         $page->setLongLivedToken(null);
-        $this->assertTrue($page->isLongLivedTokenExpired());
+        static::assertTrue($page->isLongLivedTokenExpired());
     }
 
     /**
@@ -84,7 +84,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
         $now = new \DateTimeImmutable('now');
         $page->setLongLivedToken('{token}');
         $page->setLongLivedTokenExpiration($now->sub(new \DateInterval('P1D')));
-        $this->assertTrue($page->isLongLivedTokenExpired());
+        static::assertTrue($page->isLongLivedTokenExpired());
     }
 
     /**
@@ -97,7 +97,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
         $now = new \DateTimeImmutable('now');
         $page->setLongLivedToken('{token}');
         $page->setLongLivedTokenExpiration($now->add(new \DateInterval('P1D')));
-        $this->assertFalse($page->isLongLivedTokenExpired());
+        static::assertFalse($page->isLongLivedTokenExpired());
     }
 
     /**
@@ -107,9 +107,9 @@ class PageTest extends \PHPUnit_Framework_TestCase
     public function testShortLivedExpirationIfTokenNull()
     {
         $page = new Page();
-        $this->assertTrue($page->isShortLivedTokenExpired());
+        static::assertTrue($page->isShortLivedTokenExpired());
         $page->setShortLivedToken(null);
-        $this->assertTrue($page->isShortLivedTokenExpired());
+        static::assertTrue($page->isShortLivedTokenExpired());
     }
 
     /**
@@ -122,7 +122,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
         $now = new \DateTimeImmutable('now');
         $page->setShortLivedToken('{token}');
         $page->setShortLivedTokenExpiration($now->sub(new \DateInterval('P1D')));
-        $this->assertTrue($page->isShortLivedTokenExpired());
+        static::assertTrue($page->isShortLivedTokenExpired());
     }
 
     /**
@@ -135,6 +135,6 @@ class PageTest extends \PHPUnit_Framework_TestCase
         $now = new \DateTimeImmutable('now');
         $page->setShortLivedToken('{token}');
         $page->setShortLivedTokenExpiration($now->add(new \DateInterval('P1D')));
-        $this->assertFalse($page->isShortLivedTokenExpired());
+        static::assertFalse($page->isShortLivedTokenExpired());
     }
 }

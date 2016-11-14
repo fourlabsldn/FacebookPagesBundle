@@ -4,7 +4,7 @@ namespace FL\FacebookPagesBundle\Tests\Services\Facebook\V2_8;
 
 use FL\FacebookPagesBundle\Model\PageManager;
 use FL\FacebookPagesBundle\Model\Page;
-use FL\FacebookPagesBundle\Model\PageRating;
+use FL\FacebookPagesBundle\Model\PageReview;
 use FL\FacebookPagesBundle\Services\Facebook\V2_8\PageManagerClient;
 use FL\FacebookPagesBundle\Guzzle\Guzzle6HttpClient;
 use FL\FacebookPagesBundle\Tests\Util\Url\ManipulateUrl;
@@ -26,7 +26,7 @@ class PageManagerClientTest extends \PHPUnit_Framework_TestCase
      */
     public function testConstruction()
     {
-        new PageManagerClient('fakeAppId', 'fakeAppSecret', PageManager::class, Page::class, PageRating::class);
+        new PageManagerClient('fakeAppId', 'fakeAppSecret', PageManager::class, Page::class, PageReview::class);
     }
 
     /**
@@ -43,17 +43,17 @@ class PageManagerClientTest extends \PHPUnit_Framework_TestCase
         $ourGuzzleClient = new Guzzle6HttpClient(new Client([
             'handler' => $stack,
         ]));
-        $pageManagerClient = new PageManagerClient('fakeAppId', 'fakeAppSecret', PageManager::class, Page::class, PageRating::class, $ourGuzzleClient);
+        $pageManagerClient = new PageManagerClient('fakeAppId', 'fakeAppSecret', PageManager::class, Page::class, PageReview::class, $ourGuzzleClient);
         $pageManager = new PageManager();
         $pageManager->setLongLivedToken('someToken12371623123812763');
         $pageManagerClient->get('/me', $pageManager);
 
         /** @var Request $request */
         $request = $container[0]['request'];
-        $this->assertEquals($request->getUri()->getScheme(), 'https');
-        $this->assertEquals($request->getUri()->getHost(), 'graph.facebook.com');
-        $this->assertEquals($request->getUri()->getPath(), '/v2.8/me');
-        $this->assertContains('someToken12371623123812763', $request->getUri()->getQuery());
+        static::assertEquals($request->getUri()->getScheme(), 'https');
+        static::assertEquals($request->getUri()->getHost(), 'graph.facebook.com');
+        static::assertEquals($request->getUri()->getPath(), '/v2.8/me');
+        static::assertContains('someToken12371623123812763', $request->getUri()->getQuery());
     }
 
     /**
@@ -63,7 +63,7 @@ class PageManagerClientTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetException()
     {
-        $client = new PageManagerClient('fakeAppId', 'fakeAppSecret', PageManager::class, Page::class, PageRating::class);
+        $client = new PageManagerClient('fakeAppId', 'fakeAppSecret', PageManager::class, Page::class, PageReview::class);
         $pageManager = new PageManager();
         $pageManager->setLongLivedToken(null);
         $client->get('/me', $pageManager);
@@ -75,14 +75,14 @@ class PageManagerClientTest extends \PHPUnit_Framework_TestCase
      */
     public function testGenerateAuthorizationUrl()
     {
-        $client = new PageManagerClient('fakeAppId', 'fakeAppSecret', PageManager::class, Page::class, PageRating::class);
+        $client = new PageManagerClient('fakeAppId', 'fakeAppSecret', PageManager::class, Page::class, PageReview::class);
         $url = $client->generateAuthorizationUrl('https://www.example.com/callbackurl');
 
         /*
          * Keep in mind $client->generateAuthorizationUrl will return a url that has a query,
          * with a changing state parameter. E.g. ...'state=819273ab81238ba7123' or ...'state=21f371ce23bac6123'
          */
-        $this->assertEquals(
+        static::assertEquals(
             ManipulateUrl::removeParametersFromQueryInUrl($url, ['state']),
             'https://www.facebook.com/v2.8/dialog/oauth?client_id=fakeAppId'.
             '&response_type=code&sdk=php-sdk-5.4.0&redirect_uri='.

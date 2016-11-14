@@ -26,9 +26,9 @@ class PageManagerStorageTest extends ManagerAndRepositoryTest
             $this->entityManager,
             PageManager::class
         );
-        $this->assertInternalType('array', $pageManagerStorage->getAll());
+        static::assertInternalType('array', $pageManagerStorage->getAll());
         foreach ($pageManagerStorage->getAll() as $pageManager) {
-            $this->assertInstanceOf(PageManagerInterface::class, $pageManager);
+            static::assertInstanceOf(PageManagerInterface::class, $pageManager);
         }
     }
 
@@ -46,15 +46,15 @@ class PageManagerStorageTest extends ManagerAndRepositoryTest
 
         $pageManagerA = new PageManager();
         $pageManagerStorage->persist($pageManagerA);
-        $this->assertContains($pageManagerA, $this->persistedEntities);
-        $this->assertContains($pageManagerA, $this->persistedAndFlushedEntities);
+        static::assertContains($pageManagerA, $this->persistedEntities);
+        static::assertContains($pageManagerA, $this->persistedAndFlushedEntities);
 
         $pageManagerB = new PageManager();
         $pageManagerStorage->persist($pageManagerB);
-        $this->assertNotContains($pageManagerA, $this->persistedEntities);
-        $this->assertContains($pageManagerB, $this->persistedEntities);
-        $this->assertContains($pageManagerA, $this->persistedAndFlushedEntities);
-        $this->assertContains($pageManagerB, $this->persistedAndFlushedEntities);
+        static::assertNotContains($pageManagerA, $this->persistedEntities);
+        static::assertContains($pageManagerB, $this->persistedEntities);
+        static::assertContains($pageManagerA, $this->persistedAndFlushedEntities);
+        static::assertContains($pageManagerB, $this->persistedAndFlushedEntities);
     }
 
     /**
@@ -73,10 +73,10 @@ class PageManagerStorageTest extends ManagerAndRepositoryTest
         $pageManagerB = new PageManager();
 
         $pageManagerStorage->persistMultiple([$pageManagerA, $pageManagerB]);
-        $this->assertContains($pageManagerA, $this->persistedEntities);
-        $this->assertContains($pageManagerB, $this->persistedEntities);
-        $this->assertContains($pageManagerA, $this->persistedAndFlushedEntities);
-        $this->assertContains($pageManagerB, $this->persistedAndFlushedEntities);
+        static::assertContains($pageManagerA, $this->persistedEntities);
+        static::assertContains($pageManagerB, $this->persistedEntities);
+        static::assertContains($pageManagerA, $this->persistedAndFlushedEntities);
+        static::assertContains($pageManagerB, $this->persistedAndFlushedEntities);
     }
 
     /**
@@ -99,7 +99,7 @@ class PageManagerStorageTest extends ManagerAndRepositoryTest
             return;
         }
 
-        $this->fail(sprintf(
+        static::fail(sprintf(
             'Expected %s for invalid %s::persistMultiple',
             \InvalidArgumentException::class,
             PageManager::class

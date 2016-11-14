@@ -51,7 +51,7 @@ class ManagerAndRepositoryTest extends \PHPUnit_Framework_TestCase
         ;
 
         $this->entityRepository
-            ->expects($this->any())
+            ->expects(static::any())
             ->method('findAll')
             ->will($this->returnValue($this->findAllReturnValue))
         ;
@@ -64,30 +64,30 @@ class ManagerAndRepositoryTest extends \PHPUnit_Framework_TestCase
         ;
 
         $this->entityManager
-            ->expects($this->any())
+            ->expects(static::any())
             ->method('clear')
             ->willReturnCallback(function () {
                 $this->persistedEntities = [];
             });
 
         $this->entityManager
-            ->expects($this->any())
+            ->expects(static::any())
             ->method('persist')
             ->willReturnCallback(function ($entity) {
                 $this->persistedEntities[] = $entity;
             });
 
         $this->entityManager
-            ->expects($this->any())
+            ->expects(static::any())
             ->method('flush')
             ->willReturnCallback(function () {
                 $this->persistedAndFlushedEntities = array_merge($this->persistedAndFlushedEntities, $this->persistedEntities);
             });
 
         $this->entityManager
-            ->expects($this->any())
+            ->expects(static::any())
             ->method('getRepository')
-            ->will($this->returnValue($this->entityRepository))
+            ->will(static::returnValue($this->entityRepository))
         ;
     }
 }
