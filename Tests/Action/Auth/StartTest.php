@@ -10,6 +10,7 @@ use FL\FacebookPagesBundle\Services\Facebook\V2_8\FacebookUserClient;
 use FL\FacebookPagesBundle\Tests\Util\Url\ManipulateUrl;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\RouterInterface;
 
 class StartTest extends \PHPUnit_Framework_TestCase
 {
@@ -21,7 +22,18 @@ class StartTest extends \PHPUnit_Framework_TestCase
     public function testInvoke()
     {
         $facebookUserClient = new FacebookUserClient('fakeAppId', 'fakeAppSecret', FacebookUser::class, Page::class, PageRating::class);
-        $authorizeAction = new Start($facebookUserClient, 'https://www.example.com/callbackurl');
+        $router = $this
+            ->getMockBuilder(RouterInterface::class)
+            ->setMethods(['generate', 'getContext', 'match', 'getRouteCollection', 'setContext'])
+            ->disableOriginalConstructor()
+            ->getMock()
+        ;
+        $router
+            ->expects($this->any())
+            ->method('generate')
+            ->will($this->returnValue('https://www.example.com/callbackurl'))
+        ;
+        $authorizeAction = new Start($facebookUserClient, $router);
 
         /** @var RedirectResponse $response */
         $response = $authorizeAction(new Request());

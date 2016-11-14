@@ -42,11 +42,10 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
                 'fl_facebook_pages' => [
                     'app_id' => 'fakeAppId',
                     'app_secret' => 'fakePageSecret',
-                    'callback_url' => 'http://example.com',
                     'facebook_user_class' => FacebookUser::class,
                     'page_class' => Page::class,
                     'page_rating_class' => PageRating::class,
-                    'facebook_user_storage' => '@fake_facebook_user_storage_service_alias',
+                    'page_manager_storage' => '@fake_facebook_user_storage_service_alias',
                     'page_storage' => '@fake_page_storage_service_alias',
                     'page_rating_storage' => '@fake_page_rating_storage_service_alias',
                     'guzzle_service' => '@fake_guzzle_service',
@@ -68,14 +67,17 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
             $this->configuration,
             [
                 'fl_facebook_pages' => [
-                        'facebook_user_class' => '',
-                        'page_class' => '',
-                        'page_rating_class' => '',
-                        'facebook_user_storage' => '',
-                        'page_storage' => '',
-                        'page_rating_storage' => '',
-                        'redirect_url_after_authorization' => '',
-                        'only_these_page_ids' => [],
+                    'app_id' => '',
+                    'app_secret' => '',
+                    'facebook_user_class' => '',
+                    'page_class' => '',
+                    'page_rating_class' => '',
+                    'page_manager_storage' => '',
+                    'page_storage' => '',
+                    'page_rating_storage' => '',
+                    'guzzle_service' => '',
+                    'redirect_url_after_authorization' => '',
+                    'only_these_page_ids' => [],
                     ],
             ]
         );
