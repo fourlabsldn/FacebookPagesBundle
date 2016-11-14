@@ -21,7 +21,7 @@ class PageReview extends BasePageReview implements PageReviewInterface
      * @var int|null (1-5 stars)
      * @ORM\Column(type="smallint", nullable=true)
      */
-    protected $review;
+    protected $rating;
 
     /**
      * @var string|null

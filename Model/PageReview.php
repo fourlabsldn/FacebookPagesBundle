@@ -20,7 +20,7 @@ class PageReview implements PageReviewInterface
     /**
      * @var int|null (1-5 stars)
      */
-    protected $review;
+    protected $rating;
 
     /**
      * @var string|null
@@ -58,21 +58,17 @@ class PageReview implements PageReviewInterface
     /**
      * {@inheritdoc}
      */
-    public function hasReview(): bool
+    public function hasRating(): bool
     {
-        if (is_int($this->review)) {
-            return true;
-        }
-
-        return false;
+        return is_int($this->rating);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getReview()
+    public function getRating()
     {
-        return $this->review;
+        return $this->rating;
     }
 
     /**
@@ -80,13 +76,10 @@ class PageReview implements PageReviewInterface
      *
      * @throws \InvalidArgumentException
      */
-    public function setReview(int $review = null): PageReviewInterface
+    public function setRating(int $rating = null): PageReviewInterface
     {
-        $this->review = $review;
-        if (
-            is_int($review) &&
-            ($review >= 6 || $review <= 0)
-        ) {
+        $this->rating = $rating;
+        if (is_int($rating) && ($rating >= 6 || $rating <= 0)) {
             throw new \InvalidArgumentException();
         }
 
