@@ -224,7 +224,7 @@ class PageManagerClient
         $allReviews = [];
 
         $reviewsEdge = $this->getWithPage(sprintf(
-            '/%s/ratings?fields=open_graph_story',
+            '/%s/ratings?fields=id,created_time,reviewer,rating,review_text,open_graph_story',
             $page->getPageId()),
             $page
         )->getGraphEdge();
@@ -248,7 +248,7 @@ class PageManagerClient
                 }
 
                 if ($reviewGraphNode->getField('rating')) {
-                    $review->setReview($reviewGraphNode->getField('rating'));
+                    $review->setRating($reviewGraphNode->getField('rating'));
                 }
 
                 $allReviews[] = $review;
