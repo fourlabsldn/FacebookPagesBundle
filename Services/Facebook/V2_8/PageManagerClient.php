@@ -38,7 +38,7 @@ class PageManagerClient
     /**
      * @var string
      */
-    private $pageRatingClass;
+    private $pageReviewClass;
 
     /**
      * @var Guzzle6HttpClient
@@ -50,7 +50,7 @@ class PageManagerClient
      * @param string                 $appSecret
      * @param string                 $userClass
      * @param string                 $pageClass
-     * @param string                 $pageRatingClass
+     * @param string                 $pageReviewClass
      * @param Guzzle6HttpClient|null $guzzle6HttpClient
      */
     public function __construct(
@@ -58,7 +58,7 @@ class PageManagerClient
         string $appSecret,
         string $userClass,
         string $pageClass,
-        string $pageRatingClass,
+        string $pageReviewClass,
         Guzzle6HttpClient $guzzle6HttpClient = null
     ) {
         if ($guzzle6HttpClient === null) {
@@ -69,7 +69,7 @@ class PageManagerClient
         $this->appSecret = $appSecret;
         $this->userClass = $userClass;
         $this->pageClass = $pageClass;
-        $this->pageRatingClass = $pageRatingClass;
+        $this->pageReviewClass = $pageReviewClass;
         $this->guzzleClient = new Facebook([
             'app_id' => $appId,
             'app_secret' => $appSecret,
@@ -222,35 +222,35 @@ class PageManagerClient
      */
     public function resolvePageReviews(PageInterface $page): array
     {
-        $allRatings = [];
-        /** @var GraphEdge $ratingsEdge */
-        $ratingsEdge = $this->getWithPage(sprintf('/%s/ratings', $page->getPageId()), $page)->getGraphEdge();
+        $allReviews = [];
+        /** @var GraphEdge $reviewsEdge */
+        $reviewsEdge = $this->getWithPage(sprintf('/%s/ratings', $page->getPageId()), $page)->getGraphEdge();
         do {
-            /** @var GraphNode $ratingGraphNode */
-            foreach ($ratingsEdge->all() as $ratingGraphNode) {
+            /** @var GraphNode $reviewGraphNode */
+            foreach ($reviewsEdge->all() as $reviewGraphNode) {
                 /** @var GraphNode $reviewerGraphNode */
-                $reviewerGraphNode = $ratingGraphNode->getField('reviewer');
+                $reviewerGraphNode = $reviewGraphNode->getField('reviewer');
 
-                /** @var PageReviewInterface $rating */
-                $rating = new $this->pageRatingClass();
-                $rating
+                /** @var PageReviewInterface $review */
+                $review = new $this->pageReviewClass();
+                $review
                     ->setReviewerId($reviewerGraphNode->getField('id'))
                     ->setReviewerName($reviewerGraphNode->getField('name'))
-                    ->setCreatedAt(\DateTimeImmutable::createFromMutable($ratingGraphNode->getField('created_time')))
+                    ->setCreatedAt(\DateTimeImmutable::createFromMutable($reviewGraphNode->getField('created_time')))
                 ;
 
-                if ($ratingGraphNode->getField('review_text')) {
-                    $rating->setText($ratingGraphNode->getField('review_text'));
+                if ($reviewGraphNode->getField('review_text')) {
+                    $review->setText($reviewGraphNode->getField('review_text'));
                 }
 
-                if ($ratingGraphNode->getField('rating')) {
-                    $rating->setRating($ratingGraphNode->getField('rating'));
+                if ($reviewGraphNode->getField('rating')) {
+                    $review->setReview($reviewGraphNode->getField('rating'));
                 }
 
-                $allRatings[] = $rating;
+                $allReviews[] = $review;
             }
-        } while (($ratingsEdge = $this->guzzleClient->next($ratingsEdge)));
+        } while (($reviewsEdge = $this->guzzleClient->next($reviewsEdge)));
 
-        return $allRatings;
+        return $allReviews;
     }
 }

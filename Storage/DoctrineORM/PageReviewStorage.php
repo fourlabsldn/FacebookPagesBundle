@@ -55,11 +55,11 @@ class PageReviewStorage implements PageReviewStorageInterface
     public function persistMultiple(array $pageRatings): PageReviewStorageInterface
     {
         $this->entityManager->clear();
-        foreach ($pageRatings as $rating) {
-            if (!($rating instanceof PageReviewInterface)) {
+        foreach ($pageRatings as $review) {
+            if (!($review instanceof PageReviewInterface)) {
                 throw new \InvalidArgumentException();
             }
-            $this->entityManager->persist($rating);
+            $this->entityManager->persist($review);
         }
         $this->entityManager->flush();
 

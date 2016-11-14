@@ -22,19 +22,19 @@ interface PageReviewInterface
     /**
      * @return bool
      */
-    public function hasRating(): bool;
+    public function hasReview(): bool;
 
     /**
      * @return int|null (1-5 stars)
      */
-    public function getRating();
+    public function getReview();
 
     /**
-     * @param int $rating (1-5 stars)
+     * @param int $review (1-5 stars)
      *
      * @return PageReviewInterface
      */
-    public function setRating(int $rating): PageReviewInterface;
+    public function setReview(int $review): PageReviewInterface;
 
     /**
      * @return bool

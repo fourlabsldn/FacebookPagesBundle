@@ -12,8 +12,8 @@ class PageReviewTest extends \PHPUnit_Framework_TestCase
      * @test
      * @covers \FL\FacebookPagesBundle\Model\PageReview::getCreatedAt
      * @covers \FL\FacebookPagesBundle\Model\PageReview::setCreatedAt
-     * @covers \FL\FacebookPagesBundle\Model\PageReview::getRating
-     * @covers \FL\FacebookPagesBundle\Model\PageReview::setRating
+     * @covers \FL\FacebookPagesBundle\Model\PageReview::getReview
+     * @covers \FL\FacebookPagesBundle\Model\PageReview::setReview
      * @covers \FL\FacebookPagesBundle\Model\PageReview::getText
      * @covers \FL\FacebookPagesBundle\Model\PageReview::setText
      * @covers \FL\FacebookPagesBundle\Model\PageReview::getReviewerId
@@ -26,7 +26,7 @@ class PageReviewTest extends \PHPUnit_Framework_TestCase
 
         $tool
             ->addTestItem(new TestItemImmutable('getCreatedAt', 'setCreatedAt', new \DateTimeImmutable('+ 1 day + 3 hours')))
-            ->addTestItem(new TestItemImmutable('getRating', 'setRating', 3))
+            ->addTestItem(new TestItemImmutable('getReview', 'setReview', 3))
             ->addTestItem(new TestItemImmutable('getText', 'setText', 'It was very good!'))
             ->addTestItem(new TestItemImmutable('getReviewerId', 'setReviewerId', '1234567890'))
         ;
@@ -39,107 +39,107 @@ class PageReviewTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      * @covers \FL\FacebookPagesBundle\Model\PageReview::getCreatedAt
-     * @covers \FL\FacebookPagesBundle\Model\PageReview::getRating
+     * @covers \FL\FacebookPagesBundle\Model\PageReview::getReview
      * @covers \FL\FacebookPagesBundle\Model\PageReview::getText
      * @covers \FL\FacebookPagesBundle\Model\PageReview::getReviewerId
      */
     public function testNullValuesInNewObject()
     {
-        $pageRating = new PageReview();
-        static::assertNull($pageRating->getCreatedAt());
-        static::assertNull($pageRating->getRating());
-        static::assertNull($pageRating->getText());
-        static::assertNull($pageRating->getReviewerId());
+        $pageReview = new PageReview();
+        static::assertNull($pageReview->getCreatedAt());
+        static::assertNull($pageReview->getReview());
+        static::assertNull($pageReview->getText());
+        static::assertNull($pageReview->getReviewerId());
     }
 
     /**
      * @test
-     * @covers \FL\FacebookPagesBundle\Model\PageReview::hasRating
-     */
-    public function testHasRatingIsTrue()
-    {
-        $pageRating = new PageReview();
-        $pageRating->setRating(2);
-        static::assertTrue($pageRating->hasRating());
-    }
-
-    /**
-     * @test
-     * @covers \FL\FacebookPagesBundle\Model\PageReview::hasText
+     * @covers \FL\FacebookPagesBundle\Model\PageReview::hasReview
      */
     public function testHasReviewIsTrue()
     {
-        $pageRating = new PageReview();
-        $pageRating->setText('Some Review!');
-        static::assertTrue($pageRating->hasText());
-    }
-
-    /**
-     * @test
-     * @covers \FL\FacebookPagesBundle\Model\PageReview::hasRating
-     */
-    public function testHasRatingIsFalseIfRatingIsNull()
-    {
-        $pageRating = new PageReview();
-        static::assertFalse($pageRating->hasRating());
+        $pageReview = new PageReview();
+        $pageReview->setReview(2);
+        static::assertTrue($pageReview->hasReview());
     }
 
     /**
      * @test
      * @covers \FL\FacebookPagesBundle\Model\PageReview::hasText
      */
-    public function testHasReviewIsFalseInNewObject()
+    public function testHasTextIsTrue()
     {
-        $pageRating = new PageReview();
-        static::assertFalse($pageRating->hasText());
+        $pageReview = new PageReview();
+        $pageReview->setText('Some Review!');
+        static::assertTrue($pageReview->hasText());
     }
 
     /**
      * @test
-     * @covers \FL\FacebookPagesBundle\Model\PageReview::setRating
+     * @covers \FL\FacebookPagesBundle\Model\PageReview::hasReview
      */
-    public function testValidSetRating()
+    public function testHasReviewIsFalseIfReviewIsNull()
     {
-        $pageRating = new PageReview();
-        $pageRating->setRating(1);
-        $pageRating->setRating(2);
-        $pageRating->setRating(3);
-        $pageRating->setRating(4);
-        $pageRating->setRating(5);
+        $pageReview = new PageReview();
+        static::assertFalse($pageReview->hasReview());
     }
 
     /**
      * @test
-     * @covers \FL\FacebookPagesBundle\Model\PageReview::setRating
+     * @covers \FL\FacebookPagesBundle\Model\PageReview::hasText
      */
-    public function testInvalidSetRating()
+    public function testHasTextIsFalseInNewObject()
     {
-        $pageRating = new PageReview();
+        $pageReview = new PageReview();
+        static::assertFalse($pageReview->hasText());
+    }
+
+    /**
+     * @test
+     * @covers \FL\FacebookPagesBundle\Model\PageReview::setReview
+     */
+    public function testValidSetReview()
+    {
+        $pageReview = new PageReview();
+        $pageReview->setReview(1);
+        $pageReview->setReview(2);
+        $pageReview->setReview(3);
+        $pageReview->setReview(4);
+        $pageReview->setReview(5);
+    }
+
+    /**
+     * @test
+     * @covers \FL\FacebookPagesBundle\Model\PageReview::setReview
+     */
+    public function testInvalidSetReview()
+    {
+        $pageReview = new PageReview();
         $totalExceptions = 0;
 
         try {
-            $pageRating->setRating(-10);
+            $pageReview->setReview(-10);
         } catch (\InvalidArgumentException $exception) {
             ++$totalExceptions;
         }
         try {
-            $pageRating->setRating(0);
+            $pageReview->setReview(0);
         } catch (\InvalidArgumentException $exception) {
             ++$totalExceptions;
         }
         try {
-            $pageRating->setRating(6);
+            $pageReview->setReview(6);
         } catch (\InvalidArgumentException $exception) {
             ++$totalExceptions;
         }
         try {
-            $pageRating->setRating(20);
+            $pageReview->setReview(20);
         } catch (\InvalidArgumentException $exception) {
             ++$totalExceptions;
         }
 
         if ($totalExceptions !== 4) {
-            static::fail(sprintf('-10, 0, 6, and 20 must throw an exception when using %s::setRating', PageReview::class));
+            static::fail(sprintf('-10, 0, 6, and 20 must throw an exception when using %s::setReview', PageReview::class));
         }
     }
 }
