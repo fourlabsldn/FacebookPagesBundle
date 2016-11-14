@@ -10,7 +10,7 @@ use Facebook\GraphNodes\GraphNode;
 use FL\FacebookPagesBundle\Guzzle\Guzzle6HttpClient;
 use FL\FacebookPagesBundle\Model\PageManagerInterface;
 use FL\FacebookPagesBundle\Model\PageInterface;
-use FL\FacebookPagesBundle\Model\PageRatingInterface;
+use FL\FacebookPagesBundle\Model\PageReviewInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 class PageManagerClient
@@ -218,9 +218,9 @@ class PageManagerClient
     /**
      * @param PageInterface $page
      *
-     * @return PageRatingInterface[]
+     * @return PageReviewInterface[]
      */
-    public function resolvePageRatings(PageInterface $page): array
+    public function resolvePageReviews(PageInterface $page): array
     {
         $allRatings = [];
         /** @var GraphEdge $ratingsEdge */
@@ -231,18 +231,25 @@ class PageManagerClient
                 /** @var GraphNode $reviewerGraphNode */
                 $reviewerGraphNode = $ratingGraphNode->getField('reviewer');
 
-                /** @var PageRatingInterface $rating */
+                /** @var PageReviewInterface $rating */
                 $rating = new $this->pageRatingClass();
                 $rating
-                    ->setReview($ratingGraphNode->getField('review_text'))
-                    ->setRating($ratingGraphNode->getField('rating'))
                     ->setReviewerId($reviewerGraphNode->getField('id'))
                     ->setReviewerName($reviewerGraphNode->getField('name'))
                     ->setCreatedAt(\DateTimeImmutable::createFromMutable($ratingGraphNode->getField('created_time')))
                 ;
+
+                if ($ratingGraphNode->getField('review_text')) {
+                    $rating->setText($ratingGraphNode->getField('review_text'));
+                }
+
+                if ($ratingGraphNode->getField('rating')) {
+                    $rating->setRating($ratingGraphNode->getField('rating'));
+                }
+
                 $allRatings[] = $rating;
             }
-        } while ($ratingsEdge = $this->guzzleClient->next($ratingsEdge));
+        } while (($ratingsEdge = $this->guzzleClient->next($ratingsEdge)));
 
         return $allRatings;
     }

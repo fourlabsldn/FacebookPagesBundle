@@ -4,10 +4,10 @@ namespace FL\FacebookPagesBundle\Storage\DoctrineORM;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
-use FL\FacebookPagesBundle\Model\PageRatingInterface;
-use FL\FacebookPagesBundle\Storage\PageRatingStorageInterface;
+use FL\FacebookPagesBundle\Model\PageReviewInterface;
+use FL\FacebookPagesBundle\Storage\PageReviewStorageInterface;
 
-class PageRatingStorage implements PageRatingStorageInterface
+class PageReviewStorage implements PageReviewStorageInterface
 {
     /**
      * @var EntityManagerInterface
@@ -17,16 +17,16 @@ class PageRatingStorage implements PageRatingStorageInterface
     /**
      * @var EntityRepository
      */
-    private $pageRatingRepository;
+    private $repository;
 
     /**
      * @param EntityManagerInterface $entityManager
-     * @param string                 $pageRatingClass
+     * @param string                 $pageReviewClass
      */
-    public function __construct(EntityManagerInterface $entityManager, string $pageRatingClass)
+    public function __construct(EntityManagerInterface $entityManager, string $pageReviewClass)
     {
         $this->entityManager = $entityManager;
-        $this->pageRatingRepository = $this->entityManager->getRepository($pageRatingClass);
+        $this->repository = $this->entityManager->getRepository($pageReviewClass);
     }
 
     /**
@@ -34,13 +34,13 @@ class PageRatingStorage implements PageRatingStorageInterface
      */
     public function getAll(): array
     {
-        return $this->pageRatingRepository->findAll();
+        return $this->repository->findAll();
     }
 
     /**
      * {@inheritdoc}
      */
-    public function persist(PageRatingInterface $pageRating): PageRatingStorageInterface
+    public function persist(PageReviewInterface $pageRating): PageReviewStorageInterface
     {
         $this->entityManager->clear();
         $this->entityManager->persist($pageRating);
@@ -52,11 +52,11 @@ class PageRatingStorage implements PageRatingStorageInterface
     /**
      * {@inheritdoc}
      */
-    public function persistMultiple(array $pageRatings): PageRatingStorageInterface
+    public function persistMultiple(array $pageRatings): PageReviewStorageInterface
     {
         $this->entityManager->clear();
         foreach ($pageRatings as $rating) {
-            if (!($rating instanceof PageRatingInterface)) {
+            if (!($rating instanceof PageReviewInterface)) {
                 throw new \InvalidArgumentException();
             }
             $this->entityManager->persist($rating);

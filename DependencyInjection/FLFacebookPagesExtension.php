@@ -4,7 +4,7 @@ namespace FL\FacebookPagesBundle\DependencyInjection;
 
 use FL\FacebookPagesBundle\Model\PageManagerInterface;
 use FL\FacebookPagesBundle\Model\PageInterface;
-use FL\FacebookPagesBundle\Model\PageRatingInterface;
+use FL\FacebookPagesBundle\Model\PageReviewInterface;
 use Symfony\Component\DependencyInjection\Loader;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
@@ -42,14 +42,14 @@ class FLFacebookPagesExtension extends Extension
          */
         $this->validateClassNameIsInstanceOfAnother($config['page_manager_class'], PageManagerInterface::class, 'fl_facebook_pages.page_manager_class');
         $this->validateClassNameIsInstanceOfAnother($config['page_class'], PageInterface::class, 'fl_facebook_pages.page_class');
-        $this->validateClassNameIsInstanceOfAnother($config['page_rating_class'], PageRatingInterface::class, 'fl_facebook_pages.page_rating_class');
+        $this->validateClassNameIsInstanceOfAnother($config['page_review_class'], PageReviewInterface::class, 'fl_facebook_pages.page_review_class');
 
         /*
          * Set Model Classes Parameters
          */
         $container->setParameter('fl_facebook_pages.page_manager_class', $config['page_manager_class']);
         $container->setParameter('fl_facebook_pages.page_class', $config['page_class']);
-        $container->setParameter('fl_facebook_pages.page_rating_class', $config['page_rating_class']);
+        $container->setParameter('fl_facebook_pages.page_review_class', $config['page_review_class']);
 
         /*
          * Set storage service aliases
@@ -57,7 +57,7 @@ class FLFacebookPagesExtension extends Extension
          */
         $container->setAlias('fl_facebook_pages.page_manager_storage', $config['page_manager_storage']);
         $container->setAlias('fl_facebook_pages.page_storage', $config['page_storage']);
-        $container->setAlias('fl_facebook_pages.page_rating_storage', $config['page_rating_storage']);
+        $container->setAlias('fl_facebook_pages.page_review_storage', $config['page_review_storage']);
 
         /*
          * Set guzzle client alias

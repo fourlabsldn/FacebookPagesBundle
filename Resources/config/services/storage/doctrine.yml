@@ -13,9 +13,9 @@ services:
       - "%fl_facebook_pages.page_class%"
     lazy: true
 
-  fl_facebook_pages.storage.doctrine.page_rating_storage:
-    class: FL\FacebookPagesBundle\Storage\DoctrineORM\PageRatingStorage
+  fl_facebook_pages.storage.doctrine.page_review_storage:
+    class: FL\FacebookPagesBundle\Storage\DoctrineORM\PageReviewStorage
     arguments:
       - "@doctrine.orm.entity_manager"
-      - "%fl_facebook_pages.page_rating_class%"
+      - "%fl_facebook_pages.page_review_class%"
     lazy: true

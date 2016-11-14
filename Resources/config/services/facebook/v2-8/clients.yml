@@ -6,5 +6,5 @@ services:
       - "%fl_facebook_pages.app_secret%"
       - "%fl_facebook_pages.page_manager_class%"
       - "%fl_facebook_pages.page_class%"
-      - "%fl_facebook_pages.page_rating_class%"
+      - "%fl_facebook_pages.page_review_class%"
       - "@fl_facebook_pages.guzzle.client"

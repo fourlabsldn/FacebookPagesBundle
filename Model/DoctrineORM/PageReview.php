@@ -2,14 +2,14 @@
 
 namespace FL\FacebookPagesBundle\Model\DoctrineORM;
 
-use FL\FacebookPagesBundle\Model\PageRatingInterface;
-use FL\FacebookPagesBundle\Model\PageRating as BasePageRating;
+use FL\FacebookPagesBundle\Model\PageReviewInterface;
+use FL\FacebookPagesBundle\Model\PageReview as BasePageReview;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\MappedSuperclass
  */
-class PageRating extends BasePageRating implements PageRatingInterface
+class PageReview extends BasePageReview implements PageReviewInterface
 {
     /**
      * @var \DateTimeImmutable|null
@@ -27,7 +27,7 @@ class PageRating extends BasePageRating implements PageRatingInterface
      * @var string|null
      * @ORM\Column(type="text", nullable=true)
      */
-    protected $review;
+    protected $text;
 
     /**
      * @var string|null

@@ -5,8 +5,13 @@ namespace FL\FacebookPagesBundle\Model;
 /**
  * @link https://developers.facebook.com/docs/graph-api/reference/page/ratings/
  */
-class PageRating implements PageRatingInterface
+class PageReview implements PageReviewInterface
 {
+    /**
+     * @var
+     */
+    protected $storyId;
+
     /**
      * @var \DateTimeImmutable|null
      */
@@ -20,7 +25,7 @@ class PageRating implements PageRatingInterface
     /**
      * @var string|null
      */
-    protected $review;
+    protected $text;
 
     /**
      * @var string|null
@@ -43,7 +48,7 @@ class PageRating implements PageRatingInterface
     /**
      * {@inheritdoc}
      */
-    public function setCreatedAt(\DateTimeImmutable $createdAt = null): PageRatingInterface
+    public function setCreatedAt(\DateTimeImmutable $createdAt = null): PageReviewInterface
     {
         $this->createdAt = $createdAt;
 
@@ -75,7 +80,7 @@ class PageRating implements PageRatingInterface
      *
      * @throws \InvalidArgumentException
      */
-    public function setRating(int $rating = null): PageRatingInterface
+    public function setRating(int $rating = null): PageReviewInterface
     {
         $this->rating = $rating;
         if (
@@ -91,29 +96,25 @@ class PageRating implements PageRatingInterface
     /**
      * {@inheritdoc}
      */
-    public function hasReview(): bool
+    public function hasText(): bool
     {
-        if (is_string($this->review)) {
-            return true;
-        }
-
-        return false;
+        return is_string($this->text);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getReview()
+    public function getText()
     {
-        return $this->review;
+        return $this->text;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setReview(string $review = null): PageRatingInterface
+    public function setText(string $text): PageReviewInterface
     {
-        $this->review = $review;
+        $this->text = $text;
 
         return $this;
     }
@@ -129,7 +130,7 @@ class PageRating implements PageRatingInterface
     /**
      * {@inheritdoc}
      */
-    public function setReviewerId(string $reviewerId = null): PageRatingInterface
+    public function setReviewerId(string $reviewerId): PageReviewInterface
     {
         $this->reviewerId = $reviewerId;
 
@@ -147,7 +148,7 @@ class PageRating implements PageRatingInterface
     /**
      * {@inheritdoc}
      */
-    public function setReviewerName(string $reviewerName = null): PageRatingInterface
+    public function setReviewerName(string $reviewerName): PageReviewInterface
     {
         $this->reviewerName = $reviewerName;
 
