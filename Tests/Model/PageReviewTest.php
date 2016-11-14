@@ -56,7 +56,7 @@ class PageReviewTest extends \PHPUnit_Framework_TestCase
      * @test
      * @covers \FL\FacebookPagesBundle\Model\PageReview::hasRating
      */
-    public function testHasReviewIsTrue()
+    public function testHasRatingIsTrue()
     {
         $pageReview = new PageReview();
         $pageReview->setRating(2);
@@ -78,7 +78,7 @@ class PageReviewTest extends \PHPUnit_Framework_TestCase
      * @test
      * @covers \FL\FacebookPagesBundle\Model\PageReview::hasRating
      */
-    public function testHasReviewIsFalseIfReviewIsNull()
+    public function testHasRatingIsFalseIfReviewIsNull()
     {
         $pageReview = new PageReview();
         static::assertFalse($pageReview->hasRating());
@@ -139,7 +139,7 @@ class PageReviewTest extends \PHPUnit_Framework_TestCase
         }
 
         if ($totalExceptions !== 4) {
-            static::fail(sprintf('-10, 0, 6, and 20 must throw an exception when using %s::setReview', PageReview::class));
+            static::fail(sprintf('-10, 0, 6, and 20 must throw an exception when using %s::setRating', PageReview::class));
         }
     }
 }
