@@ -13,7 +13,7 @@ class Start
     /**
      * @var PageManagerClient
      */
-    private $facebookUserClient;
+    private $pageManagerClient;
 
     /**
      * @var RouterInterface
@@ -21,14 +21,14 @@ class Start
     private $router;
 
     /**
-     * @param PageManagerClient $facebookUserClient
+     * @param PageManagerClient $pageManagerClient
      * @param RouterInterface $router
      */
     public function __construct(
-        PageManagerClient $facebookUserClient,
+        PageManagerClient $pageManagerClient,
         RouterInterface $router
     ) {
-        $this->facebookUserClient = $facebookUserClient;
+        $this->pageManagerClient = $pageManagerClient;
         $this->router = $router;
     }
 
@@ -40,7 +40,7 @@ class Start
     public function __invoke(Request $request): Response
     {
         return new RedirectResponse(
-            $this->facebookUserClient->generateAuthorizationUrl(
+            $this->pageManagerClient->generateAuthorizationUrl(
                 $this->router->generate('fl_facebook_pages_routes.save_auth', [], RouterInterface::ABSOLUTE_URL)
             )
         );

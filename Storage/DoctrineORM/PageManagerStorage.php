@@ -26,7 +26,7 @@ class PageManagerStorage implements PageManagerStorageInterface
     public function __construct(EntityManagerInterface $entityManager, string $pageManagerClass)
     {
         $this->entityManager = $entityManager;
-        $this->facebookUserRepository = $this->entityManager->getRepository($pageManagerClass);
+        $this->pageManagerRepository = $this->entityManager->getRepository($pageManagerClass);
     }
 
     /**
@@ -34,7 +34,7 @@ class PageManagerStorage implements PageManagerStorageInterface
      */
     public function getAll(): array
     {
-        return $this->facebookUserRepository->findAll();
+        return $this->pageManagerRepository->findAll();
     }
 
     /**
@@ -71,7 +71,7 @@ class PageManagerStorage implements PageManagerStorageInterface
      */
     public function clearAll(): PageManagerStorageInterface
     {
-        $this->facebookUserRepository->createQueryBuilder('m')
+        $this->pageManagerRepository->createQueryBuilder('m')
             ->delete()
             ->getQuery()
             ->execute()
