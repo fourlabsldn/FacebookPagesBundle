@@ -22,15 +22,14 @@ class Clear
 
     /**
      * @param PageManagerStorageInterface $pageManagerStorage
-     * @param PageStorageInterface $pageStorage
-     * @param string $redirectAfterAuthorization
+     * @param PageStorageInterface        $pageStorage
+     * @param string                      $redirectAfterAuthorization
      */
     public function __construct(
         PageManagerStorageInterface $pageManagerStorage,
         PageStorageInterface $pageStorage,
         string $redirectAfterAuthorization
-    )
-    {
+    ) {
         $this->pageManagerStorage = $pageManagerStorage;
         $this->pageStorage = $pageStorage;
         $this->redirectAfterAuthorization = $redirectAfterAuthorization;

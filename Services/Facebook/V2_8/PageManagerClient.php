@@ -83,7 +83,7 @@ class PageManagerClient
     }
 
     /**
-     * @param string                $endpoint
+     * @param string               $endpoint
      * @param PageManagerInterface $pageManager
      *
      * @return FacebookResponse

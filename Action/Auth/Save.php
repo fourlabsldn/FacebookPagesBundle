@@ -37,11 +37,11 @@ class Save
     private $onlyThesePageIds;
 
     /**
-     * @param PageManagerClient            $pageManagerClient
-     * @param PageManagerStorageInterface  $pageManagerStorage
-     * @param PageStorageInterface         $pageStorage
-     * @param string                       $redirectAfterAuthorization
-     * @param string[]                     $onlyThesePageIds
+     * @param PageManagerClient           $pageManagerClient
+     * @param PageManagerStorageInterface $pageManagerStorage
+     * @param PageStorageInterface        $pageStorage
+     * @param string                      $redirectAfterAuthorization
+     * @param string[]                    $onlyThesePageIds
      *
      * @link https://developers.facebook.com/docs/facebook-login/permissions
      */

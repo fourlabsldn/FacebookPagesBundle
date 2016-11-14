@@ -22,7 +22,7 @@ class Start
 
     /**
      * @param PageManagerClient $pageManagerClient
-     * @param RouterInterface $router
+     * @param RouterInterface   $router
      */
     public function __construct(
         PageManagerClient $pageManagerClient,
