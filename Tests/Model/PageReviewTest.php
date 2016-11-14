@@ -10,14 +10,14 @@ class PageReviewTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @test
-     * @covers \FL\FacebookPagesBundle\Model\PageRating::getCreatedAt
-     * @covers \FL\FacebookPagesBundle\Model\PageRating::setCreatedAt
-     * @covers \FL\FacebookPagesBundle\Model\PageRating::getRating
-     * @covers \FL\FacebookPagesBundle\Model\PageRating::setRating
-     * @covers \FL\FacebookPagesBundle\Model\PageRating::getReview
-     * @covers \FL\FacebookPagesBundle\Model\PageRating::setReview
-     * @covers \FL\FacebookPagesBundle\Model\PageRating::getReviewerId
-     * @covers \FL\FacebookPagesBundle\Model\PageRating::setReviewerId
+     * @covers \FL\FacebookPagesBundle\Model\PageReview::getCreatedAt
+     * @covers \FL\FacebookPagesBundle\Model\PageReview::setCreatedAt
+     * @covers \FL\FacebookPagesBundle\Model\PageReview::getRating
+     * @covers \FL\FacebookPagesBundle\Model\PageReview::setRating
+     * @covers \FL\FacebookPagesBundle\Model\PageReview::getText
+     * @covers \FL\FacebookPagesBundle\Model\PageReview::setText
+     * @covers \FL\FacebookPagesBundle\Model\PageReview::getReviewerId
+     * @covers \FL\FacebookPagesBundle\Model\PageReview::setReviewerId
      */
     public function testGettersAndSetters()
     {
@@ -27,7 +27,7 @@ class PageReviewTest extends \PHPUnit_Framework_TestCase
         $tool
             ->addTestItem(new TestItemImmutable('getCreatedAt', 'setCreatedAt', new \DateTimeImmutable('+ 1 day + 3 hours')))
             ->addTestItem(new TestItemImmutable('getRating', 'setRating', 3))
-            ->addTestItem(new TestItemImmutable('getReview', 'setReview', 'It was very good!'))
+            ->addTestItem(new TestItemImmutable('getText', 'setText', 'It was very good!'))
             ->addTestItem(new TestItemImmutable('getReviewerId', 'setReviewerId', '1234567890'))
         ;
 
@@ -38,10 +38,10 @@ class PageReviewTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @covers \FL\FacebookPagesBundle\Model\PageRating::getCreatedAt
-     * @covers \FL\FacebookPagesBundle\Model\PageRating::getRating
-     * @covers \FL\FacebookPagesBundle\Model\PageRating::getReview
-     * @covers \FL\FacebookPagesBundle\Model\PageRating::getReviewerId
+     * @covers \FL\FacebookPagesBundle\Model\PageReview::getCreatedAt
+     * @covers \FL\FacebookPagesBundle\Model\PageReview::getRating
+     * @covers \FL\FacebookPagesBundle\Model\PageReview::getText
+     * @covers \FL\FacebookPagesBundle\Model\PageReview::getReviewerId
      */
     public function testNullValuesInNewObject()
     {
@@ -54,7 +54,7 @@ class PageReviewTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @covers \FL\FacebookPagesBundle\Model\PageRating::hasRating
+     * @covers \FL\FacebookPagesBundle\Model\PageReview::hasRating
      */
     public function testHasRatingIsTrue()
     {
@@ -65,7 +65,7 @@ class PageReviewTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @covers \FL\FacebookPagesBundle\Model\PageRating::hasReview
+     * @covers \FL\FacebookPagesBundle\Model\PageReview::hasText
      */
     public function testHasReviewIsTrue()
     {
@@ -76,7 +76,7 @@ class PageReviewTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @covers \FL\FacebookPagesBundle\Model\PageRating::hasRating
+     * @covers \FL\FacebookPagesBundle\Model\PageReview::hasRating
      */
     public function testHasRatingIsFalseIfRatingIsNull()
     {
@@ -86,7 +86,7 @@ class PageReviewTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @covers \FL\FacebookPagesBundle\Model\PageRating::hasReview
+     * @covers \FL\FacebookPagesBundle\Model\PageReview::hasText
      */
     public function testHasReviewIsFalseInNewObject()
     {
@@ -96,7 +96,7 @@ class PageReviewTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @covers \FL\FacebookPagesBundle\Model\PageRating::setRating
+     * @covers \FL\FacebookPagesBundle\Model\PageReview::setRating
      */
     public function testValidSetRating()
     {
@@ -110,7 +110,7 @@ class PageReviewTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @covers \FL\FacebookPagesBundle\Model\PageRating::setRating
+     * @covers \FL\FacebookPagesBundle\Model\PageReview::setRating
      */
     public function testInvalidSetRating()
     {

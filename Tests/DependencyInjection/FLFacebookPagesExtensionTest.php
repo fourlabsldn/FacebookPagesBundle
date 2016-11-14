@@ -72,7 +72,7 @@ class FLFacebookPagesExtensionTest extends \PHPUnit_Framework_TestCase
     public function testInvalidPageRatingClassConfiguration()
     {
         $this->extension->load(
-            array_merge($this->createValidConfiguration(), [['page_rating_class' => \DateTimeImmutable::class]]),
+            array_merge($this->createValidConfiguration(), [['page_review_class' => \DateTimeImmutable::class]]),
             $this->container
         );
     }

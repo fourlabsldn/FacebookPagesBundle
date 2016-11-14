@@ -11,8 +11,8 @@ class ReviewTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @test
-     * @covers \FL\FacebookPagesBundle\Action\Webhook\RatingNew::__construct
-     * @covers \FL\FacebookPagesBundle\Action\Webhook\RatingNew::__invoke
+     * @covers \FL\FacebookPagesBundle\Action\Webhook\Rating::__construct
+     * @covers \FL\FacebookPagesBundle\Action\Webhook\Rating::__invoke
      */
     public function testInvoke()
     {

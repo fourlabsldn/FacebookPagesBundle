@@ -17,8 +17,8 @@ class PageReviewStorageTest extends ManagerAndRepositoryTest
 
     /**
      * @test
-     * @covers \FL\FacebookPagesBundle\Storage\DoctrineORM\PageRatingStorage::__construct
-     * @covers \FL\FacebookPagesBundle\Storage\DoctrineORM\PageRatingStorage::getAll
+     * @covers \FL\FacebookPagesBundle\Storage\DoctrineORM\PageReviewStorage::__construct
+     * @covers \FL\FacebookPagesBundle\Storage\DoctrineORM\PageReviewStorage::getAll
      */
     public function testGetAll()
     {
@@ -35,8 +35,8 @@ class PageReviewStorageTest extends ManagerAndRepositoryTest
 
     /**
      * @test
-     * @covers \FL\FacebookPagesBundle\Storage\DoctrineORM\PageRatingStorage::__construct
-     * @covers \FL\FacebookPagesBundle\Storage\DoctrineORM\PageRatingStorage::persist
+     * @covers \FL\FacebookPagesBundle\Storage\DoctrineORM\PageReviewStorage::__construct
+     * @covers \FL\FacebookPagesBundle\Storage\DoctrineORM\PageReviewStorage::persist
      */
     public function testPersist()
     {
@@ -60,8 +60,8 @@ class PageReviewStorageTest extends ManagerAndRepositoryTest
 
     /**
      * @test
-     * @covers \FL\FacebookPagesBundle\Storage\DoctrineORM\PageRatingStorage::__construct
-     * @covers \FL\FacebookPagesBundle\Storage\DoctrineORM\PageRatingStorage::persistMultiple
+     * @covers \FL\FacebookPagesBundle\Storage\DoctrineORM\PageReviewStorage::__construct
+     * @covers \FL\FacebookPagesBundle\Storage\DoctrineORM\PageReviewStorage::persistMultiple
      */
     public function testPersistMultiple()
     {
@@ -82,7 +82,7 @@ class PageReviewStorageTest extends ManagerAndRepositoryTest
 
     /**
      * @test
-     * @covers \FL\FacebookPagesBundle\Storage\DoctrineORM\PageRatingStorage::persistMultiple
+     * @covers \FL\FacebookPagesBundle\Storage\DoctrineORM\PageReviewStorage::persistMultiple
      */
     public function testPersistMultipleException()
     {

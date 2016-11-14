@@ -3,10 +3,9 @@
 namespace FL\FacebookPagesBundle\Tests\DependencyInjection;
 
 use FL\FacebookPagesBundle\DependencyInjection\Configuration;
-use FL\FacebookPagesBundle\Model\DoctrineORM\PageReview;
 use FL\FacebookPagesBundle\Model\PageManager;
 use FL\FacebookPagesBundle\Model\Page;
-use FL\FacebookPagesBundle\Model\PageRating;
+use FL\FacebookPagesBundle\Model\PageReview;
 use Symfony\Component\Config\Definition\Processor;
 
 class ConfigurationTest extends \PHPUnit_Framework_TestCase
