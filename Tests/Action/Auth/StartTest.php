@@ -3,7 +3,7 @@
 namespace FL\FacebookPagesBundle\Action;
 
 use FL\FacebookPagesBundle\Action\Auth\Start;
-use FL\FacebookPagesBundle\Model\FacebookUser;
+use FL\FacebookPagesBundle\Model\PageManager;
 use FL\FacebookPagesBundle\Model\Page;
 use FL\FacebookPagesBundle\Model\PageRating;
 use FL\FacebookPagesBundle\Services\Facebook\V2_8\FacebookUserClient;
@@ -21,7 +21,7 @@ class StartTest extends \PHPUnit_Framework_TestCase
      */
     public function testInvoke()
     {
-        $facebookUserClient = new FacebookUserClient('fakeAppId', 'fakeAppSecret', FacebookUser::class, Page::class, PageRating::class);
+        $facebookUserClient = new FacebookUserClient('fakeAppId', 'fakeAppSecret', PageManager::class, Page::class, PageRating::class);
         $router = $this
             ->getMockBuilder(RouterInterface::class)
             ->setMethods(['generate', 'getContext', 'match', 'getRouteCollection', 'setContext'])

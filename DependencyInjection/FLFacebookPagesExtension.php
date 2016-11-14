@@ -2,7 +2,7 @@
 
 namespace FL\FacebookPagesBundle\DependencyInjection;
 
-use FL\FacebookPagesBundle\Model\FacebookUserInterface;
+use FL\FacebookPagesBundle\Model\PageManagerInterface;
 use FL\FacebookPagesBundle\Model\PageInterface;
 use FL\FacebookPagesBundle\Model\PageRatingInterface;
 use Symfony\Component\DependencyInjection\Loader;
@@ -40,7 +40,7 @@ class FLFacebookPagesExtension extends Extension
         /*
          * Validate Model Classes Parameters
          */
-        $this->validateClassNameIsInstanceOfAnother($config['facebook_user_class'], FacebookUserInterface::class, 'fl_facebook_pages.facebook_user_class');
+        $this->validateClassNameIsInstanceOfAnother($config['facebook_user_class'], PageManagerInterface::class, 'fl_facebook_pages.facebook_user_class');
         $this->validateClassNameIsInstanceOfAnother($config['page_class'], PageInterface::class, 'fl_facebook_pages.page_class');
         $this->validateClassNameIsInstanceOfAnother($config['page_rating_class'], PageRatingInterface::class, 'fl_facebook_pages.page_rating_class');
 

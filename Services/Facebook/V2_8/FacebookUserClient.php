@@ -8,7 +8,7 @@ use Facebook\FacebookResponse;
 use Facebook\GraphNodes\GraphEdge;
 use Facebook\GraphNodes\GraphNode;
 use FL\FacebookPagesBundle\Guzzle\Guzzle6HttpClient;
-use FL\FacebookPagesBundle\Model\FacebookUserInterface;
+use FL\FacebookPagesBundle\Model\PageManagerInterface;
 use FL\FacebookPagesBundle\Model\PageInterface;
 use FL\FacebookPagesBundle\Model\PageRatingInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -86,11 +86,11 @@ class FacebookUserClient
 
     /**
      * @param string                $endpoint
-     * @param FacebookUserInterface $facebookUser
+     * @param PageManagerInterface $facebookUser
      *
      * @return FacebookResponse
      */
-    public function get(string $endpoint, FacebookUserInterface $facebookUser)
+    public function get(string $endpoint, PageManagerInterface $facebookUser)
     {
         if ($facebookUser->getLongLivedToken() === null) {
             throw new \InvalidArgumentException();
@@ -134,15 +134,15 @@ class FacebookUserClient
     /**
      * @param Request $authorizeFacebookRequest
      *
-     * @return FacebookUserInterface
+     * @return PageManagerInterface
      */
-    public function generateUserFromAuthorizationRequest(Request $authorizeFacebookRequest): FacebookUserInterface
+    public function generateUserFromAuthorizationRequest(Request $authorizeFacebookRequest): PageManagerInterface
     {
         $token = $this->generateLongLivedTokenFromUrl($authorizeFacebookRequest->getUri());
         $response = $this->guzzleClient->get('/me', $token->getValue());
         $graphUser = $response->getGraphUser();
 
-        /** @var FacebookUserInterface $user */
+        /** @var PageManagerInterface $user */
         $user = (new $this->userClass());
         $expiration = $token->getExpiresAt() ? \DateTimeImmutable::createFromMutable($token->getExpiresAt()) : null;
         $user
@@ -183,11 +183,11 @@ class FacebookUserClient
     }
 
     /**
-     * @param FacebookUserInterface $facebookUser
+     * @param PageManagerInterface $facebookUser
      *
      * @return PageInterface[]
      */
-    public function resolveUserPages(FacebookUserInterface $facebookUser)
+    public function resolveUserPages(PageManagerInterface $facebookUser)
     {
         $response = $this->get('/me/accounts', $facebookUser);
         $fullyAdminedPages = [];
@@ -208,7 +208,7 @@ class FacebookUserClient
                     ->setPageId($pageGraphNode->getField('id'))
                     ->setPageName($pageGraphNode->getField('name'))
                     ->setCategory($pageGraphNode->getField('category'))
-                    ->setFacebookUser($facebookUser)
+                    ->setPageManager($facebookUser)
                 ;
                 $fullyAdminedPages[] = $page;
             }

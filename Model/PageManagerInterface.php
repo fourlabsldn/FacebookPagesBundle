@@ -5,7 +5,7 @@ namespace FL\FacebookPagesBundle\Model;
 /**
  * @link https://developers.facebook.com/docs/facebook-login/access-tokens/#usertokens
  */
-interface FacebookUserInterface
+interface PageManagerInterface
 {
     /**
      * @return string|null
@@ -15,9 +15,9 @@ interface FacebookUserInterface
     /**
      * @param string|null $token
      *
-     * @return FacebookUserInterface
+     * @return PageManagerInterface
      */
-    public function setShortLivedToken(string $token = null): FacebookUserInterface;
+    public function setShortLivedToken(string $token = null): PageManagerInterface;
 
     /**
      * @return \DateTimeImmutable|null
@@ -27,9 +27,9 @@ interface FacebookUserInterface
     /**
      * @param $expiration \DateTimeImmutable|null
      *
-     * @return FacebookUserInterface
+     * @return PageManagerInterface
      */
-    public function setShortLivedTokenExpiration(\DateTimeImmutable $expiration = null): FacebookUserInterface;
+    public function setShortLivedTokenExpiration(\DateTimeImmutable $expiration = null): PageManagerInterface;
 
     /**
      * @return bool
@@ -44,9 +44,9 @@ interface FacebookUserInterface
     /**
      * @param string|null $token
      *
-     * @return FacebookUserInterface
+     * @return PageManagerInterface
      */
-    public function setLongLivedToken(string $token = null): FacebookUserInterface;
+    public function setLongLivedToken(string $token = null): PageManagerInterface;
 
     /**
      * @return \DateTimeImmutable|null
@@ -56,9 +56,9 @@ interface FacebookUserInterface
     /**
      * @param $expiration \DateTimeImmutable|null
      *
-     * @return FacebookUserInterface
+     * @return PageManagerInterface
      */
-    public function setLongLivedTokenExpiration(\DateTimeImmutable $expiration = null): FacebookUserInterface;
+    public function setLongLivedTokenExpiration(\DateTimeImmutable $expiration = null): PageManagerInterface;
 
     /**
      * @return bool
@@ -73,7 +73,7 @@ interface FacebookUserInterface
     /**
      * @param string|null $userId
      *
-     * @return FacebookUserInterface
+     * @return PageManagerInterface
      */
-    public function setUserId(string $userId = null): FacebookUserInterface;
+    public function setUserId(string $userId = null): PageManagerInterface;
 }

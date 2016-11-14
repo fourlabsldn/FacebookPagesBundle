@@ -103,14 +103,14 @@ interface PageInterface
     public function setCategory(string $category = null): PageInterface;
 
     /**
-     * @return FacebookUserInterface|null
+     * @return PageManagerInterface|null
      */
-    public function getFacebookUser();
+    public function getPageManager();
 
     /**
-     * @param FacebookUserInterface|null $facebookUser
+     * @param PageManagerInterface|null $facebookUser
      *
      * @return PageInterface
      */
-    public function setFacebookUser(FacebookUserInterface $facebookUser = null): PageInterface;
+    public function setPageManager(PageManagerInterface $facebookUser = null): PageInterface;
 }

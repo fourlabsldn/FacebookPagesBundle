@@ -2,8 +2,8 @@
 
 namespace FL\FacebookPagesBundle\Tests\Storage\DoctrineORM;
 
-use FL\FacebookPagesBundle\Model\FacebookUser;
-use FL\FacebookPagesBundle\Model\FacebookUserInterface;
+use FL\FacebookPagesBundle\Model\PageManager;
+use FL\FacebookPagesBundle\Model\PageManagerInterface;
 use FL\FacebookPagesBundle\Storage\DoctrineORM\FacebookUserStorage;
 use FL\FacebookPagesBundle\Storage\DoctrineORM\PageManagerStorage;
 use FL\FacebookPagesBundle\Tests\Util\Storage\DoctrineORM\ManagerAndRepositoryTest;
@@ -12,7 +12,7 @@ class PageManagerStorageTest extends ManagerAndRepositoryTest
 {
     public function setUp()
     {
-        $this->findAllReturnValue = [new FacebookUser(), new FacebookUser()];
+        $this->findAllReturnValue = [new PageManager(), new PageManager()];
         parent::setUp();
     }
 
@@ -25,11 +25,11 @@ class PageManagerStorageTest extends ManagerAndRepositoryTest
     {
         $facebookUserStorage = new PageManagerStorage(
             $this->entityManager,
-            FacebookUser::class
+            PageManager::class
         );
         $this->assertInternalType('array', $facebookUserStorage->getAll());
         foreach ($facebookUserStorage->getAll() as $facebookUser) {
-            $this->assertInstanceOf(FacebookUserInterface::class, $facebookUser);
+            $this->assertInstanceOf(PageManagerInterface::class, $facebookUser);
         }
     }
 
@@ -45,12 +45,12 @@ class PageManagerStorageTest extends ManagerAndRepositoryTest
             PageManagerStorage::class
         );
 
-        $facebookUserA = new FacebookUser();
+        $facebookUserA = new PageManager();
         $facebookUserStorage->persist($facebookUserA);
         $this->assertContains($facebookUserA, $this->persistedEntities);
         $this->assertContains($facebookUserA, $this->persistedAndFlushedEntities);
 
-        $facebookUserB = new FacebookUser();
+        $facebookUserB = new PageManager();
         $facebookUserStorage->persist($facebookUserB);
         $this->assertNotContains($facebookUserA, $this->persistedEntities);
         $this->assertContains($facebookUserB, $this->persistedEntities);
@@ -70,8 +70,8 @@ class PageManagerStorageTest extends ManagerAndRepositoryTest
             PageManagerStorage::class
         );
 
-        $facebookUserA = new FacebookUser();
-        $facebookUserB = new FacebookUser();
+        $facebookUserA = new PageManager();
+        $facebookUserB = new PageManager();
 
         $facebookUserStorage->persistMultiple([$facebookUserA, $facebookUserB]);
         $this->assertContains($facebookUserA, $this->persistedEntities);
@@ -91,7 +91,7 @@ class PageManagerStorageTest extends ManagerAndRepositoryTest
             PageManagerStorage::class
         );
 
-        $facebookUser = new FacebookUser();
+        $facebookUser = new PageManager();
         $date = new \DateTimeImmutable();
 
         try {
@@ -103,7 +103,7 @@ class PageManagerStorageTest extends ManagerAndRepositoryTest
         $this->fail(sprintf(
             'Expected %s for invalid %s::persistMultiple',
             \InvalidArgumentException::class,
-            FacebookUser::class
+            PageManager::class
         ));
     }
 }

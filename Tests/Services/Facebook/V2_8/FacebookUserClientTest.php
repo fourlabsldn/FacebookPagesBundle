@@ -2,7 +2,7 @@
 
 namespace FL\FacebookPagesBundle\Tests\Services\Facebook\V2_8;
 
-use FL\FacebookPagesBundle\Model\FacebookUser;
+use FL\FacebookPagesBundle\Model\PageManager;
 use FL\FacebookPagesBundle\Model\Page;
 use FL\FacebookPagesBundle\Model\PageRating;
 use FL\FacebookPagesBundle\Services\Facebook\V2_8\FacebookUserClient;
@@ -26,7 +26,7 @@ class FacebookUserClientTest extends \PHPUnit_Framework_TestCase
      */
     public function testConstruction()
     {
-        new FacebookUserClient('fakeAppId', 'fakeAppSecret', FacebookUser::class, Page::class, PageRating::class);
+        new FacebookUserClient('fakeAppId', 'fakeAppSecret', PageManager::class, Page::class, PageRating::class);
     }
 
     /**
@@ -43,8 +43,8 @@ class FacebookUserClientTest extends \PHPUnit_Framework_TestCase
         $ourGuzzleClient = new Guzzle6HttpClient(new Client([
             'handler' => $stack,
         ]));
-        $facebookUserClient = new FacebookUserClient('fakeAppId', 'fakeAppSecret', FacebookUser::class, Page::class, PageRating::class, $ourGuzzleClient);
-        $facebookUser = new FacebookUser();
+        $facebookUserClient = new FacebookUserClient('fakeAppId', 'fakeAppSecret', PageManager::class, Page::class, PageRating::class, $ourGuzzleClient);
+        $facebookUser = new PageManager();
         $facebookUser->setLongLivedToken('someToken12371623123812763');
         $facebookUserClient->get('/me', $facebookUser);
 
@@ -63,8 +63,8 @@ class FacebookUserClientTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetException()
     {
-        $client = new FacebookUserClient('fakeAppId', 'fakeAppSecret', FacebookUser::class, Page::class, PageRating::class);
-        $facebookUser = new FacebookUser();
+        $client = new FacebookUserClient('fakeAppId', 'fakeAppSecret', PageManager::class, Page::class, PageRating::class);
+        $facebookUser = new PageManager();
         $facebookUser->setLongLivedToken(null);
         $client->get('/me', $facebookUser);
     }
@@ -75,7 +75,7 @@ class FacebookUserClientTest extends \PHPUnit_Framework_TestCase
      */
     public function testGenerateAuthorizationUrl()
     {
-        $client = new FacebookUserClient('fakeAppId', 'fakeAppSecret', FacebookUser::class, Page::class, PageRating::class);
+        $client = new FacebookUserClient('fakeAppId', 'fakeAppSecret', PageManager::class, Page::class, PageRating::class);
         $url = $client->generateAuthorizationUrl('https://www.example.com/callbackurl');
 
         /*

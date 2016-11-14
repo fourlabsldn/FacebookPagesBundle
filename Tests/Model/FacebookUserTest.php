@@ -2,7 +2,7 @@
 
 namespace FL\FacebookPagesBundle\Tests\Model;
 
-use FL\FacebookPagesBundle\Model\FacebookUser;
+use FL\FacebookPagesBundle\Model\PageManager;
 use FL\FacebookPagesBundle\Tests\Util\GettersSetters\TestItemImmutable;
 use FL\FacebookPagesBundle\Tests\Util\GettersSetters\TestTool;
 
@@ -10,20 +10,20 @@ class FacebookUserTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @test
-     * @covers \FL\FacebookPagesBundle\Model\FacebookUser::getShortLivedToken
-     * @covers \FL\FacebookPagesBundle\Model\FacebookUser::setShortLivedToken
-     * @covers \FL\FacebookPagesBundle\Model\FacebookUser::getShortLivedTokenExpiration
-     * @covers \FL\FacebookPagesBundle\Model\FacebookUser::setShortLivedTokenExpiration
-     * @covers \FL\FacebookPagesBundle\Model\FacebookUser::getLongLivedToken
-     * @covers \FL\FacebookPagesBundle\Model\FacebookUser::setLongLivedToken
-     * @covers \FL\FacebookPagesBundle\Model\FacebookUser::getLongLivedTokenExpiration
-     * @covers \FL\FacebookPagesBundle\Model\FacebookUser::setLongLivedTokenExpiration
-     * @covers \FL\FacebookPagesBundle\Model\FacebookUser::getUserId
-     * @covers \FL\FacebookPagesBundle\Model\FacebookUser::setUserId
+     * @covers \FL\FacebookPagesBundle\Model\PageManager::getShortLivedToken
+     * @covers \FL\FacebookPagesBundle\Model\PageManager::setShortLivedToken
+     * @covers \FL\FacebookPagesBundle\Model\PageManager::getShortLivedTokenExpiration
+     * @covers \FL\FacebookPagesBundle\Model\PageManager::setShortLivedTokenExpiration
+     * @covers \FL\FacebookPagesBundle\Model\PageManager::getLongLivedToken
+     * @covers \FL\FacebookPagesBundle\Model\PageManager::setLongLivedToken
+     * @covers \FL\FacebookPagesBundle\Model\PageManager::getLongLivedTokenExpiration
+     * @covers \FL\FacebookPagesBundle\Model\PageManager::setLongLivedTokenExpiration
+     * @covers \FL\FacebookPagesBundle\Model\PageManager::getUserId
+     * @covers \FL\FacebookPagesBundle\Model\PageManager::setUserId
      */
     public function testGettersAndSetters()
     {
-        $facebookUser = new FacebookUser();
+        $facebookUser = new PageManager();
         $tool = new TestTool();
 
         $tool
@@ -41,15 +41,15 @@ class FacebookUserTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @covers \FL\FacebookPagesBundle\Model\FacebookUser::getShortLivedToken
-     * @covers \FL\FacebookPagesBundle\Model\FacebookUser::getShortLivedTokenExpiration
-     * @covers \FL\FacebookPagesBundle\Model\FacebookUser::getLongLivedToken
-     * @covers \FL\FacebookPagesBundle\Model\FacebookUser::getLongLivedTokenExpiration
-     * @covers \FL\FacebookPagesBundle\Model\FacebookUser::getUserId
+     * @covers \FL\FacebookPagesBundle\Model\PageManager::getShortLivedToken
+     * @covers \FL\FacebookPagesBundle\Model\PageManager::getShortLivedTokenExpiration
+     * @covers \FL\FacebookPagesBundle\Model\PageManager::getLongLivedToken
+     * @covers \FL\FacebookPagesBundle\Model\PageManager::getLongLivedTokenExpiration
+     * @covers \FL\FacebookPagesBundle\Model\PageManager::getUserId
      */
     public function testNullValuesInNewObject()
     {
-        $facebookUser = new FacebookUser();
+        $facebookUser = new PageManager();
         $this->assertNull($facebookUser->getLongLivedToken());
         $this->assertNull($facebookUser->getLongLivedTokenExpiration());
         $this->assertNull($facebookUser->getShortLivedToken());
@@ -59,11 +59,11 @@ class FacebookUserTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @covers \FL\FacebookPagesBundle\Model\FacebookUser::isLongLivedTokenExpired
+     * @covers \FL\FacebookPagesBundle\Model\PageManager::isLongLivedTokenExpired
      */
     public function testLongLivedExpirationIfTokenNull()
     {
-        $facebookUser = new FacebookUser();
+        $facebookUser = new PageManager();
         $this->assertTrue($facebookUser->isLongLivedTokenExpired());
         $facebookUser->setLongLivedToken(null);
         $this->assertTrue($facebookUser->isLongLivedTokenExpired());
@@ -71,11 +71,11 @@ class FacebookUserTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @covers \FL\FacebookPagesBundle\Model\FacebookUser::isLongLivedTokenExpired
+     * @covers \FL\FacebookPagesBundle\Model\PageManager::isLongLivedTokenExpired
      */
     public function testLongLivedExpirationIfPastToken()
     {
-        $facebookUser = new FacebookUser();
+        $facebookUser = new PageManager();
         $now = new \DateTimeImmutable('now');
         $facebookUser->setLongLivedToken('{token}');
         $facebookUser->setLongLivedTokenExpiration($now->sub(new \DateInterval('P1D')));
@@ -84,11 +84,11 @@ class FacebookUserTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @covers \FL\FacebookPagesBundle\Model\FacebookUser::isLongLivedTokenExpired
+     * @covers \FL\FacebookPagesBundle\Model\PageManager::isLongLivedTokenExpired
      */
     public function testLongLivedExpirationIfFutureToken()
     {
-        $facebookUser = new FacebookUser();
+        $facebookUser = new PageManager();
         $now = new \DateTimeImmutable('now');
         $facebookUser->setLongLivedToken('{token}');
         $facebookUser->setLongLivedTokenExpiration($now->add(new \DateInterval('P1D')));
@@ -97,11 +97,11 @@ class FacebookUserTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @covers \FL\FacebookPagesBundle\Model\FacebookUser::isShortLivedTokenExpired()
+     * @covers \FL\FacebookPagesBundle\Model\PageManager::isShortLivedTokenExpired()
      */
     public function testShortLivedExpirationIfTokenNull()
     {
-        $facebookUser = new FacebookUser();
+        $facebookUser = new PageManager();
         $this->assertTrue($facebookUser->isShortLivedTokenExpired());
         $facebookUser->setShortLivedToken(null);
         $this->assertTrue($facebookUser->isShortLivedTokenExpired());
@@ -109,11 +109,11 @@ class FacebookUserTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @covers \FL\FacebookPagesBundle\Model\FacebookUser::isShortLivedTokenExpired
+     * @covers \FL\FacebookPagesBundle\Model\PageManager::isShortLivedTokenExpired
      */
     public function testShortLivedExpirationIfPastToken()
     {
-        $facebookUser = new FacebookUser();
+        $facebookUser = new PageManager();
         $now = new \DateTimeImmutable('now');
         $facebookUser->setShortLivedToken('{token}');
         $facebookUser->setShortLivedTokenExpiration($now->sub(new \DateInterval('P1D')));
@@ -122,11 +122,11 @@ class FacebookUserTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @covers \FL\FacebookPagesBundle\Model\FacebookUser::isShortLivedTokenExpired
+     * @covers \FL\FacebookPagesBundle\Model\PageManager::isShortLivedTokenExpired
      */
     public function testShortLivedExpirationIfFutureToken()
     {
-        $facebookUser = new FacebookUser();
+        $facebookUser = new PageManager();
         $now = new \DateTimeImmutable('now');
         $facebookUser->setShortLivedToken('{token}');
         $facebookUser->setShortLivedTokenExpiration($now->add(new \DateInterval('P1D')));

@@ -4,7 +4,7 @@ namespace FL\FacebookPagesBundle\Storage\DoctrineORM;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
-use FL\FacebookPagesBundle\Model\FacebookUserInterface;
+use FL\FacebookPagesBundle\Model\PageManagerInterface;
 use FL\FacebookPagesBundle\Storage\PageManagerStorageInterface;
 
 class PageManagerStorage implements PageManagerStorageInterface
@@ -40,7 +40,7 @@ class PageManagerStorage implements PageManagerStorageInterface
     /**
      * {@inheritdoc}
      */
-    public function persist(FacebookUserInterface $facebookUser): PageManagerStorageInterface
+    public function persist(PageManagerInterface $facebookUser): PageManagerStorageInterface
     {
         $this->entityManager->clear();
         $this->entityManager->persist($facebookUser);
@@ -56,7 +56,7 @@ class PageManagerStorage implements PageManagerStorageInterface
     {
         $this->entityManager->clear();
         foreach ($facebookUsers as $user) {
-            if (!($user instanceof FacebookUserInterface)) {
+            if (!($user instanceof PageManagerInterface)) {
                 throw new \InvalidArgumentException();
             }
             $this->entityManager->persist($user);

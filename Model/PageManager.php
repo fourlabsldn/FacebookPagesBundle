@@ -2,7 +2,7 @@
 
 namespace FL\FacebookPagesBundle\Model;
 
-class FacebookUser implements FacebookUserInterface
+class PageManager implements PageManagerInterface
 {
     /**
      * @var string|null
@@ -40,7 +40,7 @@ class FacebookUser implements FacebookUserInterface
     /**
      * {@inheritdoc}
      */
-    public function setShortLivedToken(string $token = null): FacebookUserInterface
+    public function setShortLivedToken(string $token = null): PageManagerInterface
     {
         $this->shortLivedToken = $token;
 
@@ -58,7 +58,7 @@ class FacebookUser implements FacebookUserInterface
     /**
      * {@inheritdoc}
      */
-    public function setShortLivedTokenExpiration(\DateTimeImmutable $expiration = null): FacebookUserInterface
+    public function setShortLivedTokenExpiration(\DateTimeImmutable $expiration = null): PageManagerInterface
     {
         $this->shortLivedTokenExpiration = $expiration;
 
@@ -91,7 +91,7 @@ class FacebookUser implements FacebookUserInterface
     /**
      * {@inheritdoc}
      */
-    public function setLongLivedToken(string $token = null): FacebookUserInterface
+    public function setLongLivedToken(string $token = null): PageManagerInterface
     {
         $this->longLivedToken = $token;
 
@@ -109,7 +109,7 @@ class FacebookUser implements FacebookUserInterface
     /**
      * {@inheritdoc}
      */
-    public function setLongLivedTokenExpiration(\DateTimeImmutable $expiration = null): FacebookUserInterface
+    public function setLongLivedTokenExpiration(\DateTimeImmutable $expiration = null): PageManagerInterface
     {
         $this->longLivedTokenExpiration = $expiration;
 
@@ -142,7 +142,7 @@ class FacebookUser implements FacebookUserInterface
     /**
      * {@inheritdoc}
      */
-    public function setUserId(string $userId = null): FacebookUserInterface
+    public function setUserId(string $userId = null): PageManagerInterface
     {
         $this->userId = $userId;
 

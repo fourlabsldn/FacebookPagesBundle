@@ -2,14 +2,14 @@
 
 namespace FL\FacebookPagesBundle\Model\DoctrineORM;
 
-use FL\FacebookPagesBundle\Model\FacebookUserInterface;
-use FL\FacebookPagesBundle\Model\FacebookUser as BaseFacebookUser;
+use FL\FacebookPagesBundle\Model\PageManagerInterface;
+use FL\FacebookPagesBundle\Model\PageManager as BasePageManager;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\MappedSuperclass
  */
-class FacebookUser extends BaseFacebookUser implements FacebookUserInterface
+class PageManager extends BasePageManager implements PageManagerInterface
 {
     /**
      * @var string|null

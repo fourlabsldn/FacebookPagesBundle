@@ -2,24 +2,24 @@
 
 namespace FL\FacebookPagesBundle\Storage;
 
-use FL\FacebookPagesBundle\Model\FacebookUserInterface;
+use FL\FacebookPagesBundle\Model\PageManagerInterface;
 
 interface PageManagerStorageInterface
 {
     /**
-     * @return FacebookUserInterface[]
+     * @return PageManagerInterface[]
      */
     public function getAll(): array;
 
     /**
-     * @param FacebookUserInterface $facebookUser
+     * @param PageManagerInterface $facebookUser
      *
      * @return PageManagerStorageInterface
      */
-    public function persist(FacebookUserInterface $facebookUser): PageManagerStorageInterface;
+    public function persist(PageManagerInterface $facebookUser): PageManagerStorageInterface;
 
     /**
-     * @param FacebookUserInterface[] $facebookUsers
+     * @param PageManagerInterface[] $facebookUsers
      *
      * @return PageManagerStorageInterface
      */
