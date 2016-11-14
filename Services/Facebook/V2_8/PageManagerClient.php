@@ -5,7 +5,6 @@ namespace FL\FacebookPagesBundle\Services\Facebook\V2_8;
 use Facebook\Authentication\AccessToken;
 use Facebook\Facebook;
 use Facebook\FacebookResponse;
-use Facebook\GraphNodes\GraphEdge;
 use Facebook\GraphNodes\GraphNode;
 use FL\FacebookPagesBundle\Guzzle\Guzzle6HttpClient;
 use FL\FacebookPagesBundle\Model\PageManagerInterface;
@@ -123,9 +122,9 @@ class PageManagerClient
      */
     public function generateAuthorizationUrl(string $callbackUrl)
     {
-        return $this->guzzleClient->getRedirectLoginHelper()->getLoginUrl(
-            $callbackUrl,
-            ['public_profile', 'email', 'manage_pages', 'publish_pages', 'pages_messaging']
+        return $this->guzzleClient->getRedirectLoginHelper()->getLoginUrl($callbackUrl, [
+                'manage_pages',
+            ]
         );
     }
 
@@ -223,8 +222,13 @@ class PageManagerClient
     public function resolvePageReviews(PageInterface $page): array
     {
         $allReviews = [];
-        /** @var GraphEdge $reviewsEdge */
-        $reviewsEdge = $this->getWithPage(sprintf('/%s/ratings', $page->getPageId()), $page)->getGraphEdge();
+
+        $reviewsEdge = $this->getWithPage(sprintf(
+            '/%s/ratings',
+            $page->getPageId()),
+            $page
+        )->getGraphEdge();
+
         do {
             /** @var GraphNode $reviewGraphNode */
             foreach ($reviewsEdge->all() as $reviewGraphNode) {

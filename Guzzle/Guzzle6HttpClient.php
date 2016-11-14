@@ -42,7 +42,10 @@ class Guzzle6HttpClient implements FacebookHttpClientInterface
     {
         $request = new Request($method, $url, $headers, $body);
         try {
-            $response = $this->client->send($request, ['timeout' => $timeOut, 'http_errors' => false]);
+            $response = $this->client->send($request, [
+                'timeout' => $timeOut,
+                'http_errors' => false,
+            ]);
         } catch (RequestException $e) {
             throw new FacebookSDKException($e->getMessage(), $e->getCode());
         }
