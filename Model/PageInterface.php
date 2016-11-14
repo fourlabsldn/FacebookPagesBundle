@@ -108,9 +108,9 @@ interface PageInterface
     public function getPageManager();
 
     /**
-     * @param PageManagerInterface|null $facebookUser
+     * @param PageManagerInterface|null $pageManager
      *
      * @return PageInterface
      */
-    public function setPageManager(PageManagerInterface $facebookUser = null): PageInterface;
+    public function setPageManager(PageManagerInterface $pageManager = null): PageInterface;
 }

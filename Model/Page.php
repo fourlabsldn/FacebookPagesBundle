@@ -42,7 +42,7 @@ class Page implements PageInterface
     /**
      * @var PageManagerInterface|null
      */
-    protected $facebookUser;
+    protected $pageManager;
 
     /**
      * {@inheritdoc}
@@ -205,15 +205,15 @@ class Page implements PageInterface
      */
     public function getPageManager()
     {
-        return $this->facebookUser;
+        return $this->pageManager;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setPageManager(PageManagerInterface $facebookUser = null): PageInterface
+    public function setPageManager(PageManagerInterface $pageManager = null): PageInterface
     {
-        $this->facebookUser = $facebookUser;
+        $this->pageManager = $pageManager;
 
         return $this;
     }

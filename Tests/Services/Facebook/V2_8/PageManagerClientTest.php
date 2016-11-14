@@ -43,10 +43,10 @@ class PageManagerClientTest extends \PHPUnit_Framework_TestCase
         $ourGuzzleClient = new Guzzle6HttpClient(new Client([
             'handler' => $stack,
         ]));
-        $facebookUserClient = new PageManagerClient('fakeAppId', 'fakeAppSecret', PageManager::class, Page::class, PageRating::class, $ourGuzzleClient);
-        $facebookUser = new PageManager();
-        $facebookUser->setLongLivedToken('someToken12371623123812763');
-        $facebookUserClient->get('/me', $facebookUser);
+        $pageManagerClient = new PageManagerClient('fakeAppId', 'fakeAppSecret', PageManager::class, Page::class, PageRating::class, $ourGuzzleClient);
+        $pageManager = new PageManager();
+        $pageManager->setLongLivedToken('someToken12371623123812763');
+        $pageManagerClient->get('/me', $pageManager);
 
         /** @var Request $request */
         $request = $container[0]['request'];
@@ -64,9 +64,9 @@ class PageManagerClientTest extends \PHPUnit_Framework_TestCase
     public function testGetException()
     {
         $client = new PageManagerClient('fakeAppId', 'fakeAppSecret', PageManager::class, Page::class, PageRating::class);
-        $facebookUser = new PageManager();
-        $facebookUser->setLongLivedToken(null);
-        $client->get('/me', $facebookUser);
+        $pageManager = new PageManager();
+        $pageManager->setLongLivedToken(null);
+        $client->get('/me', $pageManager);
     }
 
     /**

@@ -60,5 +60,5 @@ class Page extends BasePage implements PageInterface
      * @ORM\OneToOne(targetEntity="AppBundle\Entity\FacebookPageManager", cascade={"persist"})
      * @ORM\JoinColumn(referencedColumnName="id", nullable=true)
      */
-    protected $facebookUser;
+    protected $pageManager;
 }

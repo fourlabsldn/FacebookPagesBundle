@@ -21,7 +21,7 @@ class PageRatingTest extends \PHPUnit_Framework_TestCase
      */
     public function testGettersAndSetters()
     {
-        $facebookUser = new PageRating();
+        $pageManager = new PageRating();
         $tool = new TestTool();
 
         $tool
@@ -31,7 +31,7 @@ class PageRatingTest extends \PHPUnit_Framework_TestCase
             ->addTestItem(new TestItemImmutable('getReviewerId', 'setReviewerId', '1234567890'))
         ;
 
-        if (!$tool->doGettersAndSettersWork($facebookUser)) {
+        if (!$tool->doGettersAndSettersWork($pageManager)) {
             $this->fail($tool->getLatestErrorMessage());
         }
     }
