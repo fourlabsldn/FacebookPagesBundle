@@ -6,7 +6,7 @@ use FL\FacebookPagesBundle\Model\PageManager;
 use FL\FacebookPagesBundle\Tests\Util\GettersSetters\TestItemImmutable;
 use FL\FacebookPagesBundle\Tests\Util\GettersSetters\TestTool;
 
-class FacebookUserTest extends \PHPUnit_Framework_TestCase
+class PageManagerTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @test

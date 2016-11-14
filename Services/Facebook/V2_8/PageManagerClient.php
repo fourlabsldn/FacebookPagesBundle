@@ -13,7 +13,7 @@ use FL\FacebookPagesBundle\Model\PageInterface;
 use FL\FacebookPagesBundle\Model\PageRatingInterface;
 use Symfony\Component\HttpFoundation\Request;
 
-class FacebookUserClient
+class PageManagerClient
 {
     /**
      * @var string
@@ -46,8 +46,6 @@ class FacebookUserClient
     private $guzzleClient;
 
     /**
-     * FacebookUserClient constructor.
-     *
      * @param string                 $appId
      * @param string                 $appSecret
      * @param string                 $userClass
@@ -86,17 +84,17 @@ class FacebookUserClient
 
     /**
      * @param string                $endpoint
-     * @param PageManagerInterface $facebookUser
+     * @param PageManagerInterface $pageManager
      *
      * @return FacebookResponse
      */
-    public function get(string $endpoint, PageManagerInterface $facebookUser)
+    public function get(string $endpoint, PageManagerInterface $pageManager)
     {
-        if ($facebookUser->getLongLivedToken() === null) {
+        if ($pageManager->getLongLivedToken() === null) {
             throw new \InvalidArgumentException();
         }
 
-        return $this->guzzleClient->get($endpoint, $facebookUser->getLongLivedToken(), null, null);
+        return $this->guzzleClient->get($endpoint, $pageManager->getLongLivedToken(), null, null);
     }
 
     /**
@@ -183,13 +181,13 @@ class FacebookUserClient
     }
 
     /**
-     * @param PageManagerInterface $facebookUser
+     * @param PageManagerInterface $pageManager
      *
      * @return PageInterface[]
      */
-    public function resolveUserPages(PageManagerInterface $facebookUser)
+    public function resolveUserPages(PageManagerInterface $pageManager)
     {
-        $response = $this->get('/me/accounts', $facebookUser);
+        $response = $this->get('/me/accounts', $pageManager);
         $fullyAdminedPages = [];
 
         /** @var GraphNode $pageGraphNode */
@@ -208,7 +206,7 @@ class FacebookUserClient
                     ->setPageId($pageGraphNode->getField('id'))
                     ->setPageName($pageGraphNode->getField('name'))
                     ->setCategory($pageGraphNode->getField('category'))
-                    ->setPageManager($facebookUser)
+                    ->setPageManager($pageManager)
                 ;
                 $fullyAdminedPages[] = $page;
             }

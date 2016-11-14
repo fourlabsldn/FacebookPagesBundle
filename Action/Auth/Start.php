@@ -2,7 +2,7 @@
 
 namespace FL\FacebookPagesBundle\Action\Auth;
 
-use FL\FacebookPagesBundle\Services\Facebook\V2_8\FacebookUserClient;
+use FL\FacebookPagesBundle\Services\Facebook\V2_8\PageManagerClient;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -11,7 +11,7 @@ use Symfony\Component\Routing\RouterInterface;
 class Start
 {
     /**
-     * @var FacebookUserClient
+     * @var PageManagerClient
      */
     private $facebookUserClient;
 
@@ -21,11 +21,11 @@ class Start
     private $router;
 
     /**
-     * @param FacebookUserClient $facebookUserClient
+     * @param PageManagerClient $facebookUserClient
      * @param RouterInterface $router
      */
     public function __construct(
-        FacebookUserClient $facebookUserClient,
+        PageManagerClient $facebookUserClient,
         RouterInterface $router
     ) {
         $this->facebookUserClient = $facebookUserClient;

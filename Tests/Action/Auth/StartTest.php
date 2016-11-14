@@ -6,7 +6,7 @@ use FL\FacebookPagesBundle\Action\Auth\Start;
 use FL\FacebookPagesBundle\Model\PageManager;
 use FL\FacebookPagesBundle\Model\Page;
 use FL\FacebookPagesBundle\Model\PageRating;
-use FL\FacebookPagesBundle\Services\Facebook\V2_8\FacebookUserClient;
+use FL\FacebookPagesBundle\Services\Facebook\V2_8\PageManagerClient;
 use FL\FacebookPagesBundle\Tests\Util\Url\ManipulateUrl;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,7 +21,7 @@ class StartTest extends \PHPUnit_Framework_TestCase
      */
     public function testInvoke()
     {
-        $facebookUserClient = new FacebookUserClient('fakeAppId', 'fakeAppSecret', PageManager::class, Page::class, PageRating::class);
+        $facebookUserClient = new PageManagerClient('fakeAppId', 'fakeAppSecret', PageManager::class, Page::class, PageRating::class);
         $router = $this
             ->getMockBuilder(RouterInterface::class)
             ->setMethods(['generate', 'getContext', 'match', 'getRouteCollection', 'setContext'])
