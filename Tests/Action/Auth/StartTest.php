@@ -45,8 +45,7 @@ class StartTest extends \PHPUnit_Framework_TestCase
         static::assertEquals(
             ManipulateUrl::removeParametersFromQueryInUrl($response->getTargetUrl(), ['state']),
             'https://www.facebook.com/v2.8/dialog/oauth?client_id=fakeAppId'.
-            '&response_type=code&sdk=php-sdk-5.4.0&redirect_uri='.
-            'https%3A%2F%2Fwww.example.com%2Fcallbackurl&scope='.
-            'public_profile%2Cemail%2Cmanage_pages%2Cpublish_pages%2Cpages_messaging');
+            '&response_type=code&sdk=php-sdk-6.0-dev&redirect_uri='.
+            'https%3A%2F%2Fwww.example.com%2Fcallbackurl&scope=manage_pages');
     }
 }
