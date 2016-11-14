@@ -224,7 +224,7 @@ class PageManagerClient
         $allReviews = [];
 
         $reviewsEdge = $this->getWithPage(sprintf(
-            '/%s/ratings',
+            '/%s/ratings?fields=open_graph_story',
             $page->getPageId()),
             $page
         )->getGraphEdge();
