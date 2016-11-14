@@ -2,21 +2,21 @@
 
 namespace FL\FacebookPagesBundle\Action\Webhook;
 
-use FL\FacebookPagesBundle\Storage\PageRatingStorageInterface;
+use FL\FacebookPagesBundle\Storage\PageReviewStorageInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class Rating
 {
     /**
-     * @var PageRatingStorageInterface
+     * @var PageReviewStorageInterface
      */
     private $pageRatingsStorage;
 
     /**
-     * @param PageRatingStorageInterface $pageRatingsStorage
+     * @param PageReviewStorageInterface $pageRatingsStorage
      */
-    public function __construct(PageRatingStorageInterface $pageRatingsStorage)
+    public function __construct(PageReviewStorageInterface $pageRatingsStorage)
     {
         $this->pageRatingsStorage = $pageRatingsStorage;
     }
