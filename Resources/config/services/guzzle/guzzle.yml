@@ -3,3 +3,4 @@ services:
     class: FL\FacebookPagesBundle\Guzzle\Guzzle6HttpClient
     arguments:
       - "@fl_facebook_pages.guzzle_service"
+

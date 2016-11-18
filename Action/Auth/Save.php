@@ -17,11 +17,6 @@ class Save
     private $pageManagerClient;
 
     /**
-     * @var PageManagerStorageInterface
-     */
-    private $pageManagerStorage;
-
-    /**
      * @var PageStorageInterface
      */
     private $pageStorage;
@@ -38,7 +33,6 @@ class Save
 
     /**
      * @param PageManagerClient           $pageManagerClient
-     * @param PageManagerStorageInterface $pageManagerStorage
      * @param PageStorageInterface        $pageStorage
      * @param string                      $redirectAfterAuthorization
      * @param string[]                    $onlyThesePageIds
@@ -47,13 +41,11 @@ class Save
      */
     public function __construct(
         PageManagerClient $pageManagerClient,
-        PageManagerStorageInterface $pageManagerStorage,
         PageStorageInterface $pageStorage,
         string $redirectAfterAuthorization,
         array $onlyThesePageIds = null
     ) {
         $this->pageManagerClient = $pageManagerClient;
-        $this->pageManagerStorage = $pageManagerStorage;
         $this->pageStorage = $pageStorage;
         $this->redirectAfterAuthorization = $redirectAfterAuthorization;
         $this->onlyThesePageIds = $onlyThesePageIds;

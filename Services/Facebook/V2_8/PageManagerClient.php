@@ -22,11 +22,6 @@ class PageManagerClient
     /**
      * @var string
      */
-    private $appSecret;
-
-    /**
-     * @var string
-     */
     private $userClass;
 
     /**
@@ -65,7 +60,6 @@ class PageManagerClient
         }
 
         $this->appId = $appId;
-        $this->appSecret = $appSecret;
         $this->userClass = $userClass;
         $this->pageClass = $pageClass;
         $this->pageReviewClass = $pageReviewClass;
