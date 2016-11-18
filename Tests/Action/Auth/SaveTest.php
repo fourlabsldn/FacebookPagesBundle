@@ -25,9 +25,8 @@ class SaveTest extends \PHPUnit_Framework_TestCase
     public function testInvoke()
     {
         $pageManagerClient = new PageManagerClient('fakeAppId', 'fakeAppSecret', PageManager::class, Page::class, PageReview::class);
-        $userStorage = $this->getMockBuilder(PageManagerStorageInterface::class)->getMock();
         $pageStorage = $this->getMockBuilder(PageStorageInterface::class)->getMock();
-        $saveAction = new Save($pageManagerClient, $userStorage, $pageStorage, 'https://www.example.com');
+        $saveAction = new Save($pageManagerClient, $pageStorage, 'https://www.example.com');
         $this->assertInstanceOf(RedirectResponse::class, $saveAction(new Request()));
     }
 }
