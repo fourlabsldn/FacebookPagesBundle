@@ -31,13 +31,13 @@ class PageReview extends BasePageReview implements PageReviewInterface
 
     /**
      * @var string|null
-     * @ORM\Column(type="string", nullable=true, length=2048)
+     * @ORM\Column(type="string", nullable=true, unique=true)
      */
     protected $reviewerId;
 
     /**
      * @var string|null
-     * @ORM\Column(type="string", nullable=true, length=2048)
+     * @ORM\Column(type="string", nullable=true)
      */
     protected $reviewerName;
 }
