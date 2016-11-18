@@ -3,7 +3,6 @@
 namespace FL\FacebookPagesBundle\Action\Auth;
 
 use FL\FacebookPagesBundle\Services\Facebook\V2_8\PageManagerClient;
-use FL\FacebookPagesBundle\Storage\PageManagerStorageInterface;
 use FL\FacebookPagesBundle\Storage\PageStorageInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -32,10 +31,10 @@ class Save
     private $onlyThesePageIds;
 
     /**
-     * @param PageManagerClient           $pageManagerClient
-     * @param PageStorageInterface        $pageStorage
-     * @param string                      $redirectAfterAuthorization
-     * @param string[]                    $onlyThesePageIds
+     * @param PageManagerClient    $pageManagerClient
+     * @param PageStorageInterface $pageStorage
+     * @param string               $redirectAfterAuthorization
+     * @param string[]             $onlyThesePageIds
      *
      * @link https://developers.facebook.com/docs/facebook-login/permissions
      */
