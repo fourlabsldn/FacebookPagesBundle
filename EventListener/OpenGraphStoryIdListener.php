@@ -24,7 +24,8 @@ class OpenGraphStoryIdListener
             return;
         }
 
-        for ($n = 0; $n < count($body->data); ++$n) {
+        $nodeCount = count($body->data);
+        for ($n = 0; $n < $nodeCount; ++$n) {
             $body->data[$n]->open_graph_story->data->id = $body->data[$n]->open_graph_story->id;
         }
 
