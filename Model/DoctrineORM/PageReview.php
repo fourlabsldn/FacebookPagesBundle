@@ -12,6 +12,12 @@ use Doctrine\ORM\Mapping as ORM;
 class PageReview extends BasePageReview implements PageReviewInterface
 {
     /**
+     * @var string|null
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $storyId;
+
+    /**
      * @var \DateTimeImmutable|null
      * @ORM\Column(type="datetimetz", nullable=true)
      */

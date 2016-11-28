@@ -4,3 +4,7 @@ services:
     arguments:
       - "@fl_facebook_pages.guzzle_service"
 
+  fl_facebook_pages.guzzle.open_graph_story_id_listener:
+    class: FL\FacebookPagesBundle\EventListener\OpenGraphStoryIdListener
+    tags:
+      - { name: kernel.event_listener, event: guzzle_bundle.post_transaction }

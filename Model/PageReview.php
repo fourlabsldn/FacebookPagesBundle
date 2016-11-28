@@ -8,7 +8,7 @@ namespace FL\FacebookPagesBundle\Model;
 class PageReview implements PageReviewInterface
 {
     /**
-     * @var
+     * @var string|null
      */
     protected $storyId;
 
@@ -36,6 +36,24 @@ class PageReview implements PageReviewInterface
      * @var string|null
      */
     protected $reviewerName;
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getStoryId()
+    {
+        return $this->storyId;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setStoryId(string $storyId)
+    {
+        $this->storyId = $storyId;
+
+        return $this;
+    }
 
     /**
      * {@inheritdoc}

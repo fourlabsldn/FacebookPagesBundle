@@ -8,6 +8,18 @@ namespace FL\FacebookPagesBundle\Model;
 interface PageReviewInterface
 {
     /**
+     * @return string|null OpenGraph Story ID
+     */
+    public function getStoryId();
+
+    /**
+     * @param string $storyId OpenGraph Story ID
+     *
+     * @return PageReviewInterface
+     */
+    public function setStoryId(string $storyId);
+
+    /**
      * @return \DateTimeImmutable|null
      */
     public function getCreatedAt();
