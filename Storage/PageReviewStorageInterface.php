@@ -24,4 +24,11 @@ interface PageReviewStorageInterface
      * @return PageReviewStorageInterface
      */
     public function persistMultiple(array $pages): PageReviewStorageInterface;
+
+    /**
+     * Deletes all page reviews.
+     *
+     * @return PageReviewStorageInterface
+     */
+    public function clearAll(): PageReviewStorageInterface;
 }

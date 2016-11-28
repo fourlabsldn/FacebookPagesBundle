@@ -9,7 +9,6 @@ services:
     class: FL\FacebookPagesBundle\Action\Auth\Save
     arguments:
       - "@fl_facebook_pages.facebook.v2_8.page_manager_client"
-      - "@fl_facebook_pages.page_manager_storage"
       - "@fl_facebook_pages.page_storage"
       - "%fl_facebook_pages.redirect_url_after_authorization%"
       - "%fl_facebook_pages.only_these_page_ids%"
@@ -19,4 +18,5 @@ services:
     arguments:
       - "@fl_facebook_pages.page_manager_storage"
       - "@fl_facebook_pages.page_storage"
+      - "@fl_facebook_pages.page_review_storage"
       - "%fl_facebook_pages.redirect_url_after_authorization%"

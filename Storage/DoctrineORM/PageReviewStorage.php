@@ -65,4 +65,18 @@ class PageReviewStorage implements PageReviewStorageInterface
 
         return $this;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function clearAll(): PageReviewStorageInterface
+    {
+        $this->repository->createQueryBuilder('r')
+            ->delete()
+            ->getQuery()
+            ->execute()
+        ;
+
+        return $this;
+    }
 }
