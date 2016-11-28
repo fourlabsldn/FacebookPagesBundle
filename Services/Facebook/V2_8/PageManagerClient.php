@@ -245,6 +245,10 @@ class PageManagerClient
                     $review->setRating($reviewGraphNode->getField('rating'));
                 }
 
+                if ($reviewGraphNode->getField('open_graph_story')) {
+                    $review->setStoryId($reviewGraphNode->getField('open_graph_story')->getField('id'));
+                }
+
                 $allReviews[] = $review;
             }
         } while (($reviewsEdge = $this->guzzleClient->next($reviewsEdge)));
