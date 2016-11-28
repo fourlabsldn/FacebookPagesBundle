@@ -6,13 +6,13 @@ use EightPoints\Bundle\GuzzleBundle\Events\PostTransactionEvent;
 use GuzzleHttp\Psr7\Stream;
 
 /**
- * This is quite a shameful workaround for quite a shameful bug: https://github.com/facebook/php-graph-sdk/issues/700
+ * This is quite a shameful workaround for quite a shameful bug: https://github.com/facebook/php-graph-sdk/issues/700.
  */
 class OpenGraphStoryIdListener
 {
     public function onGuzzleBundlePostTransaction(PostTransactionEvent $event)
     {
-        $body = json_decode((string)$event->getTransaction()->getBody());
+        $body = json_decode((string) $event->getTransaction()->getBody());
 
         // Whatever this is, it's not our array of reviews. Maybe an error response.
         if (!(isset($body->data) && is_array($body->data))) {
@@ -24,7 +24,7 @@ class OpenGraphStoryIdListener
             return;
         }
 
-        for ($n = 0; $n < count($body->data); $n++) {
+        for ($n = 0; $n < count($body->data); ++$n) {
             $body->data[$n]->open_graph_story->data->id = $body->data[$n]->open_graph_story->id;
         }
 
