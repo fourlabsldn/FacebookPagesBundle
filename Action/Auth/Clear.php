@@ -31,9 +31,9 @@ class Clear
 
     /**
      * @param PageManagerStorageInterface $pageManagerStorage
-     * @param PageStorageInterface $pageStorage
-     * @param PageReviewStorageInterface $pageReviewStore
-     * @param string $redirectAfterAuthorization
+     * @param PageStorageInterface        $pageStorage
+     * @param PageReviewStorageInterface  $pageReviewStore
+     * @param string                      $redirectAfterAuthorization
      */
     public function __construct(
         PageManagerStorageInterface $pageManagerStorage,
