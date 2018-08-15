@@ -2,7 +2,7 @@
 
 namespace FL\FacebookPagesBundle\Action\Auth;
 
-use FL\FacebookPagesBundle\Services\Facebook\V2_8\PageManagerClient;
+use FL\FacebookPagesBundle\Services\Facebook\PageManagerClient;
 use FL\FacebookPagesBundle\Storage\PageStorageInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;

@@ -1,6 +1,6 @@
 <?php
 
-namespace FL\FacebookPagesBundle\Services\Facebook\V2_8;
+namespace FL\FacebookPagesBundle\Services\Facebook;
 
 use Facebook\Authentication\AccessToken;
 use Facebook\Facebook;
@@ -39,40 +39,18 @@ class PageManagerClient
      */
     private $guzzleClient;
 
-    /**
-     * @param string                 $appId
-     * @param string                 $appSecret
-     * @param string                 $userClass
-     * @param string                 $pageClass
-     * @param string                 $pageReviewClass
-     * @param Guzzle6HttpClient|null $guzzle6HttpClient
-     */
     public function __construct(
         string $appId,
-        string $appSecret,
         string $userClass,
         string $pageClass,
         string $pageReviewClass,
-        Guzzle6HttpClient $guzzle6HttpClient = null
+        Facebook $facebookClient
     ) {
-        if ($guzzle6HttpClient === null) {
-            $guzzle6HttpClient = new Guzzle6HttpClient(new \GuzzleHttp\Client());
-        }
-
         $this->appId = $appId;
         $this->userClass = $userClass;
         $this->pageClass = $pageClass;
         $this->pageReviewClass = $pageReviewClass;
-        $this->guzzleClient = new Facebook([
-            'app_id' => $appId,
-            'app_secret' => $appSecret,
-            'default_graph_version' => 'v2.8',
-            'enable_beta_mode' => false,
-            'http_client_handler' => $guzzle6HttpClient,
-            'persistent_data_handler' => null,
-            'pseudo_random_string_generator' => null,
-            'url_detection_handler' => null,
-        ]);
+        $this->guzzleClient = $facebookClient;
     }
 
     /**
