@@ -6,6 +6,7 @@ use Facebook\Authentication\AccessToken;
 use Facebook\Facebook;
 use Facebook\FacebookResponse;
 use Facebook\GraphNodes\GraphNode;
+use Facebook\Url\UrlManipulator;
 use FL\FacebookPagesBundle\Guzzle\Guzzle6HttpClient;
 use FL\FacebookPagesBundle\Model\PageManagerInterface;
 use FL\FacebookPagesBundle\Model\PageInterface;
@@ -136,7 +137,7 @@ class PageManagerClient
         $oAuth2Client = $this->guzzleClient->getOAuth2Client();
 
         // we need a clean redirect URL for Facebook's strict matching policy
-        $redirectUrl = FacebookUrlManipulator::removeParamsFromUrl($url, ['state', 'code']);
+        $redirectUrl = UrlManipulator::removeParamsFromUrl($url, ['state', 'code']);
         $accessToken = $helper->getAccessToken($redirectUrl);
 
         if (!isset($accessToken)) {
