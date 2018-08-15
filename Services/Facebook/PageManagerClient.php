@@ -135,7 +135,9 @@ class PageManagerClient
         $helper = $this->guzzleClient->getRedirectLoginHelper();
         $oAuth2Client = $this->guzzleClient->getOAuth2Client();
 
-        $accessToken = $helper->getAccessToken($url);
+        // we need a clean redirect URL for Facebook's strict matching policy
+        $redirectUrl = FacebookUrlManipulator::removeParamsFromUrl($url, ['state', 'code']);
+        $accessToken = $helper->getAccessToken($redirectUrl);
 
         if (!isset($accessToken)) {
             throw new \InvalidArgumentException();
