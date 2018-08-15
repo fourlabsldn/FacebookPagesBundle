@@ -5,20 +5,10 @@ namespace FL\FacebookPagesBundle\Tests\Model;
 use FL\FacebookPagesBundle\Model\PageReview;
 use FL\FacebookPagesBundle\Tests\Util\GettersSetters\TestItemImmutable;
 use FL\FacebookPagesBundle\Tests\Util\GettersSetters\TestTool;
+use PHPUnit\Framework\TestCase;
 
-class PageReviewTest extends \PHPUnit_Framework_TestCase
+class PageReviewTest extends TestCase
 {
-    /**
-     * @test
-     * @covers \FL\FacebookPagesBundle\Model\PageReview::getCreatedAt
-     * @covers \FL\FacebookPagesBundle\Model\PageReview::setCreatedAt
-     * @covers \FL\FacebookPagesBundle\Model\PageReview::getRating
-     * @covers \FL\FacebookPagesBundle\Model\PageReview::setRating
-     * @covers \FL\FacebookPagesBundle\Model\PageReview::getText
-     * @covers \FL\FacebookPagesBundle\Model\PageReview::setText
-     * @covers \FL\FacebookPagesBundle\Model\PageReview::getReviewerId
-     * @covers \FL\FacebookPagesBundle\Model\PageReview::setReviewerId
-     */
     public function testGettersAndSetters()
     {
         $pageManager = new PageReview();
@@ -36,13 +26,6 @@ class PageReviewTest extends \PHPUnit_Framework_TestCase
         }
     }
 
-    /**
-     * @test
-     * @covers \FL\FacebookPagesBundle\Model\PageReview::getCreatedAt
-     * @covers \FL\FacebookPagesBundle\Model\PageReview::getRating
-     * @covers \FL\FacebookPagesBundle\Model\PageReview::getText
-     * @covers \FL\FacebookPagesBundle\Model\PageReview::getReviewerId
-     */
     public function testNullValuesInNewObject()
     {
         $pageReview = new PageReview();
@@ -52,10 +35,6 @@ class PageReviewTest extends \PHPUnit_Framework_TestCase
         static::assertNull($pageReview->getReviewerId());
     }
 
-    /**
-     * @test
-     * @covers \FL\FacebookPagesBundle\Model\PageReview::hasRating
-     */
     public function testHasRatingIsTrue()
     {
         $pageReview = new PageReview();
@@ -63,10 +42,6 @@ class PageReviewTest extends \PHPUnit_Framework_TestCase
         static::assertTrue($pageReview->hasRating());
     }
 
-    /**
-     * @test
-     * @covers \FL\FacebookPagesBundle\Model\PageReview::hasText
-     */
     public function testHasTextIsTrue()
     {
         $pageReview = new PageReview();
@@ -74,30 +49,18 @@ class PageReviewTest extends \PHPUnit_Framework_TestCase
         static::assertTrue($pageReview->hasText());
     }
 
-    /**
-     * @test
-     * @covers \FL\FacebookPagesBundle\Model\PageReview::hasRating
-     */
     public function testHasRatingIsFalseIfReviewIsNull()
     {
         $pageReview = new PageReview();
         static::assertFalse($pageReview->hasRating());
     }
 
-    /**
-     * @test
-     * @covers \FL\FacebookPagesBundle\Model\PageReview::hasText
-     */
     public function testHasTextIsFalseInNewObject()
     {
         $pageReview = new PageReview();
         static::assertFalse($pageReview->hasText());
     }
 
-    /**
-     * @test
-     * @covers \FL\FacebookPagesBundle\Model\PageReview::setRating
-     */
     public function testValidSetReview()
     {
         $pageReview = new PageReview();
@@ -108,10 +71,6 @@ class PageReviewTest extends \PHPUnit_Framework_TestCase
         $pageReview->setRating(5);
     }
 
-    /**
-     * @test
-     * @covers \FL\FacebookPagesBundle\Model\PageReview::setRating
-     */
     public function testInvalidSetReview()
     {
         $pageReview = new PageReview();
@@ -138,8 +97,10 @@ class PageReviewTest extends \PHPUnit_Framework_TestCase
             ++$totalExceptions;
         }
 
-        if ($totalExceptions !== 4) {
-            static::fail(sprintf('-10, 0, 6, and 20 must throw an exception when using %s::setRating', PageReview::class));
-        }
+        static::assertEquals(
+            4,
+            $totalExceptions,
+            sprintf('-10, 0, 6, and 20 must throw an exception when using %s::setRating', PageReview::class)
+        );
     }
 }

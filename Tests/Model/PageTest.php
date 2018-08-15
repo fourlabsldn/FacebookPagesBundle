@@ -5,24 +5,10 @@ namespace FL\FacebookPagesBundle\Tests\Model;
 use FL\FacebookPagesBundle\Model\Page;
 use FL\FacebookPagesBundle\Tests\Util\GettersSetters\TestItemImmutable;
 use FL\FacebookPagesBundle\Tests\Util\GettersSetters\TestTool;
+use PHPUnit\Framework\TestCase;
 
-class PageTest extends \PHPUnit_Framework_TestCase
+class PageTest extends TestCase
 {
-    /**
-     * @test
-     * @covers \FL\FacebookPagesBundle\Model\Page::getShortLivedToken
-     * @covers \FL\FacebookPagesBundle\Model\Page::setShortLivedToken
-     * @covers \FL\FacebookPagesBundle\Model\Page::getShortLivedTokenExpiration
-     * @covers \FL\FacebookPagesBundle\Model\Page::setShortLivedTokenExpiration
-     * @covers \FL\FacebookPagesBundle\Model\Page::getLongLivedToken
-     * @covers \FL\FacebookPagesBundle\Model\Page::setLongLivedToken
-     * @covers \FL\FacebookPagesBundle\Model\Page::getLongLivedTokenExpiration
-     * @covers \FL\FacebookPagesBundle\Model\Page::setLongLivedTokenExpiration
-     * @covers \FL\FacebookPagesBundle\Model\Page::getPageId
-     * @covers \FL\FacebookPagesBundle\Model\Page::setPageId
-     * @covers \FL\FacebookPagesBundle\Model\Page::getCategory
-     * @covers \FL\FacebookPagesBundle\Model\Page::setCategory
-     */
     public function testGettersAndSetters()
     {
         $page = new Page();
@@ -42,15 +28,6 @@ class PageTest extends \PHPUnit_Framework_TestCase
         }
     }
 
-    /**
-     * @test
-     * @covers \FL\FacebookPagesBundle\Model\Page::getShortLivedToken
-     * @covers \FL\FacebookPagesBundle\Model\Page::getShortLivedTokenExpiration
-     * @covers \FL\FacebookPagesBundle\Model\Page::getLongLivedToken
-     * @covers \FL\FacebookPagesBundle\Model\Page::getLongLivedTokenExpiration
-     * @covers \FL\FacebookPagesBundle\Model\Page::getPageId
-     * @covers \FL\FacebookPagesBundle\Model\Page::getCategory
-     */
     public function testNullValuesInNewObject()
     {
         $page = new Page();
@@ -62,10 +39,6 @@ class PageTest extends \PHPUnit_Framework_TestCase
         static::assertNull($page->getCategory());
     }
 
-    /**
-     * @test
-     * @covers \FL\FacebookPagesBundle\Model\Page::isLongLivedTokenExpired
-     */
     public function testLongLivedExpirationIfTokenNull()
     {
         $page = new Page();
@@ -74,10 +47,6 @@ class PageTest extends \PHPUnit_Framework_TestCase
         static::assertTrue($page->isLongLivedTokenExpired());
     }
 
-    /**
-     * @test
-     * @covers \FL\FacebookPagesBundle\Model\Page::isLongLivedTokenExpired
-     */
     public function testLongLivedExpirationIfPastToken()
     {
         $page = new Page();
@@ -87,10 +56,6 @@ class PageTest extends \PHPUnit_Framework_TestCase
         static::assertTrue($page->isLongLivedTokenExpired());
     }
 
-    /**
-     * @test
-     * @covers \FL\FacebookPagesBundle\Model\Page::isLongLivedTokenExpired
-     */
     public function testLongLivedExpirationIfFutureToken()
     {
         $page = new Page();
@@ -100,10 +65,6 @@ class PageTest extends \PHPUnit_Framework_TestCase
         static::assertFalse($page->isLongLivedTokenExpired());
     }
 
-    /**
-     * @test
-     * @covers \FL\FacebookPagesBundle\Model\Page::isShortLivedTokenExpired()
-     */
     public function testShortLivedExpirationIfTokenNull()
     {
         $page = new Page();
@@ -112,10 +73,6 @@ class PageTest extends \PHPUnit_Framework_TestCase
         static::assertTrue($page->isShortLivedTokenExpired());
     }
 
-    /**
-     * @test
-     * @covers \FL\FacebookPagesBundle\Model\Page::isShortLivedTokenExpired
-     */
     public function testShortLivedExpirationIfPastToken()
     {
         $page = new Page();
@@ -125,10 +82,6 @@ class PageTest extends \PHPUnit_Framework_TestCase
         static::assertTrue($page->isShortLivedTokenExpired());
     }
 
-    /**
-     * @test
-     * @covers \FL\FacebookPagesBundle\Model\Page::isShortLivedTokenExpired
-     */
     public function testShortLivedExpirationIfFutureToken()
     {
         $page = new Page();

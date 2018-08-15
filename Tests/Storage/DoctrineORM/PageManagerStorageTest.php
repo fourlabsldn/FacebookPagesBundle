@@ -15,11 +15,6 @@ class PageManagerStorageTest extends ManagerAndRepositoryTest
         parent::setUp();
     }
 
-    /**
-     * @test
-     * @covers \FL\FacebookPagesBundle\Storage\DoctrineORM\PageManagerStorage::__construct
-     * @covers \FL\FacebookPagesBundle\Storage\DoctrineORM\PageManagerStorage::getAll
-     */
     public function testGetAll()
     {
         $pageManagerStorage = new PageManagerStorage(
@@ -32,11 +27,6 @@ class PageManagerStorageTest extends ManagerAndRepositoryTest
         }
     }
 
-    /**
-     * @test
-     * @covers \FL\FacebookPagesBundle\Storage\DoctrineORM\PageManagerStorage::__construct
-     * @covers \FL\FacebookPagesBundle\Storage\DoctrineORM\PageManagerStorage::persist
-     */
     public function testPersist()
     {
         $pageManagerStorage = new PageManagerStorage(
@@ -57,11 +47,6 @@ class PageManagerStorageTest extends ManagerAndRepositoryTest
         static::assertContains($pageManagerB, $this->persistedAndFlushedEntities);
     }
 
-    /**
-     * @test
-     * @covers \FL\FacebookPagesBundle\Storage\DoctrineORM\PageManagerStorage::__construct
-     * @covers \FL\FacebookPagesBundle\Storage\DoctrineORM\PageManagerStorage::persistMultiple
-     */
     public function testPersistMultiple()
     {
         $pageManagerStorage = new PageManagerStorage(
@@ -79,10 +64,6 @@ class PageManagerStorageTest extends ManagerAndRepositoryTest
         static::assertContains($pageManagerB, $this->persistedAndFlushedEntities);
     }
 
-    /**
-     * @test
-     * @covers \FL\FacebookPagesBundle\Storage\DoctrineORM\PageManagerStorage::persistMultiple
-     */
     public function testPersistMultipleException()
     {
         $pageManagerStorage = new PageManagerStorage(

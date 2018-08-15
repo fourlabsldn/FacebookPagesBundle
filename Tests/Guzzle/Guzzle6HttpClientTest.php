@@ -10,11 +10,12 @@ use GuzzleHttp\Middleware;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Client;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @link https://github.com/guzzle/guzzle/blob/master/docs/testing.rst
  */
-class Guzzle6HttpClientTest extends \PHPUnit_Framework_TestCase
+class Guzzle6HttpClientTest extends TestCase
 {
     /**
      * @test

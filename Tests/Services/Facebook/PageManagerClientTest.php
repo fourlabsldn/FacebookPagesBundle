@@ -1,11 +1,12 @@
 <?php
 
-namespace FL\FacebookPagesBundle\Tests\Services\Facebook\V2_8;
+namespace FL\FacebookPagesBundle\Tests\Services\Facebook;
 
+use Facebook\Facebook;
 use FL\FacebookPagesBundle\Model\PageManager;
 use FL\FacebookPagesBundle\Model\Page;
 use FL\FacebookPagesBundle\Model\PageReview;
-use FL\FacebookPagesBundle\Services\Facebook\V2_8\PageManagerClient;
+use FL\FacebookPagesBundle\Services\Facebook\PageManagerClient;
 use FL\FacebookPagesBundle\Guzzle\Guzzle6HttpClient;
 use FL\FacebookPagesBundle\Tests\Util\Url\ManipulateUrl;
 use GuzzleHttp\Handler\MockHandler;
@@ -14,25 +15,28 @@ use GuzzleHttp\Middleware;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Client;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @link https://github.com/guzzle/guzzle/blob/master/docs/testing.rst
  */
-class PageManagerClientTest extends \PHPUnit_Framework_TestCase
+class PageManagerClientTest extends TestCase
 {
-    /**
-     * @test
-     * @covers \FL\FacebookPagesBundle\Services\Facebook\V2_8\PageManagerClient::__construct
-     */
     public function testConstruction()
     {
-        new PageManagerClient('fakeAppId', 'fakeAppSecret', PageManager::class, Page::class, PageReview::class);
+        new PageManagerClient(
+            'fakeAppId',
+            PageManager::class,
+            Page::class,
+            PageReview::class,
+            new Facebook([
+                'app_id' => 'fakeAppId',
+                'app_secret' => 'faceAppSecret',
+                'default_graph_version' => 'v3.1',
+            ])
+        );
     }
 
-    /**
-     * @test
-     * @covers \FL\FacebookPagesBundle\Services\Facebook\V2_8\PageManagerClient::get
-     */
     public function testGetWithToken()
     {
         $stack = HandlerStack::create(new MockHandler([
@@ -43,7 +47,18 @@ class PageManagerClientTest extends \PHPUnit_Framework_TestCase
         $ourGuzzleClient = new Guzzle6HttpClient(new Client([
             'handler' => $stack,
         ]));
-        $pageManagerClient = new PageManagerClient('fakeAppId', 'fakeAppSecret', PageManager::class, Page::class, PageReview::class, $ourGuzzleClient);
+        $pageManagerClient = new PageManagerClient(
+            'fakeAppId',
+            PageManager::class,
+            Page::class,
+            PageReview::class,
+            new Facebook([
+                'app_id' => 'fakeAppId',
+                'app_secret' => 'faceAppSecret',
+                'default_graph_version' => 'v3.1',
+                'http_client_handler' => $ourGuzzleClient,
+            ])
+        );
         $pageManager = new PageManager();
         $pageManager->setLongLivedToken('someToken12371623123812763');
         $pageManagerClient->get('/me', $pageManager);
@@ -52,30 +67,43 @@ class PageManagerClientTest extends \PHPUnit_Framework_TestCase
         $request = $container[0]['request'];
         static::assertEquals($request->getUri()->getScheme(), 'https');
         static::assertEquals($request->getUri()->getHost(), 'graph.facebook.com');
-        static::assertEquals($request->getUri()->getPath(), '/v2.8/me');
+        static::assertEquals($request->getUri()->getPath(), '/v3.1/me');
         static::assertContains('someToken12371623123812763', $request->getUri()->getQuery());
     }
 
-    /**
-     * @test
-     * @covers \FL\FacebookPagesBundle\Services\Facebook\V2_8\PageManagerClient::get
-     * @expectedException \InvalidArgumentException
-     */
     public function testGetException()
     {
-        $client = new PageManagerClient('fakeAppId', 'fakeAppSecret', PageManager::class, Page::class, PageReview::class);
+        static::expectException(\InvalidArgumentException::class);
+
+        $client = new PageManagerClient(
+            'fakeAppId',
+            PageManager::class,
+            Page::class,
+            PageReview::class,
+            new Facebook([
+                'app_id' => 'fakeAppId',
+                'app_secret' => 'faceAppSecret',
+                'default_graph_version' => 'v3.1',
+            ])
+        );
         $pageManager = new PageManager();
         $pageManager->setLongLivedToken(null);
         $client->get('/me', $pageManager);
     }
 
-    /**
-     * @test
-     * @covers \FL\FacebookPagesBundle\Services\Facebook\V2_8\PageManagerClient::generateAuthorizationUrl
-     */
     public function testGenerateAuthorizationUrl()
     {
-        $client = new PageManagerClient('fakeAppId', 'fakeAppSecret', PageManager::class, Page::class, PageReview::class);
+        $client = new PageManagerClient(
+            'fakeAppId',
+            PageManager::class,
+            Page::class,
+            PageReview::class,
+            new Facebook([
+                'app_id' => 'fakeAppId',
+                'app_secret' => 'faceAppSecret',
+                'default_graph_version' => 'v3.1',
+            ])
+        );
         $url = $client->generateAuthorizationUrl('https://www.example.com/callbackurl');
 
         /*
@@ -84,7 +112,7 @@ class PageManagerClientTest extends \PHPUnit_Framework_TestCase
          */
         static::assertEquals(
             ManipulateUrl::removeParametersFromQueryInUrl($url, ['state']),
-            'https://www.facebook.com/v2.8/dialog/oauth?client_id=fakeAppId'.
+            'https://www.facebook.com/v3.1/dialog/oauth?client_id=fakeAppId'.
             '&response_type=code&sdk=php-sdk-6.0-dev&redirect_uri='.
             'https%3A%2F%2Fwww.example.com%2Fcallbackurl&scope=manage_pages');
     }

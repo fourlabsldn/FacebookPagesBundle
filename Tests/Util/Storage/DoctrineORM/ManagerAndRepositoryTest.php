@@ -4,8 +4,9 @@ namespace FL\FacebookPagesBundle\Tests\Util\Storage\DoctrineORM;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
+use PHPUnit\Framework\TestCase;
 
-class ManagerAndRepositoryTest extends \PHPUnit_Framework_TestCase
+class ManagerAndRepositoryTest extends TestCase
 {
     /**
      * @var EntityRepository
