@@ -11,7 +11,8 @@ parameters:
     http_errors: false
 
 services:
-  fl_facebook_pages.config.guzzle:
+  fl_facebook_pages.guzzle:
+    class: Http\Adapter\Guzzle6\Client
     factory: ['Http\Adapter\Guzzle6\Client', createWithConfig]
     arguments: ['%fl_facebook_pages.config.facebook_client%']
 

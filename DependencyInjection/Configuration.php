@@ -54,7 +54,7 @@ class Configuration implements ConfigurationInterface
                 ->end()
                 ->scalarNode('guzzle_service')
                     ->cannotBeEmpty()
-                    ->defaultValue('fl_facebook_pages.config.guzzle')
+                    ->defaultValue('fl_facebook_pages.guzzle')
                 ->end()
                 ->scalarNode('redirect_url_after_authorization')
                     ->isRequired()
