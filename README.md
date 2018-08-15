@@ -32,11 +32,12 @@ Add to app/config/AppKernel.php
 fl_facebook_pages:
     app_id: "%facebook_app_id%"
     app_secret: "%facebook_app_secret%"
-    callback_url: "https://example.com/fl_facebook_pages/save-authorization"
     page_manager_class: AppBundle\Entity\FacebookPageManager
     page_class: AppBundle\Entity\FacebookPage
     page_review_class: AppBundle\Entity\FacebookPageReview
-    facebook_user_storage: fl_facebook_pages.storage.doctrine.facebook_user_storage
+
+    # the following have sensible defaults and can remain unchanged
+    page_manager_storage: fl_facebook_pages.storage.doctrine.facebook_user_storage
     page_storage: fl_facebook_pages.storage.doctrine.page_storage
     page_review_storage: fl_facebook_pages.storage.doctrine.page_review_storage
     guzzle_service: guzzle.client.facebook_pages
@@ -47,6 +48,12 @@ fl_facebook_pages:
 fl_facebook_pages:
     resource: "@FLFacebookPagesBundle/Resources/config/routing.yml"
 ```
+
+## Facebook App Settings
+
+Since March 2018 [Facebook enforces strict callback URL matching](https://developers.facebook.com/blog/post/2017/12/18/strict-uri-matching/).
+This means that you will have to add the following URL to _Valid OAuth Redirect URIs_ in your Facebook app settings:
+`https://yourdomain.com/fl_facebook_pages/save-auth`.
 
 ## Tests
 

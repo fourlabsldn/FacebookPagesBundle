@@ -8,7 +8,6 @@ use FL\FacebookPagesBundle\Model\Page;
 use FL\FacebookPagesBundle\Model\PageReview;
 use FL\FacebookPagesBundle\Services\Facebook\PageManagerClient;
 use FL\FacebookPagesBundle\Tests\Util\Url\ManipulateUrl;
-use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
 use Http\Mock\Client;
 use PHPUnit\Framework\TestCase;
