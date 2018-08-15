@@ -7,14 +7,10 @@ use FL\FacebookPagesBundle\Model\PageManager;
 use FL\FacebookPagesBundle\Model\Page;
 use FL\FacebookPagesBundle\Model\PageReview;
 use FL\FacebookPagesBundle\Services\Facebook\PageManagerClient;
-use FL\FacebookPagesBundle\Guzzle\Guzzle6HttpClient;
 use FL\FacebookPagesBundle\Tests\Util\Url\ManipulateUrl;
-use GuzzleHttp\Handler\MockHandler;
-use GuzzleHttp\HandlerStack;
-use GuzzleHttp\Middleware;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
-use GuzzleHttp\Client;
+use Http\Mock\Client;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -39,14 +35,8 @@ class PageManagerClientTest extends TestCase
 
     public function testGetWithToken()
     {
-        $stack = HandlerStack::create(new MockHandler([
-            new Response(200, ['FakeResponseHeader' => 'FakeValue']),
-        ]));
-        $container = [];
-        $stack->push(Middleware::history($container));
-        $ourGuzzleClient = new Guzzle6HttpClient(new Client([
-            'handler' => $stack,
-        ]));
+        $ourGuzzleClient = new Client();
+        $ourGuzzleClient->addResponse(new Response(200, ['FakeResponseHeader' => 'FakeValue']));
         $pageManagerClient = new PageManagerClient(
             'fakeAppId',
             PageManager::class,
@@ -56,15 +46,14 @@ class PageManagerClientTest extends TestCase
                 'app_id' => 'fakeAppId',
                 'app_secret' => 'faceAppSecret',
                 'default_graph_version' => 'v3.1',
-                'http_client_handler' => $ourGuzzleClient,
+                'http_client' => $ourGuzzleClient,
             ])
         );
         $pageManager = new PageManager();
         $pageManager->setLongLivedToken('someToken12371623123812763');
         $pageManagerClient->get('/me', $pageManager);
 
-        /** @var Request $request */
-        $request = $container[0]['request'];
+        $request = $ourGuzzleClient->getLastRequest();
         static::assertEquals($request->getUri()->getScheme(), 'https');
         static::assertEquals($request->getUri()->getHost(), 'graph.facebook.com');
         static::assertEquals($request->getUri()->getPath(), '/v3.1/me');

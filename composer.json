@@ -24,24 +24,33 @@
     "symfony/form": "~2.8|~3.0|~3.1",
     "symfony/options-resolver": "~2.8|~3.0|~3.1",
     "symfony/yaml": "~2.8|~3.0|~3.1",
-    "facebook/graph-sdk": "dev-master#1f889b4ea9a739963ab78a81a3616ad0374ae3ad",
+    "facebook/graph-sdk": "dev-master#6de35554c781e5450474ca062f7a1e1473a513f7",
     "guzzlehttp/guzzle": "^6.3",
     "php-http/curl-client": "^1.7",
-    "guzzlehttp/psr7": "^1.4"
+    "guzzlehttp/psr7": "^1.4",
+    "cweagans/composer-patches": "^1.6"
   },
   "require-dev": {
     "phpunit/phpunit": "^6.5",
     "doctrine/orm": "^2.6",
-    "jakeasmith/http_build_url": "^1.0"
+    "jakeasmith/http_build_url": "^1.0",
+    "php-http/mock-client": "^1.1"
   },
   "autoload": {
     "psr-4": {
-        "FL\\FacebookPagesBundle\\": ""
-      }
+      "FL\\FacebookPagesBundle\\": ""
+    }
   },
   "autoload-dev": {
     "psr-4": {
       "FL\\FacebookPagesBundle\\Tests\\": "Tests"
+    }
+  },
+  "extra": {
+    "patches": {
+      "facebook/graph-sdk": {
+        "Conserve id when next to data key": "https://patch-diff.githubusercontent.com/raw/facebook/php-graph-sdk/pull/1034.patch"
+      }
     }
   }
 }
