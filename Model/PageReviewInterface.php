@@ -3,7 +3,7 @@
 namespace FL\FacebookPagesBundle\Model;
 
 /**
- * @link https://developers.facebook.com/docs/graph-api/reference/page/ratings/
+ * @see https://developers.facebook.com/docs/graph-api/reference/page/ratings/
  */
 interface PageReviewInterface
 {
@@ -29,7 +29,7 @@ interface PageReviewInterface
      *
      * @return PageReviewInterface
      */
-    public function setCreatedAt(\DateTimeImmutable $createdAt = null): PageReviewInterface;
+    public function setCreatedAt(\DateTimeImmutable $createdAt = null): self;
 
     /**
      * @return bool
@@ -46,7 +46,7 @@ interface PageReviewInterface
      *
      * @return PageReviewInterface
      */
-    public function setRating(int $rating): PageReviewInterface;
+    public function setRating(int $rating): self;
 
     /**
      * @return bool
@@ -63,7 +63,7 @@ interface PageReviewInterface
      *
      * @return PageReviewInterface
      */
-    public function setText(string $review): PageReviewInterface;
+    public function setText(string $review): self;
 
     /**
      * @return string|null
@@ -75,7 +75,7 @@ interface PageReviewInterface
      *
      * @return PageReviewInterface
      */
-    public function setReviewerId(string $reviewerId): PageReviewInterface;
+    public function setReviewerId(string $reviewerId): self;
 
     /**
      * @return string|null
@@ -87,5 +87,5 @@ interface PageReviewInterface
      *
      * @return PageReviewInterface
      */
-    public function setReviewerName(string $reviewerName): PageReviewInterface;
+    public function setReviewerName(string $reviewerName): self;
 }

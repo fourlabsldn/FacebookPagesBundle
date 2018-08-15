@@ -13,7 +13,7 @@ use GuzzleHttp\Client;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @link https://github.com/guzzle/guzzle/blob/master/docs/testing.rst
+ * @see https://github.com/guzzle/guzzle/blob/master/docs/testing.rst
  */
 class Guzzle6HttpClientTest extends TestCase
 {

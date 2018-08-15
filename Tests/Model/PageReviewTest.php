@@ -81,16 +81,19 @@ class PageReviewTest extends TestCase
         } catch (\InvalidArgumentException $exception) {
             ++$totalExceptions;
         }
+
         try {
             $pageReview->setRating(0);
         } catch (\InvalidArgumentException $exception) {
             ++$totalExceptions;
         }
+
         try {
             $pageReview->setRating(6);
         } catch (\InvalidArgumentException $exception) {
             ++$totalExceptions;
         }
+
         try {
             $pageReview->setRating(20);
         } catch (\InvalidArgumentException $exception) {

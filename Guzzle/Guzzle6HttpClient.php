@@ -10,7 +10,7 @@ use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\Request;
 
 /**
- * @link https://www.sammyk.me/how-to-inject-your-own-http-client-in-the-facebook-php-sdk-v5#writing-a-guzzle-6-http-client-implementation-from-scratch
+ * @see https://www.sammyk.me/how-to-inject-your-own-http-client-in-the-facebook-php-sdk-v5#writing-a-guzzle-6-http-client-implementation-from-scratch
  */
 class Guzzle6HttpClient implements FacebookHttpClientInterface
 {
@@ -41,6 +41,7 @@ class Guzzle6HttpClient implements FacebookHttpClientInterface
     public function send($url, $method, $body, array $headers, $timeOut)
     {
         $request = new Request($method, $url, $headers, $body);
+
         try {
             $response = $this->client->send($request, [
                 'timeout' => $timeOut,

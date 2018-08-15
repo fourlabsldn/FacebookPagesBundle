@@ -61,7 +61,7 @@ class PageManagerClient
      */
     public function get(string $endpoint, PageManagerInterface $pageManager)
     {
-        if ($pageManager->getLongLivedToken() === null) {
+        if (null === $pageManager->getLongLivedToken()) {
             throw new \InvalidArgumentException();
         }
 
@@ -78,7 +78,7 @@ class PageManagerClient
      */
     public function getWithPage(string $endpoint, PageInterface $facebookPage)
     {
-        if ($facebookPage->getLongLivedToken() === null) {
+        if (null === $facebookPage->getLongLivedToken()) {
             throw new \InvalidArgumentException();
         }
 
@@ -88,7 +88,7 @@ class PageManagerClient
     /**
      * @param string $callbackUrl
      *
-     * @link https://developers.facebook.com/docs/facebook-login/permissions
+     * @see https://developers.facebook.com/docs/facebook-login/permissions
      *
      * @return string
      */
