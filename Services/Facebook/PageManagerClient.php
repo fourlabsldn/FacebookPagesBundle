@@ -4,8 +4,8 @@ namespace FL\FacebookPagesBundle\Services\Facebook;
 
 use Facebook\Authentication\AccessToken;
 use Facebook\Facebook;
-use Facebook\FacebookResponse;
-use Facebook\GraphNodes\GraphNode;
+use Facebook\Response;
+use Facebook\GraphNode\GraphNode;
 use Facebook\Url\UrlManipulator;
 use FL\FacebookPagesBundle\Guzzle\Guzzle6HttpClient;
 use FL\FacebookPagesBundle\Model\PageManagerInterface;
@@ -36,7 +36,7 @@ class PageManagerClient
     private $pageReviewClass;
 
     /**
-     * @var Guzzle6HttpClient
+     * @var Facebook
      */
     private $guzzleClient;
 
@@ -58,7 +58,7 @@ class PageManagerClient
      * @param string               $endpoint
      * @param PageManagerInterface $pageManager
      *
-     * @return FacebookResponse
+     * @return Response
      */
     public function get(string $endpoint, PageManagerInterface $pageManager)
     {
@@ -75,7 +75,7 @@ class PageManagerClient
      * @param string        $endpoint
      * @param PageInterface $facebookPage
      *
-     * @return FacebookResponse
+     * @return Response
      */
     public function getWithPage(string $endpoint, PageInterface $facebookPage)
     {
@@ -166,12 +166,7 @@ class PageManagerClient
 
         /** @var GraphNode $pageGraphNode */
         foreach ($response->getGraphEdge()->all() as $pageGraphNode) {
-            /** @var GraphNode $permissions */
-            $permissions = $pageGraphNode->getField('perms');
-            if (
-                is_array($permissions->uncastItems()) &&
-                in_array('BASIC_ADMIN', $permissions->uncastItems())
-            ) {
+            if (in_array('MANAGE', $pageGraphNode->getField('tasks')->asArray())) {
                 /** @var PageInterface $page */
                 $page = new $this->pageClass();
                 $page

@@ -22,6 +22,7 @@ services:
 
   fl_facebook_pages.facebook.page_manager_client:
     class: FL\FacebookPagesBundle\Services\Facebook\PageManagerClient
+    public: true
     arguments:
       - '%fl_facebook_pages.app_id%'
       - '%fl_facebook_pages.page_manager_class%'
