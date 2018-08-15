@@ -3,7 +3,7 @@
 namespace FL\FacebookPagesBundle\Model;
 
 /**
- * @link https://developers.facebook.com/docs/facebook-login/access-tokens/#usertokens
+ * @see https://developers.facebook.com/docs/facebook-login/access-tokens/#usertokens
  */
 interface PageManagerInterface
 {
@@ -17,7 +17,7 @@ interface PageManagerInterface
      *
      * @return PageManagerInterface
      */
-    public function setShortLivedToken(string $token = null): PageManagerInterface;
+    public function setShortLivedToken(string $token = null): self;
 
     /**
      * @return \DateTimeImmutable|null
@@ -29,7 +29,7 @@ interface PageManagerInterface
      *
      * @return PageManagerInterface
      */
-    public function setShortLivedTokenExpiration(\DateTimeImmutable $expiration = null): PageManagerInterface;
+    public function setShortLivedTokenExpiration(\DateTimeImmutable $expiration = null): self;
 
     /**
      * @return bool
@@ -46,7 +46,7 @@ interface PageManagerInterface
      *
      * @return PageManagerInterface
      */
-    public function setLongLivedToken(string $token = null): PageManagerInterface;
+    public function setLongLivedToken(string $token = null): self;
 
     /**
      * @return \DateTimeImmutable|null
@@ -58,7 +58,7 @@ interface PageManagerInterface
      *
      * @return PageManagerInterface
      */
-    public function setLongLivedTokenExpiration(\DateTimeImmutable $expiration = null): PageManagerInterface;
+    public function setLongLivedTokenExpiration(\DateTimeImmutable $expiration = null): self;
 
     /**
      * @return bool
@@ -75,5 +75,5 @@ interface PageManagerInterface
      *
      * @return PageManagerInterface
      */
-    public function setUserId(string $userId = null): PageManagerInterface;
+    public function setUserId(string $userId = null): self;
 }

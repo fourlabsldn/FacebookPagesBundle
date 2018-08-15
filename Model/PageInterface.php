@@ -3,8 +3,8 @@
 namespace FL\FacebookPagesBundle\Model;
 
 /**
- * @link https://developers.facebook.com/docs/facebook-login/access-tokens/#pagetokens
- * @link https://developers.facebook.com/docs/pages/access-tokens
+ * @see https://developers.facebook.com/docs/facebook-login/access-tokens/#pagetokens
+ * @see https://developers.facebook.com/docs/pages/access-tokens
  */
 interface PageInterface
 {
@@ -18,7 +18,7 @@ interface PageInterface
      *
      * @return PageInterface
      */
-    public function setShortLivedToken(string $token = null): PageInterface;
+    public function setShortLivedToken(string $token = null): self;
 
     /**
      * @return \DateTimeImmutable|null
@@ -30,7 +30,7 @@ interface PageInterface
      *
      * @return PageInterface
      */
-    public function setShortLivedTokenExpiration(\DateTimeImmutable $expiration = null): PageInterface;
+    public function setShortLivedTokenExpiration(\DateTimeImmutable $expiration = null): self;
 
     /**
      * @return bool
@@ -47,7 +47,7 @@ interface PageInterface
      *
      * @return PageInterface
      */
-    public function setLongLivedToken(string $token = null): PageInterface;
+    public function setLongLivedToken(string $token = null): self;
 
     /**
      * @return \DateTimeImmutable|null
@@ -59,7 +59,7 @@ interface PageInterface
      *
      * @return PageInterface
      */
-    public function setLongLivedTokenExpiration(\DateTimeImmutable $expiration = null): PageInterface;
+    public function setLongLivedTokenExpiration(\DateTimeImmutable $expiration = null): self;
 
     /**
      * @return bool
@@ -76,7 +76,7 @@ interface PageInterface
      *
      * @return PageInterface
      */
-    public function setPageId(string $pageId = null): PageInterface;
+    public function setPageId(string $pageId = null): self;
 
     /**
      * @return string|null
@@ -88,7 +88,7 @@ interface PageInterface
      *
      * @return PageInterface
      */
-    public function setPageName(string $pageName = null): PageInterface;
+    public function setPageName(string $pageName = null): self;
 
     /**
      * @return string|null
@@ -100,7 +100,7 @@ interface PageInterface
      *
      * @return PageInterface
      */
-    public function setCategory(string $category = null): PageInterface;
+    public function setCategory(string $category = null): self;
 
     /**
      * @return PageManagerInterface|null
@@ -112,5 +112,5 @@ interface PageInterface
      *
      * @return PageInterface
      */
-    public function setPageManager(PageManagerInterface $pageManager = null): PageInterface;
+    public function setPageManager(PageManagerInterface $pageManager = null): self;
 }

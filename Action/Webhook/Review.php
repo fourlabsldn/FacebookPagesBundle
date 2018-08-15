@@ -31,7 +31,7 @@ class Review
         // todo persist review
         // todo use verify token
         $jsonObject = json_decode($request->getContent(), true);
-        if ($jsonObject === null) {
+        if (null === $jsonObject) {
             $jsonObject = [];
         }
         // verification only
