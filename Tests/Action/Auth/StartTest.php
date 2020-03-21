@@ -2,26 +2,33 @@
 
 namespace FL\FacebookPagesBundle\Action;
 
+use Facebook\Facebook;
 use FL\FacebookPagesBundle\Action\Auth\Start;
 use FL\FacebookPagesBundle\Model\PageManager;
 use FL\FacebookPagesBundle\Model\Page;
 use FL\FacebookPagesBundle\Model\PageReview;
-use FL\FacebookPagesBundle\Services\Facebook\V2_8\PageManagerClient;
+use FL\FacebookPagesBundle\Services\Facebook\PageManagerClient;
 use FL\FacebookPagesBundle\Tests\Util\Url\ManipulateUrl;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RouterInterface;
 
-class StartTest extends \PHPUnit_Framework_TestCase
+class StartTest extends TestCase
 {
-    /**
-     * @test
-     * @covers \FL\FacebookPagesBundle\Action\AuthorizeFacebook::__construct
-     * @covers \FL\FacebookPagesBundle\Action\AuthorizeFacebook::__invoke
-     */
     public function testInvoke()
     {
-        $pageManagerClient = new PageManagerClient('fakeAppId', 'fakeAppSecret', PageManager::class, Page::class, PageReview::class);
+        $pageManagerClient = new PageManagerClient(
+            'fakeAppId',
+            PageManager::class,
+            Page::class,
+            PageReview::class,
+            new Facebook([
+                'app_id' => 'fakeAppId',
+                'app_secret' => 'faceAppSecret',
+                'default_graph_version' => 'v3.1',
+            ])
+        );
         $router = $this
             ->getMockBuilder(RouterInterface::class)
             ->setMethods(['generate', 'getContext', 'match', 'getRouteCollection', 'setContext'])
@@ -44,8 +51,9 @@ class StartTest extends \PHPUnit_Framework_TestCase
          */
         static::assertEquals(
             ManipulateUrl::removeParametersFromQueryInUrl($response->getTargetUrl(), ['state']),
-            'https://www.facebook.com/v2.8/dialog/oauth?client_id=fakeAppId'.
+            'https://www.facebook.com/v3.1/dialog/oauth?client_id=fakeAppId'.
             '&response_type=code&sdk=php-sdk-6.0-dev&redirect_uri='.
-            'https%3A%2F%2Fwww.example.com%2Fcallbackurl&scope=manage_pages');
+            'https%3A%2F%2Fwww.example.com%2Fcallbackurl&scope=manage_pages'
+        );
     }
 }

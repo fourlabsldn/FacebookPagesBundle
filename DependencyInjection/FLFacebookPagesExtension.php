@@ -12,7 +12,7 @@ use Symfony\Component\Config\FileLocator;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
- * @link http://symfony.com/doc/current/cookbook/bundles/extension.html
+ * @see http://symfony.com/doc/current/cookbook/bundles/extension.html
  */
 class FLFacebookPagesExtension extends Extension
 {
@@ -84,11 +84,7 @@ class FLFacebookPagesExtension extends Extension
         ) {
             return;
         }
-        throw new InvalidConfigurationException(sprintf(
-            'Class %s in %s is not an instance of %s',
-            $className,
-            $parameter,
-            $anotherClassName
-        ));
+
+        throw new InvalidConfigurationException(sprintf('Class %s in %s is not an instance of %s', $className, $parameter, $anotherClassName));
     }
 }

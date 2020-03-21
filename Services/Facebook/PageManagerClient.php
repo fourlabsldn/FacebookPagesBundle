@@ -1,12 +1,12 @@
 <?php
 
-namespace FL\FacebookPagesBundle\Services\Facebook\V2_8;
+namespace FL\FacebookPagesBundle\Services\Facebook;
 
 use Facebook\Authentication\AccessToken;
 use Facebook\Facebook;
-use Facebook\FacebookResponse;
-use Facebook\GraphNodes\GraphNode;
-use FL\FacebookPagesBundle\Guzzle\Guzzle6HttpClient;
+use Facebook\Response;
+use Facebook\GraphNode\GraphNode;
+use Facebook\Url\UrlManipulator;
 use FL\FacebookPagesBundle\Model\PageManagerInterface;
 use FL\FacebookPagesBundle\Model\PageInterface;
 use FL\FacebookPagesBundle\Model\PageReviewInterface;
@@ -35,55 +35,33 @@ class PageManagerClient
     private $pageReviewClass;
 
     /**
-     * @var Guzzle6HttpClient
+     * @var Facebook
      */
     private $guzzleClient;
 
-    /**
-     * @param string                 $appId
-     * @param string                 $appSecret
-     * @param string                 $userClass
-     * @param string                 $pageClass
-     * @param string                 $pageReviewClass
-     * @param Guzzle6HttpClient|null $guzzle6HttpClient
-     */
     public function __construct(
         string $appId,
-        string $appSecret,
         string $userClass,
         string $pageClass,
         string $pageReviewClass,
-        Guzzle6HttpClient $guzzle6HttpClient = null
+        Facebook $facebookClient
     ) {
-        if ($guzzle6HttpClient === null) {
-            $guzzle6HttpClient = new Guzzle6HttpClient(new \GuzzleHttp\Client());
-        }
-
         $this->appId = $appId;
         $this->userClass = $userClass;
         $this->pageClass = $pageClass;
         $this->pageReviewClass = $pageReviewClass;
-        $this->guzzleClient = new Facebook([
-            'app_id' => $appId,
-            'app_secret' => $appSecret,
-            'default_graph_version' => 'v2.8',
-            'enable_beta_mode' => false,
-            'http_client_handler' => $guzzle6HttpClient,
-            'persistent_data_handler' => null,
-            'pseudo_random_string_generator' => null,
-            'url_detection_handler' => null,
-        ]);
+        $this->guzzleClient = $facebookClient;
     }
 
     /**
      * @param string               $endpoint
      * @param PageManagerInterface $pageManager
      *
-     * @return FacebookResponse
+     * @return Response
      */
     public function get(string $endpoint, PageManagerInterface $pageManager)
     {
-        if ($pageManager->getLongLivedToken() === null) {
+        if (null === $pageManager->getLongLivedToken()) {
             throw new \InvalidArgumentException();
         }
 
@@ -96,11 +74,11 @@ class PageManagerClient
      * @param string        $endpoint
      * @param PageInterface $facebookPage
      *
-     * @return FacebookResponse
+     * @return Response
      */
     public function getWithPage(string $endpoint, PageInterface $facebookPage)
     {
-        if ($facebookPage->getLongLivedToken() === null) {
+        if (null === $facebookPage->getLongLivedToken()) {
             throw new \InvalidArgumentException();
         }
 
@@ -110,13 +88,15 @@ class PageManagerClient
     /**
      * @param string $callbackUrl
      *
-     * @link https://developers.facebook.com/docs/facebook-login/permissions
+     * @see https://developers.facebook.com/docs/facebook-login/permissions
      *
      * @return string
      */
     public function generateAuthorizationUrl(string $callbackUrl)
     {
-        return $this->guzzleClient->getRedirectLoginHelper()->getLoginUrl($callbackUrl, [
+        return $this->guzzleClient->getRedirectLoginHelper()->getLoginUrl(
+            $callbackUrl,
+            [
                 'manage_pages',
             ]
         );
@@ -157,7 +137,9 @@ class PageManagerClient
         $helper = $this->guzzleClient->getRedirectLoginHelper();
         $oAuth2Client = $this->guzzleClient->getOAuth2Client();
 
-        $accessToken = $helper->getAccessToken($url);
+        // we need a clean redirect URL for Facebook's strict matching policy
+        $redirectUrl = UrlManipulator::removeParamsFromUrl($url, ['state', 'code']);
+        $accessToken = $helper->getAccessToken($redirectUrl);
 
         if (!isset($accessToken)) {
             throw new \InvalidArgumentException();
@@ -185,12 +167,7 @@ class PageManagerClient
 
         /** @var GraphNode $pageGraphNode */
         foreach ($response->getGraphEdge()->all() as $pageGraphNode) {
-            /** @var GraphNode $permissions */
-            $permissions = $pageGraphNode->getField('perms');
-            if (
-                is_array($permissions->uncastItems()) &&
-                in_array('BASIC_ADMIN', $permissions->uncastItems())
-            ) {
+            if (in_array('MANAGE', $pageGraphNode->getField('tasks')->asArray())) {
                 /** @var PageInterface $page */
                 $page = new $this->pageClass();
                 $page
@@ -217,9 +194,11 @@ class PageManagerClient
     {
         $allReviews = [];
 
-        $reviewsEdge = $this->getWithPage(sprintf(
+        $reviewsEdge = $this->getWithPage(
+            sprintf(
             '/%s/ratings?fields=id,created_time,reviewer,rating,review_text,open_graph_story',
-            $page->getPageId()),
+            $page->getPageId()
+        ),
             $page
         )->getGraphEdge();
 

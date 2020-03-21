@@ -15,11 +15,6 @@ class PageReviewStorageTest extends ManagerAndRepositoryTest
         parent::setUp();
     }
 
-    /**
-     * @test
-     * @covers \FL\FacebookPagesBundle\Storage\DoctrineORM\PageReviewStorage::__construct
-     * @covers \FL\FacebookPagesBundle\Storage\DoctrineORM\PageReviewStorage::getAll
-     */
     public function testGetAll()
     {
         $this->entityManager->clear();
@@ -33,11 +28,6 @@ class PageReviewStorageTest extends ManagerAndRepositoryTest
         }
     }
 
-    /**
-     * @test
-     * @covers \FL\FacebookPagesBundle\Storage\DoctrineORM\PageReviewStorage::__construct
-     * @covers \FL\FacebookPagesBundle\Storage\DoctrineORM\PageReviewStorage::persist
-     */
     public function testPersist()
     {
         $pageReviewStorage = new PageReviewStorage(
@@ -58,11 +48,6 @@ class PageReviewStorageTest extends ManagerAndRepositoryTest
         static::assertContains($pageReviewB, $this->persistedAndFlushedEntities);
     }
 
-    /**
-     * @test
-     * @covers \FL\FacebookPagesBundle\Storage\DoctrineORM\PageReviewStorage::__construct
-     * @covers \FL\FacebookPagesBundle\Storage\DoctrineORM\PageReviewStorage::persistMultiple
-     */
     public function testPersistMultiple()
     {
         $pageReviewStorage = new PageReviewStorage(
@@ -80,10 +65,6 @@ class PageReviewStorageTest extends ManagerAndRepositoryTest
         static::assertContains($pageReviewB, $this->persistedAndFlushedEntities);
     }
 
-    /**
-     * @test
-     * @covers \FL\FacebookPagesBundle\Storage\DoctrineORM\PageReviewStorage::persistMultiple
-     */
     public function testPersistMultipleException()
     {
         $pageReviewStorage = new PageReviewStorage(

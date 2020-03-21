@@ -16,19 +16,19 @@ interface PageManagerStorageInterface
      *
      * @return PageManagerStorageInterface
      */
-    public function persist(PageManagerInterface $pageManager): PageManagerStorageInterface;
+    public function persist(PageManagerInterface $pageManager): self;
 
     /**
      * @param PageManagerInterface[] $pageManagers
      *
      * @return PageManagerStorageInterface
      */
-    public function persistMultiple(array $pageManagers): PageManagerStorageInterface;
+    public function persistMultiple(array $pageManagers): self;
 
     /**
      * Deletes all page managers.
      *
      * @return PageManagerStorageInterface
      */
-    public function clearAll(): PageManagerStorageInterface;
+    public function clearAll(): self;
 }

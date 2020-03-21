@@ -5,22 +5,10 @@ namespace FL\FacebookPagesBundle\Tests\Model;
 use FL\FacebookPagesBundle\Model\PageManager;
 use FL\FacebookPagesBundle\Tests\Util\GettersSetters\TestItemImmutable;
 use FL\FacebookPagesBundle\Tests\Util\GettersSetters\TestTool;
+use PHPUnit\Framework\TestCase;
 
-class PageManagerTest extends \PHPUnit_Framework_TestCase
+class PageManagerTest extends TestCase
 {
-    /**
-     * @test
-     * @covers \FL\FacebookPagesBundle\Model\PageManager::getShortLivedToken
-     * @covers \FL\FacebookPagesBundle\Model\PageManager::setShortLivedToken
-     * @covers \FL\FacebookPagesBundle\Model\PageManager::getShortLivedTokenExpiration
-     * @covers \FL\FacebookPagesBundle\Model\PageManager::setShortLivedTokenExpiration
-     * @covers \FL\FacebookPagesBundle\Model\PageManager::getLongLivedToken
-     * @covers \FL\FacebookPagesBundle\Model\PageManager::setLongLivedToken
-     * @covers \FL\FacebookPagesBundle\Model\PageManager::getLongLivedTokenExpiration
-     * @covers \FL\FacebookPagesBundle\Model\PageManager::setLongLivedTokenExpiration
-     * @covers \FL\FacebookPagesBundle\Model\PageManager::getUserId
-     * @covers \FL\FacebookPagesBundle\Model\PageManager::setUserId
-     */
     public function testGettersAndSetters()
     {
         $pageManager = new PageManager();
@@ -39,14 +27,6 @@ class PageManagerTest extends \PHPUnit_Framework_TestCase
         }
     }
 
-    /**
-     * @test
-     * @covers \FL\FacebookPagesBundle\Model\PageManager::getShortLivedToken
-     * @covers \FL\FacebookPagesBundle\Model\PageManager::getShortLivedTokenExpiration
-     * @covers \FL\FacebookPagesBundle\Model\PageManager::getLongLivedToken
-     * @covers \FL\FacebookPagesBundle\Model\PageManager::getLongLivedTokenExpiration
-     * @covers \FL\FacebookPagesBundle\Model\PageManager::getUserId
-     */
     public function testNullValuesInNewObject()
     {
         $pageManager = new PageManager();
@@ -57,10 +37,6 @@ class PageManagerTest extends \PHPUnit_Framework_TestCase
         static::assertNull($pageManager->getUserId());
     }
 
-    /**
-     * @test
-     * @covers \FL\FacebookPagesBundle\Model\PageManager::isLongLivedTokenExpired
-     */
     public function testLongLivedExpirationIfTokenNull()
     {
         $pageManager = new PageManager();
@@ -69,10 +45,6 @@ class PageManagerTest extends \PHPUnit_Framework_TestCase
         static::assertTrue($pageManager->isLongLivedTokenExpired());
     }
 
-    /**
-     * @test
-     * @covers \FL\FacebookPagesBundle\Model\PageManager::isLongLivedTokenExpired
-     */
     public function testLongLivedExpirationIfPastToken()
     {
         $pageManager = new PageManager();
@@ -82,10 +54,6 @@ class PageManagerTest extends \PHPUnit_Framework_TestCase
         static::assertTrue($pageManager->isLongLivedTokenExpired());
     }
 
-    /**
-     * @test
-     * @covers \FL\FacebookPagesBundle\Model\PageManager::isLongLivedTokenExpired
-     */
     public function testLongLivedExpirationIfFutureToken()
     {
         $pageManager = new PageManager();
@@ -95,10 +63,6 @@ class PageManagerTest extends \PHPUnit_Framework_TestCase
         static::assertFalse($pageManager->isLongLivedTokenExpired());
     }
 
-    /**
-     * @test
-     * @covers \FL\FacebookPagesBundle\Model\PageManager::isShortLivedTokenExpired()
-     */
     public function testShortLivedExpirationIfTokenNull()
     {
         $pageManager = new PageManager();
@@ -107,10 +71,6 @@ class PageManagerTest extends \PHPUnit_Framework_TestCase
         static::assertTrue($pageManager->isShortLivedTokenExpired());
     }
 
-    /**
-     * @test
-     * @covers \FL\FacebookPagesBundle\Model\PageManager::isShortLivedTokenExpired
-     */
     public function testShortLivedExpirationIfPastToken()
     {
         $pageManager = new PageManager();
@@ -120,10 +80,6 @@ class PageManagerTest extends \PHPUnit_Framework_TestCase
         static::assertTrue($pageManager->isShortLivedTokenExpired());
     }
 
-    /**
-     * @test
-     * @covers \FL\FacebookPagesBundle\Model\PageManager::isShortLivedTokenExpired
-     */
     public function testShortLivedExpirationIfFutureToken()
     {
         $pageManager = new PageManager();

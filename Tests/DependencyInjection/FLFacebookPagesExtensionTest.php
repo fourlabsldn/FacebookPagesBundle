@@ -6,9 +6,11 @@ use FL\FacebookPagesBundle\DependencyInjection\FLFacebookPagesExtension;
 use FL\FacebookPagesBundle\Model\PageManager;
 use FL\FacebookPagesBundle\Model\Page;
 use FL\FacebookPagesBundle\Model\PageReview;
+use PHPUnit\Framework\TestCase;
+use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
-class FLFacebookPagesExtensionTest extends \PHPUnit_Framework_TestCase
+class FLFacebookPagesExtensionTest extends TestCase
 {
     /**
      * @var ContainerBuilder
@@ -26,51 +28,35 @@ class FLFacebookPagesExtensionTest extends \PHPUnit_Framework_TestCase
         $this->extension = new FLFacebookPagesExtension();
     }
 
-    /**
-     * @test
-     * @covers \FL\FacebookPagesBundle\DependencyInjection\FLFacebookPagesExtension
-     */
     public function testValidConfiguration()
     {
         $this->extension->load($this->createValidConfiguration(), $this->container);
     }
 
-    /**
-     * @test
-     * @covers \FL\FacebookPagesBundle\DependencyInjection\FLFacebookPagesExtension::load
-     * @covers \FL\FacebookPagesBundle\DependencyInjection\FLFacebookPagesExtension::validateClassNameIsInstanceOfAnother
-     * @expectedException \Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
-     */
     public function testInvalidPageManagerClassConfiguration()
     {
+        self::expectException(InvalidConfigurationException::class);
+
         $this->extension->load(
             array_merge($this->createValidConfiguration(), [['page_manager_class' => \DateTimeImmutable::class]]),
             $this->container
         );
     }
 
-    /**
-     * @test
-     * @covers \FL\FacebookPagesBundle\DependencyInjection\FLFacebookPagesExtension::load
-     * @covers \FL\FacebookPagesBundle\DependencyInjection\FLFacebookPagesExtension::validateClassNameIsInstanceOfAnother
-     * @expectedException \Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
-     */
     public function testInvalidPageClassConfiguration()
     {
+        self::expectException(InvalidConfigurationException::class);
+
         $this->extension->load(
             array_merge($this->createValidConfiguration(), [['page_class' => \DateTimeImmutable::class]]),
             $this->container
         );
     }
 
-    /**
-     * @test
-     * @covers \FL\FacebookPagesBundle\DependencyInjection\FLFacebookPagesExtension::load
-     * @covers \FL\FacebookPagesBundle\DependencyInjection\FLFacebookPagesExtension::validateClassNameIsInstanceOfAnother
-     * @expectedException \Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
-     */
     public function testInvalidPageReviewClassConfiguration()
     {
+        self::expectException(InvalidConfigurationException::class);
+
         $this->extension->load(
             array_merge($this->createValidConfiguration(), [['page_review_class' => \DateTimeImmutable::class]]),
             $this->container

@@ -1,0 +1,31 @@
+parameters:
+  fl_facebook_pages.config.facebook_client:
+    app_id: '%fl_facebook_pages.app_id%'
+    app_secret: '%fl_facebook_pages.app_secret%'
+    default_graph_version: 'v3.1'
+    enable_beta_mode: false
+    persistent_data_handler: ~
+    pseudo_random_string_generator: ~
+    url_detection_handler: ~
+  fl_facebook_pages.config.guzzle:
+    http_errors: false
+
+services:
+  fl_facebook_pages.guzzle:
+    class: Http\Adapter\Guzzle6\Client
+    factory: ['Http\Adapter\Guzzle6\Client', createWithConfig]
+    arguments: ['%fl_facebook_pages.config.facebook_client%']
+
+  fl_facebook_pages.facebook_client:
+    class: Facebook\Facebook
+    arguments: ['%fl_facebook_pages.config.facebook_client%']
+
+  fl_facebook_pages.facebook.page_manager_client:
+    class: FL\FacebookPagesBundle\Services\Facebook\PageManagerClient
+    public: true
+    arguments:
+      - '%fl_facebook_pages.app_id%'
+      - '%fl_facebook_pages.page_manager_class%'
+      - '%fl_facebook_pages.page_class%'
+      - '%fl_facebook_pages.page_review_class%'
+      - '@fl_facebook_pages.facebook_client'

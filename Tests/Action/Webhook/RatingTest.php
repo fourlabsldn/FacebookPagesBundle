@@ -4,10 +4,11 @@ namespace FL\FacebookPagesBundle\Tests\Action\Webhook;
 
 use FL\FacebookPagesBundle\Action\Webhook\Review;
 use FL\FacebookPagesBundle\Storage\PageReviewStorageInterface;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class RatingTest extends \PHPUnit_Framework_TestCase
+class RatingTest extends TestCase
 {
     /**
      * @test

@@ -64,7 +64,7 @@ class TestTool
      *
      * @return TestTool
      */
-    public function addTestItem(TestItemImmutable $testItem): TestTool
+    public function addTestItem(TestItemImmutable $testItem): self
     {
         if (!$this->containsSimilarTestItem($testItem)) {
             $this->testItems->attach($testItem);
@@ -78,7 +78,7 @@ class TestTool
      *
      * @return TestTool
      */
-    public function removeTestItem(TestItemImmutable $testItem): TestTool
+    public function removeTestItem(TestItemImmutable $testItem): self
     {
         foreach ($this->testItems as $similarItem) {
             // Do not change this to "===". Value object equality is asserted with "==".

@@ -2,7 +2,7 @@
 
 namespace FL\FacebookPagesBundle\Action\Auth;
 
-use FL\FacebookPagesBundle\Services\Facebook\V2_8\PageManagerClient;
+use FL\FacebookPagesBundle\Services\Facebook\PageManagerClient;
 use FL\FacebookPagesBundle\Storage\PageStorageInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -36,7 +36,7 @@ class Save
      * @param string               $redirectAfterAuthorization
      * @param string[]             $onlyThesePageIds
      *
-     * @link https://developers.facebook.com/docs/facebook-login/permissions
+     * @see https://developers.facebook.com/docs/facebook-login/permissions
      */
     public function __construct(
         PageManagerClient $pageManagerClient,
@@ -60,7 +60,7 @@ class Save
         $user = $this->pageManagerClient->generateUserFromAuthorizationRequest($request);
 
         $userPages = $this->pageManagerClient->resolveUserPages($user);
-        if ($this->onlyThesePageIds === null || count($this->onlyThesePageIds) === 0) {
+        if (null === $this->onlyThesePageIds || 0 === count($this->onlyThesePageIds)) {
             $this->pageStorage->persistMultiple($userPages);
 
             return new RedirectResponse($this->redirectAfterAuthorization);

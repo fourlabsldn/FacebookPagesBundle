@@ -6,7 +6,7 @@ use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 /**
- * @link http://symfony.com/doc/current/cookbook/bundles/configuration.html
+ * @see http://symfony.com/doc/current/cookbook/bundles/configuration.html
  */
 class Configuration implements ConfigurationInterface
 {
@@ -53,8 +53,8 @@ class Configuration implements ConfigurationInterface
                     ->defaultValue('fl_facebook_pages.storage.doctrine.page_review_storage')
                 ->end()
                 ->scalarNode('guzzle_service')
-                    ->isRequired()
                     ->cannotBeEmpty()
+                    ->defaultValue('fl_facebook_pages.guzzle')
                 ->end()
                 ->scalarNode('redirect_url_after_authorization')
                     ->isRequired()

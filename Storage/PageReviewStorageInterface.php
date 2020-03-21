@@ -16,19 +16,19 @@ interface PageReviewStorageInterface
      *
      * @return PageReviewStorageInterface
      */
-    public function persist(PageReviewInterface $page): PageReviewStorageInterface;
+    public function persist(PageReviewInterface $page): self;
 
     /**
      * @param PageReviewInterface[] $pages
      *
      * @return PageReviewStorageInterface
      */
-    public function persistMultiple(array $pages): PageReviewStorageInterface;
+    public function persistMultiple(array $pages): self;
 
     /**
      * Deletes all page reviews.
      *
      * @return PageReviewStorageInterface
      */
-    public function clearAll(): PageReviewStorageInterface;
+    public function clearAll(): self;
 }

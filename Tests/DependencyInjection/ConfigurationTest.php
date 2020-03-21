@@ -6,9 +6,11 @@ use FL\FacebookPagesBundle\DependencyInjection\Configuration;
 use FL\FacebookPagesBundle\Model\PageManager;
 use FL\FacebookPagesBundle\Model\Page;
 use FL\FacebookPagesBundle\Model\PageReview;
+use PHPUnit\Framework\TestCase;
+use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 use Symfony\Component\Config\Definition\Processor;
 
-class ConfigurationTest extends \PHPUnit_Framework_TestCase
+class ConfigurationTest extends TestCase
 {
     /**
      * @var Configuration
@@ -29,11 +31,6 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
         $this->processor = new Processor();
     }
 
-    /**
-     * @test
-     * @covers \FL\FacebookPagesBundle\DependencyInjection\Configuration::getConfigTreeBuilder
-     * @covers \FL\FacebookPagesBundle\DependencyInjection\Configuration::getConfigTreeBuilder
-     */
     public function testValidConfigurationWorks()
     {
         $this->processor->processConfiguration(
@@ -56,13 +53,10 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    /**
-     * @test
-     * @covers \FL\FacebookPagesBundle\DependencyInjection\Configuration::getConfigTreeBuilder
-     * @expectedException \Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
-     */
     public function testEmptyConfigurationsThrowException()
     {
+        self::expectException(InvalidConfigurationException::class);
+
         $this->processor->processConfiguration(
             $this->configuration,
             [

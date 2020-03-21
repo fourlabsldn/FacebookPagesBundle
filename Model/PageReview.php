@@ -3,7 +3,7 @@
 namespace FL\FacebookPagesBundle\Model;
 
 /**
- * @link https://developers.facebook.com/docs/graph-api/reference/page/ratings/
+ * @see https://developers.facebook.com/docs/graph-api/reference/page/ratings/
  */
 class PageReview implements PageReviewInterface
 {
