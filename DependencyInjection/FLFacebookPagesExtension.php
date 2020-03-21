@@ -85,11 +85,6 @@ class FLFacebookPagesExtension extends Extension
             return;
         }
 
-        throw new InvalidConfigurationException(sprintf(
-            'Class %s in %s is not an instance of %s',
-            $className,
-            $parameter,
-            $anotherClassName
-        ));
+        throw new InvalidConfigurationException(sprintf('Class %s in %s is not an instance of %s', $className, $parameter, $anotherClassName));
     }
 }

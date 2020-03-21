@@ -102,6 +102,7 @@ class PageManagerClientTest extends TestCase
             ManipulateUrl::removeParametersFromQueryInUrl($url, ['state']),
             'https://www.facebook.com/v3.1/dialog/oauth?client_id=fakeAppId'.
             '&response_type=code&sdk=php-sdk-6.0-dev&redirect_uri='.
-            'https%3A%2F%2Fwww.example.com%2Fcallbackurl&scope=manage_pages');
+            'https%3A%2F%2Fwww.example.com%2Fcallbackurl&scope=manage_pages'
+        );
     }
 }

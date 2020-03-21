@@ -7,7 +7,6 @@ use Facebook\Facebook;
 use Facebook\Response;
 use Facebook\GraphNode\GraphNode;
 use Facebook\Url\UrlManipulator;
-use FL\FacebookPagesBundle\Guzzle\Guzzle6HttpClient;
 use FL\FacebookPagesBundle\Model\PageManagerInterface;
 use FL\FacebookPagesBundle\Model\PageInterface;
 use FL\FacebookPagesBundle\Model\PageReviewInterface;
@@ -95,7 +94,9 @@ class PageManagerClient
      */
     public function generateAuthorizationUrl(string $callbackUrl)
     {
-        return $this->guzzleClient->getRedirectLoginHelper()->getLoginUrl($callbackUrl, [
+        return $this->guzzleClient->getRedirectLoginHelper()->getLoginUrl(
+            $callbackUrl,
+            [
                 'manage_pages',
             ]
         );
@@ -193,9 +194,11 @@ class PageManagerClient
     {
         $allReviews = [];
 
-        $reviewsEdge = $this->getWithPage(sprintf(
+        $reviewsEdge = $this->getWithPage(
+            sprintf(
             '/%s/ratings?fields=id,created_time,reviewer,rating,review_text,open_graph_story',
-            $page->getPageId()),
+            $page->getPageId()
+        ),
             $page
         )->getGraphEdge();
 
